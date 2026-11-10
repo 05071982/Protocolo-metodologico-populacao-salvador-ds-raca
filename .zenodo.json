@@ -1,0 +1,13 @@
+{
+  "title": "Protocolo metodológico para estimativa populacional de Salvador por distrito sanitário, bairro, sexo, idade e raça/cor, 2000–2026",
+  "upload_type": "dataset",
+  "description": "Base populacional anual de Salvador (BA) por Distrito Sanitário (12), bairro (171), sexo, 18 faixas etárias e raça/cor (5), 2000–2026, com códigos R para atualização anual. Totais municipais do Censo (2000, 2010, 2022) e das estimativas TCU/IBGE; distribuição interna pela Razão Censitária com razões variáveis entre os Censos 2010 e 2022, ajuste proporcional iterativo (IPF) e arredondamento pelo maior resto. Documentação completa na wiki do repositório.",
+  "creators": [
+    {"name": "Leal, Jessidenes Teixeira de Freitas Mendes", "affiliation": "Sala de Situação em Saúde de Salvador, Secretaria Municipal da Saúde de Salvador"},
+    {"name": "Santos, Rafaella Santiago Coutinho", "affiliation": "Sala de Situação em Saúde de Salvador, Secretaria Municipal da Saúde de Salvador"}
+  ],
+  "license": "cc-by-4.0",
+  "language": "por",
+  "keywords": ["estimativa populacional", "distrito sanitário", "raça/cor", "razão censitária", "IPF", "Salvador", "Censo 2022", "TabNet", "small area estimation"],
+  "version": "3.0.0"
+}

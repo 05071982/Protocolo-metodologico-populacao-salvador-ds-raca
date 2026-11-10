@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "Se usar esta base ou método, cite como abaixo."
+title: "Protocolo metodológico para estimativa populacional de Salvador por distrito sanitário, bairro, sexo, idade e raça/cor, 2000–2026"
+authors:
+  - family-names: "Leal"
+    given-names: "Jessidenes Teixeira de Freitas Mendes"
+    affiliation: "Sala de Situação em Saúde de Salvador, Secretaria Municipal da Saúde de Salvador"
+  - family-names: "Santos"
+    given-names: "Rafaella Santiago Coutinho"
+    affiliation: "Sala de Situação em Saúde de Salvador, Secretaria Municipal da Saúde de Salvador"
+version: "3.0.0"
+date-released: "2026-11-10"
+license: CC-BY-4.0
+repository-code: "https://github.com/05071982/Protocolo-metodologico-populacao-salvador-ds-raca"
+keywords: [estimativa populacional, distrito sanitário, raça/cor, razão censitária, IPF, Salvador, Censo 2022, TabNet]
