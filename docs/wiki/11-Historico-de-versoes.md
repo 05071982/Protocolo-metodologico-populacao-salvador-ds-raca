@@ -9,6 +9,12 @@
 
 ## Publicação no Zenodo (DOI)
 
+[![DOI](https://zenodo.org/badge/1452138178.svg)](https://doi.org/10.5281/zenodo.24096844)
+
+**DOI:** [10.5281/zenodo.24096844](https://doi.org/10.5281/zenodo.24096844). Release v3.0.0 publicada em 10/11/2026.
+
+### Como gerar uma nova versão
+
 1. Entre em https://zenodo.org com a conta do GitHub (**Log in → GitHub**).
 2. Em **Account → GitHub**, ative o repositório `Protocolo-metodologico-populacao-salvador-ds-raca`.
 3. No GitHub, crie uma *release*: **Releases → Draft a new release**, tag `v3.0.0`, título "v3 – base 2000–2026".

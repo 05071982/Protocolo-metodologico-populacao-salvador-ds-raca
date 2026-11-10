@@ -10,6 +10,7 @@ authors:
     affiliation: "Sala de Situação em Saúde de Salvador, Secretaria Municipal da Saúde de Salvador"
 version: "3.0.0"
 date-released: "2026-11-10"
+doi: "10.5281/zenodo.24096844"
 license: CC-BY-4.0
 repository-code: "https://github.com/05071982/Protocolo-metodologico-populacao-salvador-ds-raca"
 keywords: [estimativa populacional, distrito sanitário, raça/cor, razão censitária, IPF, Salvador, Censo 2022, TabNet]

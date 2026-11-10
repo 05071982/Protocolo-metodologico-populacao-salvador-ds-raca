@@ -1,5 +1,7 @@
 # Protocolo metodológico — População de Salvador por DS, bairro, sexo, idade e raça/cor (2000–2026)
 
+[![DOI](https://zenodo.org/badge/1452138178.svg)](https://doi.org/10.5281/zenodo.24096844)
+
 Base populacional oficial da **Sala de Situação em Saúde de Salvador (SDSS/SMS)** para o **TabNet Salvador**, o **Painel Sociodemográfico** e os painéis de BI com denominador populacional.
 
 📘 **Documentação completa:** [Wiki do projeto](https://github.com/05071982/Protocolo-metodologico-populacao-salvador-ds-raca/wiki)
@@ -44,7 +46,7 @@ resultados/   base final, planilha v3, backtest de métodos
 
 ## Como citar
 
-Leal JTFM, Santos RSC. Protocolo metodológico para estimativa populacional de Salvador por distrito sanitário, bairro, sexo, idade e raça/cor, 2000–2026 [Internet]. Salvador: Secretaria Municipal da Saúde de Salvador; 2026. Disponível em: https://github.com/05071982/Protocolo-metodologico-populacao-salvador-ds-raca
+Leal JTFM, Santos RSC. Protocolo metodológico para estimativa populacional de Salvador por distrito sanitário, bairro, sexo, idade e raça/cor, 2000–2026 [Internet]. Salvador: Secretaria Municipal da Saúde de Salvador; 2026. doi:10.5281/zenodo.24096844
 
 ## Licença
 
