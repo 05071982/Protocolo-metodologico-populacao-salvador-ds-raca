@@ -16,6 +16,8 @@
 10. Runge C. Über empirische Funktionen und die Interpolation zwischen äquidistanten Ordinaten. Z Math Phys. 1901;46:224-43.
 11. Balinski ML, Young HP. Fair representation: meeting the ideal of one man, one vote. New Haven: Yale University Press; 1982.
 
+*A interpolação osculatória de Sprague para desagregação de faixas quinquenais está descrita em Siegel & Swanson (2004), ref. 1, e Shryock & Siegel (1973), ref. 4.*
+
 ## Dados e documentos oficiais
 
 12. Instituto Brasileiro de Geografia e Estatística. Censo Demográfico 2010: resultados do universo – agregados por setores censitários. Rio de Janeiro: IBGE; 2011.

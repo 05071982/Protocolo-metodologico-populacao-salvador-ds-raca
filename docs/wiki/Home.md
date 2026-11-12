@@ -44,6 +44,7 @@ Os **totais municipais** vêm do Censo nos anos censitários (2000, 2010, 2022) 
 9. [Limitações](09-Limitacoes)
 10. [Referências](10-Referencias)
 11. [Histórico de versões](11-Historico-de-versoes)
+12. [População por idade simples](12-Idade-simples)
 
 Documento-síntese: [Protocolo Metodológico para estimativa populacional de Salvador](Protocolo-Metodológico-para-estimativa-populacional-de-Salvador)
 

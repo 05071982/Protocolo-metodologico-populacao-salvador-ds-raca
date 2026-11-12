@@ -5,6 +5,7 @@
 | até 2023 | — | `pop14` e séries do TabNet: razão censitária fixa (estrutura SESAB 2010) e extrapolação de Lagrange sobre totais TCU |
 | v1 | 09/11/2026 | Primeira base DS × bairro × sexo × 18 faixas × raça; setores de fronteira divididos 1/k; bairros com a estrutura do DS |
 | v2 | 09/11/2026 | Chave setor → bairro → DS por maior área; unidades bairro × DS; estrutura própria de cada bairro |
+| v3.1 | 12/11/2026 | Tabela complementar DS × sexo × idade simples (0–100+), compatível com as faixas da base principal; script `05_idade_simples.R` |
 | **v3** | 10/11/2026 | Totais Censo + TCU/IBGE (2023 RIPSA; 2025–2026 IBGE Cidades); série `FREQ_CENSO`; **Aquarius (171)**; aba SETORES; scripts R para atualização anual |
 
 ## Publicação no Zenodo (DOI)

@@ -9,6 +9,7 @@ Todos os scripts estão em [`R/`](https://github.com/05071982/Protocolo-metodolo
 | `02_aquarius.R` | criação de bairro desmembrado | setores + `delimitacao_de_bairros_oficial.shp` | `setores_pituba_aquarius.csv` |
 | `03_estrutura_base.R` | mudança na estrutura censitária | `pop_*.csv` 2022 + `dados/entrada/` | `dados/estrutura/*.csv` |
 | **`04_atualizar_populacao.R`** | **todo ano** | `dados/estrutura/` + `totais_municipais.csv` | `resultados/*.csv` |
+| **`05_idade_simples.R`** | **todo ano, depois do 04** | saída do 04 + `proporcao_idade_simples_na_faixa.csv` | `populacao_salvador_ds_sexo_idade_*.csv` |
 
 Pacotes: `sf` e `dplyr` (só nos scripts 01 e 02). Os scripts 03 e 04 usam apenas o R base.
 
