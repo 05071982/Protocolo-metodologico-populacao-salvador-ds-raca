@@ -44,7 +44,7 @@ Não precisa instalar pacotes: o script usa só o R base.
 | `populacao_salvador_bairro_ds_2000_2027.csv` | TabNet Salvador e Painel Sociodemográfico (`ANO, DS, COD_BAIRRO, FXET, SEXO, RACA, FREQ`) |
 | `populacao_salvador_ds_2000_2027.csv` | versão agregada por DS (formato `pop14`) |
 
-**5b. Idade simples (TabNet).** Em seguida rode `source("R/05_idade_simples.R")`. Ele gera `populacao_salvador_ds_sexo_idade_2000_2027.csv` com os mesmos totais por faixa (ver [Idade simples](12-Idade-simples)).
+**5b. Idade simples (TabNet).** Em seguida rode `source("R/05_idade_simples.R")`. Ele gera `populacao_salvador_ds_sexo_idade_2000_2027.csv` com os mesmos totais por faixa (ver [Idade simples](12-Idade-simples)). Para a tabela completa com bairro, idade e raça, rode também `source("R/06_bairro_idade_raca.R")`.
 
 **6. Registre a versão.** Faça commit com a mensagem `Atualização total 2027` e crie uma *release* no GitHub. O Zenodo gera um novo DOI automaticamente (ver [Histórico de versões](11-Historico-de-versoes)).
 

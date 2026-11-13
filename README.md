@@ -17,6 +17,8 @@ ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ
 
 - `resultados/populacao_salvador_ds_sexo_idade_2000_2026.csv.gz` e `POP_SSA_DS_SEXO_IDADE_SIMPLES_2000_2026.xlsx` — DS × sexo × idade simples (0–100+), 65.448 linhas, totais por faixa idênticos à base principal
 
+- `resultados/populacao_salvador_bairro_ds_idade_raca_2000_2026.csv.gz` — `ANO | DS | COD_BAIRRO | IDADE | FXET | SEXO | RACA | FREQ` (3.116.090 linhas com FREQ > 0), coerente com as duas tabelas acima
+
 ## Método (resumo)
 
 - **Totais municipais:** Censo (2000, 2010, 2022); TCU/IBGE nos demais anos (2023: RIPSA).

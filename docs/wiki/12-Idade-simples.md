@@ -63,7 +63,25 @@ Conferências automáticas:
 - nenhum valor negativo;
 - total anual = TCU/Censo.
 
-## 12.4 Como atualizar
+## 12.4 Tabela completa com bairro e raça
+
+```
+ANO | DS | COD_BAIRRO | IDADE | FXET | SEXO | RACA | FREQ
+```
+
+Cada célula da base principal (bairro × DS × faixa × sexo × raça) é repartida entre as idades da faixa na proporção da tabela DS × sexo × idade (seção 12.2). Supõe-se que, dentro de uma faixa de 5 anos, a distribuição por idade do bairro e da raça é a do seu DS e sexo.
+
+O arredondamento é controlado em **duas margens** ao mesmo tempo, por alocação do maior resto com restrição de linha e coluna:
+- somando as idades, obtém-se exatamente a base principal (bairro, raça, faixa);
+- somando bairros e raças, obtém-se exatamente a tabela DS × sexo × idade.
+
+São 5.290.380 combinações em 2000–2026, das quais **3.116.090 têm FREQ > 0**. O arquivo traz só essas linhas. Isso passa do limite do Excel (1.048.576 linhas), então a entrega é em CSV: `resultados/populacao_salvador_bairro_ds_idade_raca_2000_2026.csv.gz`. Script: `R/06_bairro_idade_raca.R`.
+
+Planilha de idade simples:
+- aba `TAB_IDADE_2010_2022`: 6 tabelas (2010 e 2022 × masculino, feminino e total), com DS na linha e idade 0–100+ na coluna;
+- aba `TAB_FXET_2010_2022`: as mesmas 6 tabelas por faixa etária (18 faixas).
+
+## 12.5 Como atualizar
 
 Depois de rodar `04_atualizar_populacao.R`:
 
@@ -71,9 +89,13 @@ Depois de rodar `04_atualizar_populacao.R`:
 source("R/05_idade_simples.R")
 ```
 
-Gera `resultados/populacao_salvador_ds_sexo_idade_<ano_ini>_<ano_fim>.csv`.
+Gera `resultados/populacao_salvador_ds_sexo_idade_<ano_ini>_<ano_fim>.csv`. Depois, para a tabela com bairro e raça:
 
-## 12.5 Cuidados de uso
+```r
+source("R/06_bairro_idade_raca.R")
+```
+
+## 12.6 Cuidados de uso
 
 - Idade simples por DS tem mais flutuação que as faixas. Para taxas, agrupe idades sempre que possível.
-- Esta tabela não tem raça nem bairro. Para esses recortes, use a base principal com FXET.
+- Na tabela com bairro e raça, a idade simples dentro de cada faixa é modelada. Para bairro × raça, prefira trabalhar com faixas (FXET) ou grandes grupos etários.
