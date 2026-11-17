@@ -60,3 +60,5 @@ Os totais estão em `dados/entrada/totais_municipais.csv`.
 **SEXO:** 1 Masculino · 2 Feminino
 **RACA:** 1 Branca · 2 Preta · 3 Amarela · 4 Parda · 5 Indígena ("Negra" = 2 + 4)
 **COD_BAIRRO:** ordem alfabética do Livro código (1 = Acupe … 170 = Águas Claras) e **171 = Aquarius**. A lista completa está em `dados/dicionarios/bairros.csv`.
+
+> O bairro **2 – Aeroporto** consta no dicionário, mas não tem população residente no Censo 2022 e por isso não aparece nas tabelas de população: elas trazem **170 bairros com moradores** dos 171 oficiais.

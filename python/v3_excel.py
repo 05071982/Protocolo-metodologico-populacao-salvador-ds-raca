@@ -77,7 +77,7 @@ for v in ['1. Limites de DS: a tabela SESAB 2010 usa a divisão de DS da época;
 # ---------- DICIONARIO
 ws=wb.create_sheet('DICIONARIO'); [setattr(ws.column_dimensions[c],'width',w) for c,w in zip('ABCDEFGH',[12,24,4,10,24,4,12,40])]
 H_(ws,['FXET','Faixa etária','','DS','Distrito Sanitário','','COD_BAIRRO','Bairro'])
-bl=list(zip(b.COD_BAIRRO,b.bairro))
+dic=pd.read_csv(D+'dicionario_bairros_171.csv'); bl=list(zip(dic.COD_BAIRRO,dic.BAIRRO+dic.COD_BAIRRO.map({2:' (sem população residente)'}).fillna('')))
 n=max(18,len(bl))
 for i in range(n):
     r=[i+1 if i<18 else None, FX[i] if i<18 else None,None, i+1 if i<12 else None, DSN.get(i+1) if i<12 else None,None]
