@@ -2,13 +2,14 @@
 
 O método tem duas partes independentes:
 
-- **Estrutura** (calculada uma vez, a partir dos censos): como a população se distribui entre bairros, DS, sexo, idade e raça em **2010** e em **2022**.
+- **Estrutura** (calculada uma vez, a partir dos censos): como a população se distribui entre bairros, DS, sexo, idade e raça em **2010** e em **2022**, e as margens censitárias de **2000** (v4).
 - **Série** (recalculada a cada novo total): como essa distribuição evolui ano a ano e se encaixa no total municipal oficial.
 
 ```
                 ┌──────────────────────────── ESTRUTURA (03_estrutura_base.R) ─────────────────────────────┐
  Setores 2022 ──► imputação "X" ──► chave setor→bairro→DS ──► calibração no total do bairro ──► IPF raça ──► 18 faixas
  SESAB 2010  ──────────────────────────────────────────────────────────────────────────────► IPF raça 2010
+ Margens IBGE 2000/2010/2022 (sexo×idade, raça, DS) ──────────────────────► calibração censitária (v4)
                 └───────────────────────────────────────────────────────────────────────────────────────────┘
                                                     │
  Totais TCU/Censo ──► SÉRIE (04_atualizar_populacao.R): razão censitária com razões variáveis ──► arredondamento
@@ -91,7 +92,9 @@ $$
 
 O mesmo vale para 40–49, 50–59 e 60–69. A raça de cada subfaixa segue a da faixa-mãe.
 
-## 4.6 Estrutura de 2010
+## 4.6 Estruturas de 2000, 2010 e 2022 (calibração censitária, v4)
+
+### Estrutura de 2010 (v3)
 
 A tabela SESAB fornece **DS × sexo × 18 faixas** (total 2.675.656). A raça de 2010 é estimada por IPF com:
 
@@ -99,12 +102,24 @@ A tabela SESAB fornece **DS × sexo × 18 faixas** (total 2.675.656). A raça de
 - margem 1: sexo × faixa (SESAB);
 - margem 2: distribuição de raça do DS (banco 2010, só como proporção).
 
+### Calibração censitária (v4)
+
+Na versão 4, as estruturas de 2010 e 2022 passam por um IPF final que as faz fechar **exatamente** nas margens publicadas pelo IBGE, sem mudar a distribuição interna vinda dos setores. Também é criada uma estrutura de 2000:
+
+| Ano | Semente | Margens exatas |
+|---|---|---|
+| 2010 | estrutura v3 | DS × sexo × faixa (SESAB, ajuste de ±1 pessoa em 60 células); sexo × faixa × raça (universo SIDRA 3175); DS × raça (banco 2010, proporção) |
+| 2022 | 194 unidades bairro × DS | total de cada unidade (IBGE por bairro); unidade × raça (setores); sexo × faixa do município (Censo 2022) |
+| 2000 | estrutura calibrada de 2010 | total por DS (tabela DS 2000); sexo × faixa (Censo 2000); raça (SIDRA 136, sem declaração redistribuída) |
+
+O IPF altera o mínimo possível a semente (Ireland & Kullback, 1968). Por isso a distribuição entre DS e bairros, e seus cruzamentos de idade e raça, continua vindo dos setores. Detalhes e validação em [Diálogo entre bases](13-Dialogo-entre-bases).
+
 ## 4.7 Série anual: Razão Censitária com razões variáveis
 
 Seja $c$ uma célula (DS × sexo × faixa × raça; 2.160 células) e $s_c^{2010}$, $s_c^{2022}$ as suas participações no total municipal:
 
 $$
-s_c^{a} = \frac{P_c^{a} + 0{,}5}{\sum_c \left(P_c^{a} + 0{,}5\right)}\qquad a\in\{2010, 2022\}
+s_c^{a} = \frac{P_c^{a} + 0{,}5}{\sum_c \left(P_c^{a} + 0{,}5\right)}\qquad a\in\{2000, 2010, 2022\}
 $$
 
 (A pseudo-contagem 0,5 evita $\log 0$.) Para qualquer ano $t$:
@@ -123,8 +138,8 @@ em que $T(t)$ é o total municipal oficial do ano.
 
 - $0<w<1$ (2011–2021): **interpolação** geométrica entre os censos.
 - $w>1$ (2023 em diante): **extrapolação** da tendência 2010–2022.
-- $w<0$ (2000–2009): **retroprojeção** de DS × sexo × idade. A raça fica congelada na distribuição de 2010 dentro de cada DS × sexo × faixa, para não extrapolar para trás a mudança de autodeclaração.
-- $t=2010$ e $t=2022$: valores observados do censo.
+- 2001–2009 (v4): **interpolação** geométrica entre os Censos 2000 e 2010, $\tilde s_c(t)=(s_c^{2000})^{1-w}(s_c^{2010})^{w}$, $w=(t-2000)/10$, inclusive para raça. Na v3 esses anos eram retroprojeção ($w<0$), com raça congelada em 2010.
+- $t=2000$, $2010$ e $2022$: valores censitários calibrados.
 
 Isso equivale a interpolar **linearmente o logaritmo da razão** de cada célula. É a forma multiplicativa do método da razão (*ratio method*; Siegel & Swanson, 2004; Smith, Tayman & Swanson, 2013), com razões que variam no tempo em vez de fixas.
 
@@ -143,8 +158,8 @@ Para obter inteiros sem perder os totais, usa-se o método do maior resto (Hamil
 1. arredonda-se tudo para baixo;
 2. os $k$ inteiros que faltam vão para as células com as maiores partes fracionárias (empate: ordem estável).
 
-Esse procedimento é aplicado ao total municipal de cada ano, a cada DS × sexo × faixa em 2010 e a cada célula do DS na repartição entre bairros. Assim:
+Esse procedimento é aplicado ao total municipal de cada ano e a cada célula do DS na repartição entre bairros. Nos anos censitários (v4) usa-se um **arredondamento controlado com várias margens**: os inteiros vão para as células de maior parte fracionária cujas margens (DS, sexo × faixa, raça, conforme o ano) ainda têm déficit, de modo que todas as margens do item 4.6 fecham exatamente. Assim:
 
 - $\sum$ FREQ de cada ano $= T(t)$ exatamente;
 - $\sum$ bairros de um DS $=$ DS exatamente;
-- bairros em 2022 $=$ IBGE ± 19 pessoas (efeito do arredondamento).
+- bairros em 2022 $=$ IBGE ± 20 pessoas (efeito do arredondamento).

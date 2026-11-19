@@ -29,7 +29,7 @@ ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ
 
 ## Em uma frase
 
-Os **totais municipais** vêm do Censo nos anos censitários (2000, 2010, 2022) e das estimativas oficiais **TCU/IBGE** nos demais anos. A **distribuição interna** (DS × bairro × sexo × idade × raça) vem dos Censos 2010 e 2022 pelo **Método da Razão Censitária com razões variáveis**, uma evolução do método usado até 2023 no TabNet Salvador.
+Os **totais municipais** vêm do Censo nos anos censitários (2000, 2010, 2022) e das estimativas oficiais **TCU/IBGE** nos demais anos. A **distribuição interna** (DS × bairro × sexo × idade × raça) vem dos setores censitários de 2010 e 2022 pelo **Método da Razão Censitária com razões variáveis**, uma evolução do método usado até 2023 no TabNet Salvador. Desde a **versão 4**, os três anos censitários (2000, 2010, 2022) fecham exatamente com o IBGE em sexo, idade, raça e DS, e 2001–2009 são interpolados entre os Censos 2000 e 2010 (ver [Diálogo entre bases](13-Dialogo-entre-bases)).
 
 ## Navegação
 
@@ -45,6 +45,7 @@ Os **totais municipais** vêm do Censo nos anos censitários (2000, 2010, 2022) 
 10. [Referências](10-Referencias)
 11. [Histórico de versões](11-Historico-de-versoes)
 12. [População por idade simples](12-Idade-simples)
+13. [Diálogo entre bases: IBGE, SESAB e Município](13-Dialogo-entre-bases)
 
 Documento-síntese: [Protocolo Metodológico para estimativa populacional de Salvador](Protocolo-Metodológico-para-estimativa-populacional-de-Salvador)
 

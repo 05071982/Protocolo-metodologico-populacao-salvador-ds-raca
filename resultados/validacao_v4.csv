@@ -1,0 +1,20 @@
+CONFERENCIA,RESULTADO,OBS
+Total de cada ano = total oficial (Censo/TCU/RIPSA/IBGE),OK,
+POP_BAIRRO: total de cada ano = POP_DS,OK,
+DS×idade: total de cada ano = POP_DS,OK,
+bairro×idade×raça: total de cada ano = POP_DS,OK,
+2000: total por DS = tabela DS 2000 (mesmos limites),OK,
+2000: sexo × faixa etária = Censo 2000 (SESAB),OK,
+2000: raça = SIDRA 136 (sem declaração redistribuída),OK,"[566719, 502033, 7393, 1348121, 18841]"
+2000: idades simples 0–19 por sexo = Censo 2000,OK,
+2010: sexo × faixa × raça = universo SIDRA 3175,OK,
+2010: idade simples 0–100+ por sexo = SIDRA 3175,OK,
+2010: DS × sexo × faixa = tabela SESAB por DS (±1 pessoa),OK,"máx 1, células ajustadas 60"
+2022: sexo × faixa etária = Censo 2022,OK,
+2022: idades simples 0–19 por sexo = Censo 2022,OK,
+2022: população dos bairros = IBGE (arredondamento),OK,máx ±20
+Detalhada (idade) agregada = POP_BAIRRO em todas as células,OK,
+Detalhada agregada = DS × sexo × idade em todas as células,OK,
+Sem valores negativos,OK,
+Dicionário com 171 bairros (1–171),OK,
+Bairros com população na base,OK,170 com população; sem população: [2]

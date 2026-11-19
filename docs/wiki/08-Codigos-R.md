@@ -7,12 +7,14 @@ Todos os scripts estão em [`R/`](https://github.com/05071982/Protocolo-metodolo
 | `funcoes.R` | carregado pelos demais | — | `arred_maior_resto()`, `ipf_2d()`, `composicao_ano()` |
 | `01_chave_setor_bairro_ds.R` | nova malha, novo DS ou novo bairro | `BA_setores_CD2022.shp`, `DISTRITO_SANITARIO.shp` | `chave_setor_bairro_DS_2022.csv` |
 | `02_aquarius.R` | criação de bairro desmembrado | setores + `delimitacao_de_bairros_oficial.shp` | `setores_pituba_aquarius.csv` |
-| `03_estrutura_base.R` | mudança na estrutura censitária | `pop_*.csv` 2022 + `dados/entrada/` | `dados/estrutura/*.csv` |
+| `03_estrutura_base.R` | mudança na estrutura censitária | `pop_*.csv` 2022 + `dados/entrada/` | estruturas-semente 2010 e 2022 (v3) |
+| *calibração censitária (v4)* | mudança na estrutura censitária | sementes + margens IBGE em `dados/entrada/` | `dados/estrutura/*.csv` (referência: `python/v4_model.py`, `v4_series.py`, `v4_idade.py`) |
 | **`04_atualizar_populacao.R`** | **todo ano** | `dados/estrutura/` + `totais_municipais.csv` | `resultados/*.csv` |
+| **`05_idade_simples.R`** | **todo ano, depois do 04** | saída do 04 + `proporcao_idade_simples_na_faixa.csv` + `idade_simples_censos_ds.csv` | `populacao_salvador_ds_sexo_idade_*.csv` |
 | **`06_bairro_idade_raca.R`** | todo ano, depois do 05 | saídas do 04 e do 05 | `populacao_salvador_bairro_ds_idade_raca_*.csv` |
-| **`05_idade_simples.R`** | **todo ano, depois do 04** | saída do 04 + `proporcao_idade_simples_na_faixa.csv` | `populacao_salvador_ds_sexo_idade_*.csv` |
+| **`07_exportar_por_ano.R`** | todo ano, depois do 06 | saída do 06 + `dados/dicionarios/` | `populacao_bairro_idade_raca_por_ano.zip` |
 
-Pacotes: `sf` e `dplyr` (só nos scripts 01 e 02). Os scripts 03 e 04 usam apenas o R base.
+Pacotes: `sf` e `dplyr` (só nos scripts 01 e 02); `zip` e, opcionalmente, `openxlsx` (script 07). Os scripts 03 a 06 usam apenas o R base.
 
 ## 8.1 Núcleo do método (`funcoes.R`)
 
@@ -28,10 +30,10 @@ arred_maior_resto <- function(x, total) {
   as.integer(fl)
 }
 
-# Razão Censitária com razões variáveis
-composicao_ano <- function(s10, s22, ano) {
-  w <- (ano - 2010) / 12
-  s <- exp((1 - w) * log(s10) + w * log(s22))
+# Razão Censitária com razões variáveis, ancorada em três censos (v4)
+composicao_ano <- function(s00, s10, s22, ano) {
+  if (ano < 2010) { w <- (ano - 2000) / 10; s <- exp((1 - w) * log(s00) + w * log(s10)) }
+  else            { w <- (ano - 2010) / 12; s <- exp((1 - w) * log(s10) + w * log(s22)) }
   s / sum(s)
 }
 ```
@@ -39,13 +41,15 @@ composicao_ano <- function(s10, s22, ano) {
 ## 8.2 Atualização anual (trecho central do `04`)
 
 ```r
-s10 <- (C10 + 0.5) / sum(C10 + 0.5)
-s22 <- (C22 + 0.5) / sum(C22 + 0.5)
+part <- function(C) (C + 0.5) / sum(C + 0.5)
+s00 <- part(C00); s10 <- part(C10); s22 <- part(C22)       # estruturas calibradas aos censos
 for (i in seq_len(nrow(totais))) {
   ano <- totais$ANO[i]; Tt <- totais$TOTAL[i]
-  s <- composicao_ano(s10, s22, ano)
-  if (ano < 2010) s <- ave(s, grupo_dsa, FUN = sum) * pr_raca_2010   # raça congelada antes de 2010
-  Xi <- arred_maior_resto(s / sum(s) * Tt, round(Tt))               # DS × sexo × faixa × raça
+  if (as.character(ano) %in% names(censo)) {
+    Xi <- censo[[as.character(ano)]]                         # 2000, 2010, 2022: valores censitários
+  } else {
+    Xi <- arred_maior_resto(composicao_ano(s00, s10, s22, ano) * Tt, round(Tt))
+  }
   ...
 }
 # Depois: cada célula do DS é repartida entre os bairros na proporção de 2022,
@@ -54,7 +58,7 @@ for (i in seq_len(nrow(totais))) {
 
 ## 8.3 Validação
 
-Não havia R no ambiente em que os scripts foram escritos. O `04_atualizar_populacao.R` foi validado por uma réplica linha a linha em Python que lê os mesmos CSV do repositório. A réplica reproduziu **as 942.840 células da v3 sem nenhuma diferença**.
+Não havia R no ambiente em que os scripts foram escritos. O `04` e o `05` foram validados por uma réplica linha a linha em Python (`python/v4_espelho_R.py`) que lê os mesmos CSV do repositório. A réplica reproduziu **as 942.840 células da base e as 65.448 da idade simples da v4 sem nenhuma diferença**, também com um ano 2027 de teste acrescentado.
 
 Ao rodar no R pela primeira vez, confira:
 
@@ -69,6 +73,8 @@ O `03_estrutura_base.R` é a tradução para R dos scripts de referência em `py
 
 ## 8.4 Implementação de referência (Python)
 
-Os scripts em `python/` são os que geraram a v3. Ordem de execução:
+Os scripts em `python/` geraram as versões publicadas. Ordem de execução:
 
-`geo.py` → `bds.py` → `p1_sesab2010.py` → `s22.py` → `p2_s22.py` → `v3_model.py` → `v3_series.py` → `v3_series_censo.py` → `v3_units.py` → `v3_excel.py`
+- **Sementes (v3):** `geo.py` → `bds.py` → `p1_sesab2010.py` → `s22.py` → `p2_s22.py` → `v3_model.py` → `v3_series.py` → `v3_series_censo.py`
+- **v4:** `v4_inputs.py` (lê e confere SIDRA 136/3175, SESAB e DS 2000) → `v4_model.py` (calibração censitária) → `v4_series.py` → `v4_idade.py` → `v4_bairro_idade.py` → `v4_validar.py` → `v4_export.py` → `v4_repo_estrutura.py` → `v4_excel.py`, `v4_idade_tabs.py`
+- **Conferência do R:** `v4_espelho_R.py`

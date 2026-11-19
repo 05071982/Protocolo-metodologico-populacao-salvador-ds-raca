@@ -34,12 +34,18 @@ ipf_2d <- function(semente, margem_linha, margem_coluna, iter = 300) {
 }
 
 # ---------------------------------------------------------------------
-# Composição no ano t pela Razão Censitária com razões variáveis
-# s(t) ∝ s2010^(1-w) * s2022^w,  w = (t - 2010)/12
-# s10, s22 : vetores de participação (mesma ordem de células)
+# Composição no ano t pela Razão Censitária com razões variáveis (v4)
+#   2000 a 2009 : s(t) ∝ s2000^(1-w) * s2010^w ,  w = (t - 2000)/10   (interpolação entre censos)
+#   2010 em diante: s(t) ∝ s2010^(1-w) * s2022^w ,  w = (t - 2010)/12  (w > 1 após 2022 = extrapolação)
+# s00, s10, s22 : vetores de participação (mesma ordem de células)
 # ---------------------------------------------------------------------
-composicao_ano <- function(s10, s22, ano) {
-  w <- (ano - 2010) / 12
-  s <- exp((1 - w) * log(s10) + w * log(s22))
+composicao_ano <- function(s00, s10, s22, ano) {
+  if (ano < 2010) {
+    w <- (ano - 2000) / 10
+    s <- exp((1 - w) * log(s00) + w * log(s10))
+  } else {
+    w <- (ano - 2010) / 12
+    s <- exp((1 - w) * log(s10) + w * log(s22))
+  }
   s / sum(s)
 }

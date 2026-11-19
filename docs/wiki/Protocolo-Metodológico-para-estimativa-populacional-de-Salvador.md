@@ -4,7 +4,7 @@
 
 **Equipe:** Jessidenes Teixeira de Freitas Mendes Leal · Rafaella Santiago Coutinho Santos
 **Instituição:** Sala de Situação em Saúde de Salvador (SDSS), Secretaria Municipal da Saúde de Salvador
-**Versão:** v3 (10/11/2026) · **Cobertura:** 2000–2026, atualizável
+**Versão:** v4 (19/11/2026) · **Cobertura:** 2000–2026, atualizável
 
 ---
 
@@ -28,7 +28,7 @@ ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ
 27 anos × 194 unidades bairro×DS × 2 sexos × 18 faixas × 5 raças = 942.840 linhas
 ```
 
-## 3. Método em 6 passos
+## 3. Método em 7 passos
 
 | # | Passo | Técnica | Detalhe |
 |---|---|---|---|
@@ -37,13 +37,16 @@ ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ
 | 3 | Calibração | fecha no total oficial IBGE de cada bairro | [4.3](04-Metodo-passo-a-passo#43-unidades-bairro--ds-e-calibração) |
 | 4 | Sexo × idade × raça | IPF / raking com 4 margens | [4.4–4.6](04-Metodo-passo-a-passo#44-raça-e-idade-em-2022-ajuste-proporcional-iterativo-ipf) |
 | 5 | Série 2000–2026 | **Razão Censitária com razões variáveis** | [4.7](04-Metodo-passo-a-passo#47-série-anual-razão-censitária-com-razões-variáveis) |
-| 6 | Inteiros | arredondamento pelo maior resto | [4.9](04-Metodo-passo-a-passo#49-arredondamento-controlado-maior-resto) |
+| 6 | Calibração aos censos 2000, 2010 e 2022 | IPF com margens do IBGE (sexo × idade, raça, DS, bairros) | [4.6](04-Metodo-passo-a-passo#46-estruturas-de-2000-2010-e-2022-calibração-censitária-v4) e [13](13-Dialogo-entre-bases) |
+| 7 | Inteiros | arredondamento controlado (maior resto; várias margens nos censos) | [4.9](04-Metodo-passo-a-passo#49-arredondamento-controlado-maior-resto) |
 
 **Fórmula central:**
 
 $$
-P_c(t)=T(t)\cdot\frac{\left(s_c^{2010}\right)^{1-w}\left(s_c^{2022}\right)^{w}}{\sum_{c'}\left(s_{c'}^{2010}\right)^{1-w}\left(s_{c'}^{2022}\right)^{w}},\qquad w=\frac{t-2010}{12}
+P_c(t)=T(t)\cdot\frac{\left(s_c^{2010}\right)^{1-w}\left(s_c^{2022}\right)^{w}}{\sum_{c'}\left(s_{c'}^{2010}\right)^{1-w}\left(s_{c'}^{2022}\right)^{w}},\qquad w=\frac{t-2010}{12}\quad(t\ge 2010)
 $$
+
+Em 2001–2009 a mesma fórmula usa os censos 2000 e 2010: $(s_c^{2000})^{1-w}(s_c^{2010})^{w}$, com $w=(t-2000)/10$.
 
 - $T(t)$: total oficial (Censo em 2000, 2010 e 2022; TCU/IBGE nos demais anos);
 - $s_c$: participação da célula $c$ (DS × sexo × faixa × raça) no total do município.
@@ -62,17 +65,18 @@ Detalhes em [Comparação entre métodos](05-Comparacao-entre-metodos).
 
 ## 5. Atualização
 
-Todo ano, quando o IBGE publicar o novo total: acrescente uma linha em `dados/entrada/totais_municipais.csv` e rode `R/04_atualizar_populacao.R`. Ver [Como atualizar](07-Como-atualizar-a-base).
+Todo ano, quando o IBGE publicar o novo total: acrescente uma linha em `dados/entrada/totais_municipais.csv` e rode `R/04` a `R/07` (o `07` gera o zip com um arquivo por ano e o dicionário). Ver [Como atualizar](07-Como-atualizar-a-base).
 
 ## 6. Principais resultados (2022)
 
 - **Mais populosos:** Cabula/Beiru (327 mil), Itapuã (300 mil) e Barra/Rio Vermelho (299 mil).
 - **Menos populoso:** Centro Histórico (53 mil).
 - **População negra:** 83,1% em Salvador, variando de 66,3% (Barra/Rio Vermelho) a 91,2% (Subúrbio Ferroviário).
-- **Aquarius (bairro 171):** 4.837 habitantes.
+- **Aquarius (bairro 171):** 4.835 habitantes.
+- **Alinhamento com o IBGE:** 2000, 2010 e 2022 fecham exatamente com os censos em sexo × idade, raça e DS; diferenças com a SESAB fora dos censos estão publicadas ([página 13](13-Dialogo-entre-bases)).
 
 Tabelas completas em [Resultados](06-Resultados).
 
 ## 7. Limitações principais
 
-Mudança dos limites dos DS entre 2010 e 2022; raça de 2010 estimada a partir de um banco parcial; bairros fora de 2022 seguem a dinâmica do seu DS; quebras metodológicas nos totais TCU. Ver [Limitações](09-Limitacoes).
+Mudança dos limites dos DS entre 2010 e 2022; raça de 2010 por DS estimada a partir de um banco parcial (o total municipal é o universo do IBGE); raça de 2000 vem da amostra; bairros fora de 2022 seguem a dinâmica do seu DS; quebras metodológicas nos totais TCU. Ver [Limitações](09-Limitacoes).

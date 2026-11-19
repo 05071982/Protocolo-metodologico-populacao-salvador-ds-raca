@@ -12,6 +12,10 @@ Todos os insumos estão na pasta **População por DS** do Drive da SDSS. Os que
 | Tabela SESAB/SUVISA/DIS 2010 (aba "2010" do arquivo `POPULAÇÃO_INTERPOLAÇÃO_COM_BASE_CENSO_2010_Atual_10_11_2016.xlsx`) | SESAB | DS × sexo × 18 faixas, total 2.675.656 |
 | `(Censo 2010) Banco de dados por DS_.xlsx` | SDSS | Proporção de raça/cor por DS em 2010 |
 | `Bairros_2022.csv` | IBGE (população por bairro) | Total oficial de cada bairro em 2022 (soma 2.417.678) |
+| SIDRA **tabela 3175** (Censo 2010, universo): cor ou raça × sexo × idade, Salvador | IBGE | Margem sexo × idade × raça de 2010 (v4) — `dados/entrada/sidra_3175_salvador_2010_sexo_idade_raca.csv` |
+| SIDRA **tabela 136** (Censos 2000 e 2010): cor ou raça, Salvador | IBGE | Margem de raça de 2000 (amostra) (v4) — `dados/entrada/sidra_136_salvador_raca_2000_2010.csv` |
+| TabNet SESAB: população por sexo e faixa etária detalhada, Salvador, 2000–2025 | SESAB/SUVISA/DIVEP | 2000 e 2022 (= Censo): margens sexo × faixa e idades 0–19 (v4); demais anos: só reconciliação — `dados/entrada/sesab_tabnet_*.csv` |
+| Totais por DS de 2000 (mesmos limites atuais) | SMS (`pop_TCU.csv`, ano 2000) | Margem por DS de 2000 (v4) — `dados/entrada/ds_2000_totais.csv` |
 
 ## 2.2 Insumos geográficos
 

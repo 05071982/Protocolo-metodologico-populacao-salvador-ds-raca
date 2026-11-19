@@ -12,36 +12,37 @@ Base populacional oficial da **Sala de Situação em Saúde de Salvador (SDSS/SM
 ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ
 ```
 
-- `resultados/populacao_salvador_bairro_ds_2000_2026.csv.gz` — 942.840 linhas (27 anos × 194 unidades bairro×DS × 2 × 18 × 5)
-- `resultados/POP_SSA_DS_BAIRRO_RACA_2000_2026_v3.xlsx` — planilha com metodologia, dicionário, checagens, POP_DS, POP_BAIRRO e SETORES
+- `resultados/populacao_salvador_bairro_ds_2000_2026.csv.gz` — 947.700 linhas (27 anos × 194 unidades bairro×DS × 2 × 18 × 5, mais o bairro 2 – Aeroporto com FREQ = 0)
+- `resultados/POP_SSA_DS_BAIRRO_RACA_2000_2026_v4.xlsx` — planilha com metodologia, dicionário, checagens, POP_DS, POP_BAIRRO, reconciliação com a SESAB, validação e SETORES
+- `resultados/populacao_salvador_ds_sexo_idade_2000_2026.csv.gz` e `POP_SSA_DS_SEXO_IDADE_SIMPLES_2000_2026_v4.xlsx` — DS × sexo × idade simples (0–100+), 65.448 linhas, totais por faixa idênticos à base principal
+- `resultados/populacao_salvador_bairro_ds_idade_raca_2000_2026.csv.gz` — `ANO | DS | COD_BAIRRO | IDADE | FXET | SEXO | RACA | FREQ` (3.120.804 linhas com FREQ > 0), coerente com as duas tabelas acima
+- `resultados/populacao_bairro_idade_raca_por_ano.zip` — a mesma tabela, um CSV por ano (abre no Excel), com nomes e dicionário
+- `resultados/validacao_v4.csv` e `reconciliacao_sesab_2000_2025.csv`
 
-- `resultados/populacao_salvador_ds_sexo_idade_2000_2026.csv.gz` e `POP_SSA_DS_SEXO_IDADE_SIMPLES_2000_2026.xlsx` — DS × sexo × idade simples (0–100+), 65.448 linhas, totais por faixa idênticos à base principal
+## Método (resumo, versão 4)
 
-- `resultados/populacao_salvador_bairro_ds_idade_raca_2000_2026.csv.gz` — `ANO | DS | COD_BAIRRO | IDADE | FXET | SEXO | RACA | FREQ` (3.116.090 linhas com FREQ > 0), coerente com as duas tabelas acima
-
-## Método (resumo)
-
-- **Totais municipais:** Censo (2000, 2010, 2022); TCU/IBGE nos demais anos (2023: RIPSA).
-- **Distribuição interna:** Razão Censitária com razões variáveis entre os Censos 2010 e 2022, com IPF/raking para raça e idade e arredondamento pelo maior resto.
-- 12 Distritos Sanitários · 171 bairros (inclui Aquarius, Lei 9.778/2024) · 18 faixas etárias · 5 categorias de raça/cor.
+- **Totais municipais:** Censo (2000, 2010, 2022); TCU/IBGE nos demais anos (2023: RIPSA; 2025–2026: IBGE Cidades).
+- **Calibração censitária:** 2000, 2010 e 2022 fecham exatamente com o IBGE em sexo × idade, raça (SIDRA 136 e 3175), DS (2000) e bairros (2022).
+- **Distribuição interna:** setores censitários 2010 e 2022; Razão Censitária com razões variáveis (2001–2009 entre 2000 e 2010; depois entre 2010 e 2022), IPF/raking e arredondamento controlado.
+- **Diálogo com a SESAB:** iguais nos anos de censo; diferenças nos demais anos publicadas ano a ano.
+- 12 Distritos Sanitários · 171 bairros (inclui Aquarius, Lei 9.778/2024) · 18 faixas etárias e idade simples · 5 categorias de raça/cor.
 
 ## Atualização anual (ex.: 2027)
 
 1. Acrescente `2027,<total>,TCU/IBGE,0` em `dados/entrada/totais_municipais.csv`.
-2. No R: `setwd("<pasta do repositório>"); source("R/04_atualizar_populacao.R")`.
-3. Para idade simples: `source("R/05_idade_simples.R")`.
-4. Use `resultados/populacao_salvador_bairro_ds_2000_2027.csv` e `populacao_salvador_ds_sexo_idade_2000_2027.csv`.
+2. No R: `setwd("<pasta do repositório>")` e rode, em ordem, `R/04_atualizar_populacao.R`, `R/05_idade_simples.R`, `R/06_bairro_idade_raca.R` e `R/07_exportar_por_ano.R`.
+3. Use `resultados/populacao_salvador_bairro_ds_2000_2027.csv` (TabNet/BI) e `resultados/populacao_bairro_idade_raca_por_ano.zip` (um arquivo por ano + dicionário).
 
 ## Estrutura
 
 ```
-R/            scripts R (01 chave setor-bairro-DS, 02 Aquarius, 03 estrutura base, 04 atualização anual, funcoes)
-python/       implementação de referência que gerou a v3
+R/            scripts R (01 chave setor-bairro-DS, 02 Aquarius, 03 estrutura base, 04–07 atualização anual, funcoes)
+python/       implementação de referência (v3 e v4) e réplica de conferência do R
 dados/
-  entrada/    totais municipais, SESAB 2010, raça 2010, chave setores, população IBGE por bairro
-  estrutura/  estruturas 2010 (DS) e 2022 (DS e bairro×DS) — base da atualização anual
+  entrada/    totais municipais, SESAB 2010 e TabNet 2000–2025, SIDRA 136 e 3175, DS 2000, raça 2010, chave setores, população IBGE por bairro
+  estrutura/  estruturas calibradas 2000, 2010 e 2022 (DS e bairro×DS) e idade simples — base da atualização anual
   dicionarios/ DS, FXET, SEXO, RACA, bairros
-resultados/   base final, planilha v3, backtest de métodos
+resultados/   base final, planilhas v4, zip por ano, validação, reconciliação SESAB, backtest
 ```
 
 ## Equipe
