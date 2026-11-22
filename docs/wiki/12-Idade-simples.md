@@ -7,13 +7,13 @@ ANO | DS | SEXO | IDADE | FXET | FREQ        (IDADE 100 = 100 anos e mais)
 27 anos × 12 DS × 2 sexos × 101 idades = 65.448 linhas
 ```
 
-Arquivos: `resultados/POP_SSA_DS_SEXO_IDADE_SIMPLES_2000_2026_v4.xlsx` e `resultados/populacao_salvador_ds_sexo_idade_2000_2026.csv.gz`.
+Arquivos: `resultados/POP_SSA_DS_SEXO_IDADE_SIMPLES_2000_2026_v5.xlsx` e `resultados/populacao_salvador_ds_sexo_idade_2000_2026.csv.gz`.
 
 ## 12.1 O problema
 
 | Ano | Idade simples por DS disponível? |
 |---|---|
-| 2010 | **sim**: o banco Censo 2010 por DS tem idades de 0 a 100+ (cobertura de 78%, usada só como proporção) |
+| 2010 | **sim**: os agregados por setor (Pessoa11 e Pessoa12) têm idades de 0 a 100+ por sexo, em 100% dos setores (v5) |
 | 2022 | **não**: os agregados por setor só trazem 11 faixas (0–4 … 25–29, 30–39 … 60–69, 70+) |
 | outros anos | não há dado: precisa ser estimado |
 
@@ -25,7 +25,7 @@ $$
 P_{\text{idade}}(t)=P_{\text{faixa}}(t)\cdot p(\text{idade}\mid\text{faixa},t)
 $$
 
-**Proporção em 2010 (observada).** É a participação de cada idade dentro da sua faixa, por DS e sexo, tirada do banco 2010.
+**Proporção em 2010 (observada).** É a participação de cada idade dentro da sua faixa, por DS e sexo, tirada dos setores de 2010 (desde a v5; antes, de um banco com 78% de cobertura).
 
 **Proporção em 2022 (estimada por Sprague).** As faixas quinquenais de 2022 (0–4, 5–9, …, 75–79) de cada DS × sexo são desagregadas pela **interpolação osculatória de Sprague** (Siegel & Swanson, 2004, cap. 22). Esse método ajusta um polinômio suave passando pelas faixas vizinhas e preserva exatamente o total de cada faixa:
 
@@ -39,7 +39,7 @@ $\mathbf{M}$ é a matriz de multiplicadores de Sprague: painel central para as f
 - As idades 80 a 100+ seguem a forma observada em 2010, porque o Censo 2022 por setor só tem 70+.
 - Valores negativos ocasionais dos multiplicadores são truncados em zero e a faixa é renormalizada.
 
-**Calibração aos censos (v4).** Nos anos censitários, a soma dos DS fecha exatamente nas idades simples publicadas, por sexo:
+**Calibração aos censos.** Nos anos censitários, a soma dos DS fecha exatamente nas idades simples publicadas, por sexo:
 
 - **2010:** 0 a 100+ anos (universo, SIDRA 3175);
 - **2000 e 2022:** 0 a 19 anos (TabNet SESAB = Censo). Acima de 19 anos a SESAB só publica faixas quinquenais.
@@ -82,7 +82,7 @@ O arredondamento é controlado em **duas margens** ao mesmo tempo, por alocaçã
 - somando as idades, obtém-se exatamente a base principal (bairro, raça, faixa);
 - somando bairros e raças, obtém-se exatamente a tabela DS × sexo × idade.
 
-São 5.290.380 combinações em 2000–2026, das quais **3.120.804 têm FREQ > 0** (v4). O arquivo traz essas linhas e mais uma linha por ano para o bairro 2 (Aeroporto), com FREQ = 0. Isso passa do limite do Excel (1.048.576 linhas). A entrega é em CSV (`resultados/populacao_salvador_bairro_ds_idade_raca_2000_2026.csv.gz`) e em `resultados/populacao_bairro_idade_raca_por_ano.zip`, com um arquivo por ano, que abre no Excel, mais o dicionário. Scripts: `R/06_bairro_idade_raca.R` e `R/07_exportar_por_ano.R`.
+São 5.290.380 combinações em 2000–2026, das quais **3.116.941 têm FREQ > 0** (v5). O arquivo traz essas linhas e mais uma linha por ano para o bairro 2 (Aeroporto), com FREQ = 0. Isso passa do limite do Excel (1.048.576 linhas). A entrega é em CSV (`resultados/populacao_salvador_bairro_ds_idade_raca_2000_2026.csv.gz`) e em `resultados/populacao_bairro_idade_raca_por_ano.zip`, com um arquivo por ano, que abre no Excel, mais o dicionário. Scripts: `R/06_bairro_idade_raca.R` e `R/07_exportar_por_ano.R`.
 
 Planilha de idade simples:
 - aba `TAB_IDADE_2010_2022`: 6 tabelas (2010 e 2022 × masculino, feminino e total), com DS na linha e idade 0–100+ na coluna;

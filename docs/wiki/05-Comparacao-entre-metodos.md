@@ -25,25 +25,25 @@ Fingimos que estamos em 2010 e tentamos prever a população de cada DS em 2022.
 
 | DS | Observado 2022 | Razão fixa | Lagrange | Lagrange calibrado | **Razão variável** |
 |---|---:|---:|---:|---:|---:|
-| Centro Histórico | 52.741 | 64.941 | 71.400 | 58.423 | **57.463** |
-| Itapagipe | 131.240 | 146.756 | 164.866 | 134.901 | **132.708** |
-| São Caetano/Valéria | 215.362 | 232.639 | 292.989 | 239.737 | **239.912** |
-| Liberdade | 137.381 | 162.128 | 174.365 | 142.673 | **140.428** |
-| Brotas | 177.202 | 183.696 | 218.088 | 178.449 | **176.361** |
-| Barra/Rio Vermelho | 298.671 | 306.243 | 348.790 | 285.395 | **280.916** |
-| Boca do Rio | 124.113 | 114.148 | 152.585 | 124.852 | **127.732** |
-| Itapuã | 300.070 | 226.104 | 311.338 | 254.750 | **264.604** |
-| Cabula/Beiru | 327.120 | 348.649 | 446.709 | 365.517 | **367.734** |
-| Pau da Lima | 203.224 | 197.619 | 247.213 | 202.281 | **202.051** |
-| Subúrbio Ferroviário | 290.866 | 291.059 | 343.489 | 281.058 | **277.544** |
-| Cajazeiras | 159.689 | 143.696 | 182.883 | 149.643 | **150.224** |
-| **Soma** | **2.417.678** | 2.417.678 | **2.954.715** | 2.417.678 | 2.417.678 |
+| Centro Histórico | 52.741 | 64.767 | 70.977 | 58.077 | **57.110** |
+| Itapagipe | 131.239 | 146.756 | 164.866 | 134.901 | **132.672** |
+| São Caetano/Valéria | 215.362 | 234.413 | 297.308 | 243.270 | **243.888** |
+| Liberdade | 137.381 | 161.416 | 172.632 | 141.255 | **139.037** |
+| Brotas | 177.202 | 183.696 | 218.088 | 178.449 | **176.313** |
+| Barra/Rio Vermelho | 298.671 | 305.681 | 347.421 | 284.276 | **279.707** |
+| Boca do Rio | 124.113 | 114.710 | 153.954 | 125.972 | **129.085** |
+| Itapuã | 300.070 | 226.104 | 311.338 | 254.750 | **264.531** |
+| Cabula/Beiru | 327.120 | 347.030 | 442.766 | 362.291 | **363.887** |
+| Pau da Lima | 203.224 | 199.238 | 251.156 | 205.507 | **205.655** |
+| Subúrbio Ferroviário | 290.866 | 290.170 | 341.327 | 279.288 | **275.609** |
+| Cajazeiras | 159.689 | 143.696 | 182.883 | 149.643 | **150.183** |
+| **Soma** | **2.417.678** | 2.417.677 | **2.954.716** | 2.417.679 | 2.417.677 |
 
 | Métrica | Razão fixa | Lagrange | Lagrange calibrado | **Razão variável** |
 |---|---:|---:|---:|---:|
-| Erro percentual absoluto médio (MAPE) | 9,9% | 23,4% | 6,0% | **5,7%** |
-| Maior erro absoluto | 24,6% | 36,6% | 15,1% | **12,4%** |
-| RMSE (pessoas) | 25.366 | 52.866 | 19.520 | **18.577** |
+| Erro percentual absoluto médio (MAPE) | 9,8% | 23,5% | 6,1% | **5,8%** |
+| Maior erro absoluto | 24,6% | 38,1% | 15,1% | **13,2%** |
+| RMSE (pessoas) | 25.240 | 52.632 | 19.534 | **18.633** |
 
 Arquivo: `resultados/backtest_metodos_ds_2022.csv`.
 
@@ -53,7 +53,7 @@ Arquivo: `resultados/backtest_metodos_ds_2022.csv`.
 2. A Razão fixa respeita o total, mas não acompanha a dinâmica: subestima Itapuã em 25% e superestima Liberdade e Centro Histórico em 18–23%.
 3. A Razão variável tem o **menor erro em todas as métricas**. Mesmo comparada ao Lagrange recalibrado, que é uma melhoria que o método antigo não fazia, ela tem erro máximo menor e, sobretudo, as vantagens estruturais dos itens 5.2 e 5.3.
 
-*Ressalva:* os DS de 2000 e 2010 seguem a divisão de DS da época, e 2022 segue o shapefile de 2023. Parte do erro de todos os métodos vem dessa mudança de limites.
+*Desde a v5*, os três anos estão nos **limites atuais** dos DS (2000: tabela DS 2000; 2010 e 2022: setores censitários). Os erros quase não mudaram em relação à versão anterior, em que 2010 seguia os limites da época, o que confirma que a mudança de limites tinha efeito pequeno.
 
 ## 5.2 Teste nas células: valores negativos
 
@@ -61,9 +61,11 @@ Extrapolando linearmente (Lagrange de 2 pontos, 2010 e 2022) cada uma das 2.160 
 
 | Ano | Células negativas (Lagrange) | Soma dos negativos | Razão variável |
 |---|---:|---:|---|
-| 2000 | 75 | −6.979 | 0 negativas |
-| 2026 | 401 | −7.479 | 0 negativas |
-| 2030 | 502 | −18.784 | 0 negativas |
+| 2000 | 76 | −5.413 | 0 negativas |
+| 2026 | 405 | −7.900 | 0 negativas |
+| 2030 | 500 | −19.111 | 0 negativas |
+
+No nível de bairro × DS (34.920 células), a extrapolação linear até 2026 gera 5.937 células negativas.
 
 Isso acontece porque uma célula que diminuiu entre 2010 e 2022 continua diminuindo linearmente até passar de zero. Na forma geométrica, a participação nunca fica negativa e as células sempre somam 100%.
 

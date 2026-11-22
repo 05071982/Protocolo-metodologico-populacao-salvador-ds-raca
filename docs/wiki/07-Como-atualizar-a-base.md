@@ -1,6 +1,6 @@
 # 7. Como atualizar a base (ex.: total de 2027)
 
-A atualização anual **não** exige reprocessar o Censo. As estruturas calibradas de 2000, 2010 e 2022 já estão prontas em `dados/estrutura/`. **Basta informar o novo total.**
+A atualização anual **não** exige reprocessar o Censo. As estruturas calibradas de 2000, 2010 e 2022 (por bairro × DS) já estão prontas em `dados/estrutura/`. **Basta informar o novo total.**
 
 ## 7.1 Passo a passo
 
@@ -69,7 +69,7 @@ Só quando mudar a estrutura:
 - uma mudança nos **limites dos DS**;
 - uma correção dos agregados do IBGE.
 
-Nesses casos: rode `01_chave_setor_bairro_ds.R` (e `02_aquarius.R` ou um equivalente para o novo bairro), depois `03_estrutura_base.R`, refaça a calibração censitária (implementação de referência em `python/v4_model.py`, `v4_series.py` e `v4_idade.py`; ver [página 13](13-Dialogo-entre-bases)) e por fim os scripts 04 a 07.
+Nesses casos: rode `01_chave_setor_bairro_ds.R` e `01b_chave_setor2010.R` (e `02_aquarius.R` ou um equivalente para o novo bairro), depois `03_estrutura_base.R`, refaça a calibração censitária (implementação de referência em `python/v5_*.py`; ver [página 13](13-Dialogo-entre-bases)) e por fim os scripts 04 a 07.
 
 ## 7.4 Se o total de algum ano for revisado
 

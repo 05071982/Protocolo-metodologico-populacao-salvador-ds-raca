@@ -1,5 +1,5 @@
 # =====================================================================
-# 04_atualizar_populacao.R  (versão 4)
+# 04_atualizar_populacao.R  (versão 5)
 # Gera a base populacional de Salvador (ANO, DS, COD_BAIRRO, FXET, SEXO,
 # RACA, FREQ) para todos os anos de dados/entrada/totais_municipais.csv.
 #
@@ -8,115 +8,91 @@
 #        2027,<total TCU/IBGE>,TCU/IBGE,0
 #   2. Rode, nesta ordem: 04_atualizar_populacao.R, 05_idade_simples.R,
 #      06_bairro_idade_raca.R e 07_exportar_por_ano.R.
-#   3. Resultados em resultados/ (CSV completos e zip com um arquivo por ano).
 #
-# Não é preciso reprocessar os censos: as estruturas calibradas de 2000,
-# 2010 e 2022 já estão em dados/estrutura/ (ver wiki, página 13).
-# Método: Razão Censitária com razões variáveis, ancorada em três censos.
+# Estruturas prontas em dados/estrutura/ (194 unidades bairro × DS, limites atuais):
+#   2000 (margens do Censo 2000), 2010 (setores censitários 2010) e 2022 (setores 2022),
+#   todas calibradas ao IBGE (ver wiki, páginas 4 e 13).
+# Método (Razão Censitária com razões variáveis):
 #   - 2000, 2010, 2022: valores censitários calibrados (inteiros, prontos)
-#   - 2001–2009: interpolação geométrica 2000→2010
-#   - 2011–2021: interpolação geométrica 2010→2022
-#   - 2023 em diante: extrapolação da tendência 2010→2022 (w > 1)
+#   - 2001–2009 e 2011–2021: interpolação geométrica das participações de cada
+#     célula unidade × sexo × faixa × raça entre os censos vizinhos
+#   - 2023 em diante: tendência 2010→2022 nas células DS × sexo × faixa × raça,
+#     repartida entre as unidades do DS pela proporção de 2022
 #   Todo ano não censitário fecha no total de totais_municipais.csv.
 # =====================================================================
-
 rm(list = ls())
-
-# ---- Pasta do repositório (ajuste se necessário) --------------------
 raiz <- getwd()          # abra o projeto .Rproj ou use setwd("C:/.../repositorio")
 source(file.path(raiz, "R", "funcoes.R"))
 
-# ---- Entradas --------------------------------------------------------
 totais <- read.csv(file.path(raiz, "dados/entrada/totais_municipais.csv"))
 totais <- totais[order(totais$ANO), ]
-stopifnot(!anyDuplicated(totais$ANO), all(totais$TOTAL > 0))
-le <- function(a) read.csv(file.path(raiz, "dados/estrutura", a))
-e00 <- le("estrutura_2000_ds.csv"); e10 <- le("estrutura_2010_ds.csv"); e22 <- le("estrutura_2022_ds.csv")
-u22 <- le("estrutura_2022_bairro_ds.csv")
-
-# Ordem canônica das 2.160 células: DS > SEXO > FXET > RACA (RACA varia mais rápido)
-ordena <- function(d) d[order(d$DS, d$SEXO, d$FXET, d$RACA), ]
-e00 <- ordena(e00); e10 <- ordena(e10); e22 <- ordena(e22)
-stopifnot(nrow(e00) == 2160, nrow(e10) == 2160, nrow(e22) == 2160)
-celula <- e10[, c("DS", "SEXO", "FXET", "RACA")]
-
-C00 <- e00$POP; C10 <- e10$POP; C22 <- e22$POP          # inteiros calibrados aos censos
+stopifnot(!anyDuplicated(totais$ANO), all(totais$TOTAL > 0), min(totais$ANO) >= 2000)
+le <- function(a) { d <- read.csv(file.path(raiz, "dados/estrutura", a)); d[order(d$UNIDADE, d$SEXO, d$FXET, d$RACA), ] }
+e00 <- le("estrutura_2000_unidade.csv"); e10 <- le("estrutura_2010_unidade.csv"); e22 <- le("estrutura_2022_unidade.csv")
+stopifnot(nrow(e10) == 194 * 180, nrow(e00) == nrow(e10), nrow(e22) == nrow(e10))
+cel <- e10[, c("UNIDADE", "DS", "COD_BAIRRO", "SEXO", "FXET", "RACA")]
+C00 <- e00$POP; C10 <- e10$POP; C22 <- e22$POP
 censo <- list("2000" = C00, "2010" = C10, "2022" = C22)
-part <- function(C) (C + 0.5) / sum(C + 0.5)             # pseudo-contagem 0,5 evita log(0)
-s00 <- part(C00); s10 <- part(C10); s22 <- part(C22)
+part <- function(C, eps) (C + eps) / sum(C + eps)
+s00 <- part(C00, 0.1); s10 <- part(C10, 0.1); s22 <- part(C22, 0.1)      # unidades
 
-# ---- 1. Série por DS × sexo × faixa × raça ---------------------------
-serie_ds <- vector("list", nrow(totais))
+# --- extrapolação após 2022: células DS × sexo × faixa × raça (2.160)
+chave_ds <- paste(cel$DS, cel$SEXO, cel$FXET, cel$RACA)
+ds_cel <- unique(cel[order(cel$DS, cel$SEXO, cel$FXET, cel$RACA), c("DS", "SEXO", "FXET", "RACA")])
+kds <- paste(ds_cel$DS, ds_cel$SEXO, ds_cel$FXET, ds_cel$RACA)
+D10 <- as.numeric(tapply(C10, factor(chave_ds, levels = kds), sum))
+D22 <- as.numeric(tapply(C22, factor(chave_ds, levels = kds), sum))
+d10 <- part(D10, 0.5); d22 <- part(D22, 0.5)
+D22u <- D22[match(chave_ds, kds)]
+tot_u <- tapply(C22, cel$UNIDADE, sum); tot_dsu <- tapply(tot_u, tapply(cel$DS, cel$UNIDADE, `[`, 1), sum)
+sh_fb <- as.numeric(tot_u[as.character(cel$UNIDADE)] / tot_dsu[as.character(cel$DS)])
+SH <- ifelse(D22u > 0, C22 / ifelse(D22u > 0, D22u, 1), sh_fb)
+
+extrapola <- function(ano, Tt) {
+  w <- (ano - 2010) / 12
+  s <- exp((1 - w) * log(d10) + w * log(d22)); s <- s / sum(s)
+  Xd <- arred_maior_resto(s * Tt, round(Tt))
+  X  <- Xd[match(chave_ds, kds)] * SH
+  FL <- floor(X + 1e-9); FR <- X - FL
+  o  <- order(chave_ds, -FR, cel$UNIDADE)              # maior resto dentro da célula do DS; desempate pela unidade
+  falta <- Xd[match(chave_ds, kds)] - ave(FL, chave_ds, FUN = sum)
+  pos <- integer(length(X)); pos[o] <- ave(seq_along(o), chave_ds[o], FUN = seq_along)
+  as.integer(FL + (pos <= falta))
+}
+
+res <- vector("list", nrow(totais))
 for (i in seq_len(nrow(totais))) {
   ano <- totais$ANO[i]; Tt <- totais$TOTAL[i]
   if (as.character(ano) %in% names(censo)) {
     Xi <- censo[[as.character(ano)]]
     if (sum(Xi) != round(Tt)) stop("Total de ", ano, " difere do censo: ", sum(Xi))
+  } else if (ano > 2022) {
+    Xi <- extrapola(ano, Tt)
   } else {
-    if (ano < 2000) stop("Anos anteriores a 2000 não são suportados")
     Xi <- arred_maior_resto(composicao_ano(s00, s10, s22, ano) * Tt, round(Tt))
   }
-  serie_ds[[i]] <- cbind(ANO = ano, celula, FREQ_DS = Xi)
+  res[[i]] <- data.frame(ANO = ano, cel[, c("DS", "COD_BAIRRO", "FXET", "SEXO", "RACA")], FREQ = Xi)
 }
-serie_ds <- do.call(rbind, serie_ds)
+pop <- do.call(rbind, res)
 
-# ---- 2. Repartição de cada célula do DS entre os bairros (proporção de 2022) ----
-u22 <- u22[order(u22$UNIDADE, u22$SEXO, u22$FXET, u22$RACA), ]
-c22u <- aggregate(POP ~ DS + SEXO + FXET + RACA, u22, sum)          # soma das unidades no DS
-names(c22u)[5] <- "C22_DS"
-u22 <- merge(u22, c22u, by = c("DS", "SEXO", "FXET", "RACA"), sort = FALSE)
-tot_u  <- tapply(u22$POP, u22$UNIDADE, sum)
-u_ds   <- tapply(u22$DS, u22$UNIDADE, `[`, 1)
-tot_ds <- tapply(tot_u, u_ds, sum)
-share_fallback <- (tot_u / tot_ds[as.character(u_ds)])[as.character(u22$UNIDADE)]
-u22$SH <- ifelse(u22$C22_DS > 0, u22$POP / u22$C22_DS, share_fallback)
-
-resultado <- vector("list", nrow(totais))
-for (i in seq_len(nrow(totais))) {
-  ano <- totais$ANO[i]
-  d <- merge(u22[, c("UNIDADE", "DS", "COD_BAIRRO", "SEXO", "FXET", "RACA", "SH")],
-             serie_ds[serie_ds$ANO == ano, ], by = c("DS", "SEXO", "FXET", "RACA"))
-  d$X  <- d$FREQ_DS * d$SH
-  d$FL <- floor(d$X + 1e-9)
-  d$FR <- d$X - d$FL
-  d$CH <- interaction(d$DS, d$SEXO, d$FXET, d$RACA, drop = TRUE)
-  d <- d[order(d$CH, -d$FR, d$UNIDADE), ]                          # maior resto; desempate estável
-  falta <- d$FREQ_DS - ave(d$FL, d$CH, FUN = sum)                  # unidades a distribuir na célula
-  pos   <- ave(seq_len(nrow(d)), d$CH, FUN = seq_along)             # posição no ranking da célula
-  d$FREQ <- as.integer(d$FL + (pos <= falta))
-  resultado[[i]] <- d[, c("ANO", "DS", "COD_BAIRRO", "FXET", "SEXO", "RACA", "FREQ")]
-}
-pop <- do.call(rbind, resultado)
-pop <- pop[order(pop$ANO, pop$DS, pop$COD_BAIRRO, pop$SEXO, pop$FXET, pop$RACA), ]
-
-# ---- 2b. Bairros oficiais sem população residente (ex.: 2 – Aeroporto): linhas com FREQ = 0
+# Bairros oficiais sem população residente (ex.: 2 – Aeroporto): linhas com FREQ = 0
 dic <- read.csv(file.path(raiz, "dados/dicionarios/bairros.csv"))
 sem <- dic[!dic$COD_BAIRRO %in% pop$COD_BAIRRO, ]
 if (nrow(sem) > 0) {
   z <- expand.grid(RACA = 1:5, FXET = 1:18, SEXO = 1:2, COD_BAIRRO = sem$COD_BAIRRO, ANO = totais$ANO)
-  z$DS <- sem$DS_PRINCIPAL[match(z$COD_BAIRRO, sem$COD_BAIRRO)]
-  z$FREQ <- 0L
+  z$DS <- sem$DS_PRINCIPAL[match(z$COD_BAIRRO, sem$COD_BAIRRO)]; z$FREQ <- 0L
   pop <- rbind(pop, z[, names(pop)])
-  pop <- pop[order(pop$ANO, pop$DS, pop$COD_BAIRRO, pop$SEXO, pop$FXET, pop$RACA), ]
 }
-stopifnot(setequal(unique(pop$COD_BAIRRO), dic$COD_BAIRRO))     # os 171 bairros em todos os anos
-
-# ---- 3. Conferências -------------------------------------------------
-chk <- aggregate(FREQ ~ ANO, pop, sum)
-chk <- merge(chk, totais[, c("ANO", "TOTAL")])
-stopifnot(all(chk$FREQ == round(chk$TOTAL)), all(pop$FREQ >= 0))
-chk_ds <- merge(aggregate(FREQ ~ ANO + DS + SEXO + FXET + RACA, pop, sum), serie_ds)
-stopifnot(all(chk_ds$FREQ == chk_ds$FREQ_DS))
+pop <- pop[order(pop$ANO, pop$DS, pop$COD_BAIRRO, pop$SEXO, pop$FXET, pop$RACA), ]
+stopifnot(setequal(unique(pop$COD_BAIRRO), dic$COD_BAIRRO), all(pop$FREQ >= 0))
+chk <- merge(aggregate(FREQ ~ ANO, pop, sum), totais[, c("ANO", "TOTAL")])
+stopifnot(all(chk$FREQ == round(chk$TOTAL)))
 print(chk)
 
-# ---- 4. Saída --------------------------------------------------------
 dir.create(file.path(raiz, "resultados"), showWarnings = FALSE)
-arq <- file.path(raiz, "resultados",
-                 sprintf("populacao_salvador_bairro_ds_%d_%d.csv", min(pop$ANO), max(pop$ANO)))
+arq <- file.path(raiz, "resultados", sprintf("populacao_salvador_bairro_ds_%d_%d.csv", min(pop$ANO), max(pop$ANO)))
 write.csv(pop, arq, row.names = FALSE, fileEncoding = "UTF-8")
-cat("Arquivo gerado:", arq, "\nLinhas:", nrow(pop), "\n")
-
-# Versão agregada por DS (formato pop14 / TabNet)
 pop_ds <- aggregate(FREQ ~ ANO + FXET + DS + SEXO + RACA, pop, sum)
 write.csv(pop_ds[order(pop_ds$ANO, pop_ds$DS, pop_ds$SEXO, pop_ds$FXET, pop_ds$RACA), ],
           sub("bairro_ds", "ds", arq), row.names = FALSE, fileEncoding = "UTF-8")
+cat("Arquivo gerado:", arq, "\nLinhas:", nrow(pop), "\n")

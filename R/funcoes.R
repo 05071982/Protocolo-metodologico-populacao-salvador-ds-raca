@@ -39,7 +39,7 @@ ipf_2d <- function(semente, margem_linha, margem_coluna, iter = 300) {
 #   2010 em diante: s(t) ∝ s2010^(1-w) * s2022^w ,  w = (t - 2010)/12  (w > 1 após 2022 = extrapolação)
 # s00, s10, s22 : vetores de participação (mesma ordem de células)
 # ---------------------------------------------------------------------
-composicao_ano <- function(s00, s10, s22, ano) {
+composicao_ano <- function(s00, s10, s22, ano) {   # usada em 2001–2021 (unidades) e após 2022 (DS)
   if (ano < 2010) {
     w <- (ano - 2000) / 10
     s <- exp((1 - w) * log(s00) + w * log(s10))

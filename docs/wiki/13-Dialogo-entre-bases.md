@@ -1,6 +1,6 @@
-# 13. Diálogo entre bases: IBGE, SESAB e Município (versão 4)
+# 13. Diálogo entre bases: IBGE, SESAB e Município (versões 4 e 5)
 
-Uma crítica frequente às estimativas municipais é a falta de diálogo entre a população do IBGE, a da SESAB e a do município. A versão 4 responde a essa crítica com uma **hierarquia explícita de fontes**: cada fonte manda no nível em que é a melhor informação disponível, e as diferenças que sobram são publicadas.
+Uma crítica frequente às estimativas municipais é a falta de diálogo entre a população do IBGE, a da SESAB e a do município. A versão 4 respondeu a essa crítica, e a versão 5 a completou com os setores de 2010, com uma **hierarquia explícita de fontes**: cada fonte manda no nível em que é a melhor informação disponível, e as diferenças que sobram são publicadas.
 
 ## 13.1 Por que alinhar não quebra o método dos setores
 
@@ -20,21 +20,21 @@ O alinhamento é feito por **ajuste proporcional iterativo** (IPF/raking; Deming
 | 2. Sexo × faixa etária do município | Censo 2000 e Censo 2022 (TabNet SESAB = Censo); universo 2010 (SIDRA 3175) | 2000, 2010, 2022 |
 | | Idades simples 0–19 (2000 e 2022) e 0–100+ (2010) | 2000, 2010, 2022 |
 | 3. Raça/cor do município | Censo 2000, amostra (SIDRA 136); universo 2010 por sexo e idade (SIDRA 3175); universo 2022 (setores) | 2000, 2010, 2022 |
-| 4. Total por DS | Tabela DS 2000 (mesmos limites atuais); SESAB/DIS 2010; setores 2022 | 2000, 2010, 2022 |
-| 5. Bairro e cruzamentos internos | Setores censitários 2022; tabulações por DS de 2010 (SESAB e banco 2010) | todos |
+| 4. Total por DS e por bairro | Tabela DS 2000 (mesmos limites atuais); setores 2010 (v5); setores 2022 e população por bairro do IBGE | 2000, 2010, 2022 |
+| 5. Bairro e cruzamentos internos | Setores censitários 2010 e 2022, nos limites atuais | todos |
+| Tabela SESAB por DS de 2010 (limites da época) | comparação: diferença máxima de 0,8% | 2010 |
 | SESAB fora dos censos | **comparação publicada**, não ajuste | 2001–2009, 2011–2021, 2023–2025 |
 
 "Sem declaração" de raça (2000: 16.749 pessoas; 2010: 402 no universo) foi redistribuída proporcionalmente entre as cinco categorias, dentro de cada sexo e idade em 2010 e no total em 2000.
 
 ## 13.3 Calibração de cada censo
 
-**2010.** Ponto de partida: a estrutura DS × sexo × faixa × raça da v3. Margens:
+**2010 (v5).** Ponto de partida: os 3.546 setores do universo agregados nas 194 unidades bairro × DS (ver [página 14](14-Versao-5-setores-2010)). Margens:
 
-1. DS × sexo × faixa = tabela SESAB/DIS 2010. Ela difere do universo em até 6 pessoas por sexo × faixa, e foi ajustada em no máximo **1 pessoa** em 60 das 432 células para fechar no IBGE;
-2. sexo × faixa × raça do município = universo SIDRA 3175;
-3. DS × raça = banco 2010 por DS (só como proporção).
+1. população de cada unidade por sexo = soma dos setores;
+2. sexo × faixa × raça do município = universo SIDRA 3175.
 
-Inteiros por arredondamento controlado com as margens 1 e 2 exatas.
+Inteiros por arredondamento controlado com as duas margens exatas. Na v4, 2010 partia da tabela SESAB por DS (limites da época) e de um banco com 78% de cobertura.
 
 **2022.** Ponto de partida: as 194 unidades bairro × DS da v3, vindas dos setores. Margens:
 
@@ -75,18 +75,18 @@ A dissimilaridade é o percentual da população que teria de mudar de célula s
 
 Fora dos censos, **forçar a base a seguir a SESAB pioraria a qualidade**. A estrutura etária da SESAB fica quase parada entre censos e se afasta até 10% em 2019, e mesmo assim a base reencontra o Censo 2022 quando ele chega. Por isso a SESAB é usada como comparação, não como total. Quem precisar dos números da SESAB tem a tabela de reconciliação ano a ano.
 
-## 13.6 Validação da versão 4 (`resultados/validacao_v4.csv`)
+## 13.6 Validação (`resultados/validacao_v5.csv`)
 
 | Conferência | Resultado |
 |---|---|
 | Total de cada ano = total oficial | OK |
 | 2000: DS = tabela DS 2000; sexo × faixa = Censo 2000; raça = SIDRA 136; idades 0–19 = Censo 2000 | OK |
-| 2010: sexo × faixa × raça e idade simples 0–100+ = SIDRA 3175; DS × sexo × faixa = SESAB ±1 | OK |
-| 2022: sexo × faixa e idades 0–19 = Censo 2022; bairros = IBGE ±20 (arredondamento) | OK |
+| 2010: sexo × faixa × raça e idade simples 0–100+ = SIDRA 3175; bairros × DS por sexo = soma dos setores | OK |
+| 2022: sexo × faixa e idades 0–19 = Censo 2022; bairros = IBGE | OK |
 | Tabela detalhada (idade) = POP_BAIRRO = DS × idade, em todas as células | OK |
 | 171 bairros no dicionário e nas bases (2 – Aeroporto com FREQ = 0) | OK |
 | Valores negativos | nenhum |
-| R (04 e 05) reproduz a referência Python, inclusive com um ano 2027 de teste | 0 células diferentes |
+| R (04 e 05) reproduz a referência Python, inclusive com um ano 2027 de teste | 0 células diferentes (v5) |
 
 ## 13.7 Referências desta página
 

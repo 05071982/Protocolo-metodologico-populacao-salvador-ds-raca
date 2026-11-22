@@ -2,13 +2,13 @@
 
 O método tem duas partes independentes:
 
-- **Estrutura** (calculada uma vez, a partir dos censos): como a população se distribui entre bairros, DS, sexo, idade e raça em **2010** e em **2022**, e as margens censitárias de **2000** (v4).
+- **Estrutura** (calculada uma vez, a partir dos censos): como a população se distribui entre bairros, DS, sexo, idade e raça em **2010** e em **2022** (setores censitários, limites atuais), e as margens censitárias de **2000**.
 - **Série** (recalculada a cada novo total): como essa distribuição evolui ano a ano e se encaixa no total municipal oficial.
 
 ```
                 ┌──────────────────────────── ESTRUTURA (03_estrutura_base.R) ─────────────────────────────┐
  Setores 2022 ──► imputação "X" ──► chave setor→bairro→DS ──► calibração no total do bairro ──► IPF raça ──► 18 faixas
- SESAB 2010  ──────────────────────────────────────────────────────────────────────────────► IPF raça 2010
+ Setores 2010 ──► chave setor→bairro×DS (limites atuais) ──► idade×sexo e raça×sexo×grupo ──► IPF ──► 18 faixas (v5)
  Margens IBGE 2000/2010/2022 (sexo×idade, raça, DS) ──────────────────────► calibração censitária (v4)
                 └───────────────────────────────────────────────────────────────────────────────────────────┘
                                                     │
@@ -92,37 +92,37 @@ $$
 
 O mesmo vale para 40–49, 50–59 e 60–69. A raça de cada subfaixa segue a da faixa-mãe.
 
-## 4.6 Estruturas de 2000, 2010 e 2022 (calibração censitária, v4)
+## 4.6 Estruturas de 2000, 2010 e 2022 (calibração censitária)
 
-### Estrutura de 2010 (v3)
+### Estrutura de 2010 a partir dos setores (v5)
 
-A tabela SESAB fornece **DS × sexo × 18 faixas** (total 2.675.656). A raça de 2010 é estimada por IPF com:
+Desde a versão 5, 2010 é construído **setor a setor**, como 2022:
 
-- semente: a estrutura sexo × idade × raça do **mesmo DS em 2022**, que preserva as interações observadas;
-- margem 1: sexo × faixa (SESAB);
-- margem 2: distribuição de raça do DS (banco 2010, só como proporção).
+- **Dados:** agregados por setor do universo do Censo 2010 (3.546 setores com moradores, soma = 2.675.656): idade simples por sexo (Pessoa11 e Pessoa12) e raça/cor por sexo e grupo etário (Pessoa03 para 5 anos ou mais; Pessoa05 para 0 a 4 anos). Nove setores com sigilo (475 pessoas) têm só o total por sexo; idade e raça vêm da própria unidade.
+- **Chave:** a malha de setores de 2010 foi cruzada com a malha oficial de bairros e DS (`R/01b_chave_setor2010.R`). Para 2.874 setores com o mesmo código em 2022, usa-se a unidade da chave de 2022, desde que o polígono de 2010 tenha ao menos 25% da área nela; para os demais 669, a unidade de maior área; 3 setores costeiros de Paripe sem interseção foram atribuídos a Paripe. Em 96% da população, os dois critérios dão o mesmo bairro.
+- **IPF por unidade:** semente = idade do setor × proporção de raça no grupo etário; margens = unidade × sexo × faixa (setores), unidade × sexo × grupo × raça (setores) e sexo × faixa × raça do município (universo, SIDRA 3175).
 
-### Calibração censitária (v4)
+Resultado: os DS de 2010 nos **limites atuais** diferem da tabela SESAB (limites da época) em no máximo 0,8%. A mudança de limites dos DS entre 2010 e 2022 era, portanto, pequena.
 
-Na versão 4, as estruturas de 2010 e 2022 passam por um IPF final que as faz fechar **exatamente** nas margens publicadas pelo IBGE, sem mudar a distribuição interna vinda dos setores. Também é criada uma estrutura de 2000:
+### Calibração censitária
 
 | Ano | Semente | Margens exatas |
 |---|---|---|
-| 2010 | estrutura v3 | DS × sexo × faixa (SESAB, ajuste de ±1 pessoa em 60 células); sexo × faixa × raça (universo SIDRA 3175); DS × raça (banco 2010, proporção) |
-| 2022 | 194 unidades bairro × DS | total de cada unidade (IBGE por bairro); unidade × raça (setores); sexo × faixa do município (Censo 2022) |
-| 2000 | estrutura calibrada de 2010 | total por DS (tabela DS 2000); sexo × faixa (Censo 2000); raça (SIDRA 136, sem declaração redistribuída) |
+| 2010 | setores 2010 por unidade bairro × DS | população de cada unidade por sexo (setores); sexo × faixa × raça do município (SIDRA 3175) |
+| 2022 | setores 2022 por unidade bairro × DS | total de cada unidade (IBGE por bairro); sexo × faixa do município (Censo 2022) |
+| 2000 | estrutura de 2010 por unidade | total por DS (tabela DS 2000); sexo × faixa (Censo 2000); raça (SIDRA 136, sem declaração redistribuída) |
 
-O IPF altera o mínimo possível a semente (Ireland & Kullback, 1968). Por isso a distribuição entre DS e bairros, e seus cruzamentos de idade e raça, continua vindo dos setores. Detalhes e validação em [Diálogo entre bases](13-Dialogo-entre-bases).
+O IPF altera o mínimo possível a semente (Ireland & Kullback, 1968). Por isso a distribuição entre DS e bairros, e seus cruzamentos de idade e raça, continua vindo dos setores. Detalhes e validação em [Diálogo entre bases](13-Dialogo-entre-bases) e [Versão 5](14-Versao-5-setores-2010).
 
 ## 4.7 Série anual: Razão Censitária com razões variáveis
 
-Seja $c$ uma célula (DS × sexo × faixa × raça; 2.160 células) e $s_c^{2010}$, $s_c^{2022}$ as suas participações no total municipal:
+Seja $c$ uma célula (desde a v5, **unidade bairro × DS × sexo × faixa × raça**; 34.920 células) e $s_c^{2010}$, $s_c^{2022}$ as suas participações no total municipal:
 
 $$
-s_c^{a} = \frac{P_c^{a} + 0{,}5}{\sum_c \left(P_c^{a} + 0{,}5\right)}\qquad a\in\{2000, 2010, 2022\}
+s_c^{a} = \frac{P_c^{a} + \varepsilon}{\sum_c \left(P_c^{a} + \varepsilon\right)}\qquad a\in\{2000, 2010, 2022\}
 $$
 
-(A pseudo-contagem 0,5 evita $\log 0$.) Para qualquer ano $t$:
+(A pseudo-contagem $\varepsilon$ evita $\log 0$: 0,1 nas células de bairro e 0,5 nas de DS.) Para qualquer ano $t$:
 
 $$
 w = \frac{t-2010}{12},\qquad
@@ -137,15 +137,15 @@ $$
 em que $T(t)$ é o total municipal oficial do ano.
 
 - $0<w<1$ (2011–2021): **interpolação** geométrica entre os censos.
-- $w>1$ (2023 em diante): **extrapolação** da tendência 2010–2022.
-- 2001–2009 (v4): **interpolação** geométrica entre os Censos 2000 e 2010, $\tilde s_c(t)=(s_c^{2000})^{1-w}(s_c^{2010})^{w}$, $w=(t-2000)/10$, inclusive para raça. Na v3 esses anos eram retroprojeção ($w<0$), com raça congelada em 2010.
+- $w>1$ (2023 em diante): **extrapolação** da tendência 2010–2022, feita no nível **DS × sexo × faixa × raça** (2.160 células) e repartida entre os bairros do DS na proporção de 2022. Extrapolar célula a célula de bairro amplificaria crescimentos pontuais (ex.: bairros de expansão recente).
+- 2001–2009: **interpolação** geométrica entre os Censos 2000 e 2010, $\tilde s_c(t)=(s_c^{2000})^{1-w}(s_c^{2010})^{w}$, $w=(t-2000)/10$, inclusive para raça. Na v3 esses anos eram retroprojeção ($w<0$), com raça congelada em 2010.
 - $t=2000$, $2010$ e $2022$: valores censitários calibrados.
 
 Isso equivale a interpolar **linearmente o logaritmo da razão** de cada célula. É a forma multiplicativa do método da razão (*ratio method*; Siegel & Swanson, 2004; Smith, Tayman & Swanson, 2013), com razões que variam no tempo em vez de fixas.
 
-## 4.8 Do DS para o bairro
+## 4.8 Bairros com tendência própria (v5)
 
-Cada célula do DS no ano $t$ é repartida entre os bairros (unidades $u$) do DS na proporção observada em 2022:
+Entre 2001 e 2021, a interpolação é feita diretamente nas células de cada unidade bairro × DS. Cada bairro segue, portanto, a sua própria trajetória entre os censos (antes da v5, os bairros repetiam a proporção de 2022 dentro do DS). Depois de 2022:
 
 $$
 P_{u,c}(t) = P_{DS(u),c}(t)\cdot\frac{P_{u,c}^{2022}}{P_{DS(u),c}^{2022}}
@@ -158,8 +158,8 @@ Para obter inteiros sem perder os totais, usa-se o método do maior resto (Hamil
 1. arredonda-se tudo para baixo;
 2. os $k$ inteiros que faltam vão para as células com as maiores partes fracionárias (empate: ordem estável).
 
-Esse procedimento é aplicado ao total municipal de cada ano e a cada célula do DS na repartição entre bairros. Nos anos censitários (v4) usa-se um **arredondamento controlado com várias margens**: os inteiros vão para as células de maior parte fracionária cujas margens (DS, sexo × faixa, raça, conforme o ano) ainda têm déficit, de modo que todas as margens do item 4.6 fecham exatamente. Assim:
+Esse procedimento é aplicado ao total municipal de cada ano (células de bairro) e, após 2022, a cada célula do DS na repartição entre bairros. Nos anos censitários usa-se um **arredondamento controlado com várias margens**: os inteiros vão para as células de maior parte fracionária cujas margens (DS, sexo × faixa, raça, conforme o ano) ainda têm déficit, de modo que todas as margens do item 4.6 fecham exatamente. Assim:
 
 - $\sum$ FREQ de cada ano $= T(t)$ exatamente;
 - $\sum$ bairros de um DS $=$ DS exatamente;
-- bairros em 2022 $=$ IBGE ± 20 pessoas (efeito do arredondamento).
+- bairros em 2022 $=$ IBGE e bairros em 2010 $=$ soma dos setores, exatamente.

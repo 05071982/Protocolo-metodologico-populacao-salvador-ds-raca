@@ -13,17 +13,17 @@ ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ
 ```
 
 - `resultados/populacao_salvador_bairro_ds_2000_2026.csv.gz` — 947.700 linhas (27 anos × 194 unidades bairro×DS × 2 × 18 × 5, mais o bairro 2 – Aeroporto com FREQ = 0)
-- `resultados/POP_SSA_DS_BAIRRO_RACA_2000_2026_v4.xlsx` — planilha com metodologia, dicionário, checagens, POP_DS, POP_BAIRRO, reconciliação com a SESAB, validação e SETORES
-- `resultados/populacao_salvador_ds_sexo_idade_2000_2026.csv.gz` e `POP_SSA_DS_SEXO_IDADE_SIMPLES_2000_2026_v4.xlsx` — DS × sexo × idade simples (0–100+), 65.448 linhas, totais por faixa idênticos à base principal
-- `resultados/populacao_salvador_bairro_ds_idade_raca_2000_2026.csv.gz` — `ANO | DS | COD_BAIRRO | IDADE | FXET | SEXO | RACA | FREQ` (3.120.804 linhas com FREQ > 0), coerente com as duas tabelas acima
+- `resultados/POP_SSA_DS_BAIRRO_RACA_2000_2026_v5.xlsx` — planilha com metodologia, dicionário, checagens, POP_DS, POP_BAIRRO, reconciliação com a SESAB, validação e SETORES
+- `resultados/populacao_salvador_ds_sexo_idade_2000_2026.csv.gz` e `POP_SSA_DS_SEXO_IDADE_SIMPLES_2000_2026_v5.xlsx` — DS × sexo × idade simples (0–100+), 65.448 linhas, totais por faixa idênticos à base principal
+- `resultados/populacao_salvador_bairro_ds_idade_raca_2000_2026.csv.gz` — `ANO | DS | COD_BAIRRO | IDADE | FXET | SEXO | RACA | FREQ` (3.116.941 linhas com FREQ > 0), coerente com as duas tabelas acima
 - `resultados/populacao_bairro_idade_raca_por_ano.zip` — a mesma tabela, um CSV por ano (abre no Excel), com nomes e dicionário
-- `resultados/validacao_v4.csv` e `reconciliacao_sesab_2000_2025.csv`
+- `resultados/validacao_v5.csv` e `reconciliacao_sesab_2000_2025.csv`
 
-## Método (resumo, versão 4)
+## Método (resumo, versão 5)
 
 - **Totais municipais:** Censo (2000, 2010, 2022); TCU/IBGE nos demais anos (2023: RIPSA; 2025–2026: IBGE Cidades).
 - **Calibração censitária:** 2000, 2010 e 2022 fecham exatamente com o IBGE em sexo × idade, raça (SIDRA 136 e 3175), DS (2000) e bairros (2022).
-- **Distribuição interna:** setores censitários 2022 e tabulações por DS de 2010; Razão Censitária com razões variáveis (2001–2009 entre 2000 e 2010; depois entre 2010 e 2022), IPF/raking e arredondamento controlado.
+- **Distribuição interna:** setores censitários de 2010 e 2022 nos limites atuais de bairro e DS (cada bairro com tendência própria); Razão Censitária com razões variáveis (2001–2009 entre 2000 e 2010; depois entre 2010 e 2022), IPF/raking e arredondamento controlado.
 - **Diálogo com a SESAB:** iguais nos anos de censo; diferenças nos demais anos publicadas ano a ano.
 - 12 Distritos Sanitários · 171 bairros (inclui Aquarius, Lei 9.778/2024) · 18 faixas etárias e idade simples · 5 categorias de raça/cor.
 
@@ -36,13 +36,13 @@ ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ
 ## Estrutura
 
 ```
-R/            scripts R (01 chave setor-bairro-DS, 02 Aquarius, 03 estrutura base, 04–07 atualização anual, funcoes)
-python/       implementação de referência (v3 e v4) e réplica de conferência do R
+R/            scripts R (01/01b chaves setor-bairro-DS 2022/2010, 02 Aquarius, 03 estrutura base, 04–07 atualização anual, funcoes)
+python/       implementação de referência (v3 a v5) e réplica de conferência do R
 dados/
-  entrada/    totais municipais, SESAB 2010 e TabNet 2000–2025, SIDRA 136 e 3175, DS 2000, raça 2010, chave setores, população IBGE por bairro
-  estrutura/  estruturas calibradas 2000, 2010 e 2022 (DS e bairro×DS) e idade simples — base da atualização anual
+  entrada/    totais municipais, chaves de setores 2010 e 2022, SESAB 2010 e TabNet 2000–2025, SIDRA 136 e 3175, DS 2000, raça 2010, chave setores, população IBGE por bairro
+  estrutura/  estruturas calibradas 2000, 2010 e 2022 por bairro × DS e idade simples — base da atualização anual
   dicionarios/ DS, FXET, SEXO, RACA, bairros
-resultados/   base final, planilhas v4, zip por ano, validação, reconciliação SESAB, backtest
+resultados/   base final, planilhas v5, zip por ano, validação, reconciliação SESAB, backtest
 ```
 
 ## Equipe

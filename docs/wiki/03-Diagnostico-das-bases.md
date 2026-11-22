@@ -11,7 +11,7 @@ Antes de estimar, todas as construções da pasta foram auditadas. Os problemas 
 | Cobertura | **≈ 78%** |
 
 O cruzamento dos setores de 2010 com a malha perdeu muitos setores (o *Diário* registra, por exemplo, Itapuã com 235 de 543 setores).
-**Decisão:** o banco 2010 é usado apenas para a **proporção de cor/raça** de cada DS. Sexo × idade de 2010 vêm da tabela SESAB, completa.
+**Decisão (v3–v4):** o banco 2010 foi usado apenas para a proporção de cor/raça de cada DS. **Desde a v5** ele não é mais usado: 2010 é construído diretamente dos agregados por setor do IBGE (3.546 setores, 100% da população), com uma chave nova setor 2010 → bairro × DS. A causa da cobertura de 78% foi identificada: o script original cruzava os códigos dos setores de 2010 com o shapefile de 2022, e os setores divididos ou recodificados em 2022 ficavam de fora.
 
 ## 3.2 Banco 2022 por DS: dupla contagem nas fronteiras
 

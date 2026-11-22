@@ -9,8 +9,10 @@ Todos os insumos estão na pasta **População por DS** do Drive da SDSS. Os que
 | Agregados por setores — **básico**, **demografia**, **cor ou raça**, **características dos domicílios** (Censo 2022) | IBGE | Sexo × 11 faixas, raça por sexo e por faixas largas, por setor |
 | `BA_setores_CD2022.shp` | IBGE (malha de setores 2022) | Geometria dos 4.542 setores de Salvador e bairro IBGE (`NM_BAIRRO`) |
 | `pop_*.csv` (12 arquivos, pasta "Pop DS - Censo 2022") | SDSS (R, mar/2026) | Variáveis por setor já selecionadas e renomeadas (Livro código) |
-| Tabela SESAB/SUVISA/DIS 2010 (aba "2010" do arquivo `POPULAÇÃO_INTERPOLAÇÃO_COM_BASE_CENSO_2010_Atual_10_11_2016.xlsx`) | SESAB | DS × sexo × 18 faixas, total 2.675.656 |
-| `(Censo 2010) Banco de dados por DS_.xlsx` | SDSS | Proporção de raça/cor por DS em 2010 |
+| Tabela SESAB/SUVISA/DIS 2010 (aba "2010" do arquivo `POPULAÇÃO_INTERPOLAÇÃO_COM_BASE_CENSO_2010_Atual_10_11_2016.xlsx`) | SESAB | DS × sexo × 18 faixas, total 2.675.656 (limites da época); na v5, só comparação |
+| `(Censo 2010) Banco de dados por DS_.xlsx` | SDSS | Usado até a v4 (raça/cor por DS, cobertura ≈ 78%); substituído pelos setores na v5 |
+| Agregados por setores do Censo 2010, universo: `Basico_BA`, `Pessoa03_BA`, `Pessoa05_BA`, `Pessoa11_BA`, `Pessoa12_BA` | IBGE | Idade simples por sexo e raça por sexo e grupo etário, por setor (v5) |
+| Malha de setores censitários 2010 (`29SEE250GC_SIR`, recorte de Salvador) | IBGE | Chave setor 2010 → bairro × DS nos limites atuais (v5) — `dados/entrada/chave_setor_bairro_ds_2010.csv` |
 | `Bairros_2022.csv` | IBGE (população por bairro) | Total oficial de cada bairro em 2022 (soma 2.417.678) |
 | SIDRA **tabela 3175** (Censo 2010, universo): cor ou raça × sexo × idade, Salvador | IBGE | Margem sexo × idade × raça de 2010 (v4) — `dados/entrada/sidra_3175_salvador_2010_sexo_idade_raca.csv` |
 | SIDRA **tabela 136** (Censos 2000 e 2010): cor ou raça, Salvador | IBGE | Margem de raça de 2000 (amostra) (v4) — `dados/entrada/sidra_136_salvador_raca_2000_2010.csv` |

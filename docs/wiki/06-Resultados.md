@@ -2,47 +2,47 @@
 
 Arquivos em `resultados/`:
 
-- `POP_SSA_DS_BAIRRO_RACA_2000_2026_v4.xlsx`, com as abas LEIAME, METODOLOGIA, LIMITACOES, DICIONARIO, TOTAIS, CHECAGENS, POP_DS, **POP_BAIRRO**, RECONCILIACAO_SESAB, VALIDACAO e SETORES;
+- `POP_SSA_DS_BAIRRO_RACA_2000_2026_v5.xlsx`, com as abas LEIAME, METODOLOGIA, LIMITACOES, DICIONARIO, TOTAIS, CHECAGENS, POP_DS, **POP_BAIRRO**, RECONCILIACAO_SESAB, VALIDACAO e SETORES;
 - `populacao_salvador_bairro_ds_2000_2026.csv.gz`, a tabela oficial `ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ` (947.700 linhas: 942.840 das 194 unidades bairro × DS mais 4.860 linhas zeradas do bairro 2 – Aeroporto, para que os 171 bairros estejam presentes);
 - `populacao_bairro_idade_raca_por_ano.zip`, com um CSV por ano (idade detalhada, com nomes de DS e bairro), o dicionário (`DICIONARIO.xlsx` e `dicionario_bairros.csv`), `VALIDACAO_v4.csv` e `RECONCILIACAO_SESAB_2000_2025.csv`;
-- `validacao_v4.csv` e `reconciliacao_sesab_2000_2025.csv`.
+- `validacao_v5.csv` e `reconciliacao_sesab_2000_2025.csv`.
 
 ## 6.1 População por DS
 
 | DS | 2000 | 2005 | 2010 | 2015 | 2022 | 2025 | 2026 |
 |:--|--:|--:|--:|--:|--:|--:|--:|
-| Centro Histórico | 72.262 | 75.489 | 71.870 | 72.216 | 52.741 | 53.026 | 51.968 |
-| Itapagipe | 160.374 | 169.033 | 162.416 | 169.972 | 131.240 | 134.799 | 133.090 |
-| São Caetano/Valéria | 227.858 | 253.347 | 257.463 | 272.388 | 215.362 | 223.558 | 221.541 |
-| Liberdade | 183.647 | 189.849 | 179.427 | 182.825 | 137.381 | 139.706 | 137.504 |
-| Brotas | 190.971 | 206.189 | 203.296 | 219.509 | 177.201 | 185.373 | 184.138 |
-| Barra/Rio Vermelho | 330.697 | 350.407 | 338.921 | 367.552 | 298.671 | 313.383 | 311.646 |
-| Boca do Rio | 104.447 | 120.294 | 126.328 | 143.437 | 124.113 | 133.907 | 134.385 |
-| Itapuã | 199.307 | 233.681 | 250.230 | 308.340 | 300.070 | 340.056 | 346.940 |
-| Cabula/Beiru | 335.138 | 376.227 | 385.854 | 410.048 | 327.120 | 341.983 | 339.910 |
-| Pau da Lima | 194.950 | 216.035 | 218.706 | 241.906 | 203.224 | 216.524 | 216.437 |
-| Subúrbio Ferroviário | 304.305 | 327.354 | 322.116 | 351.477 | 290.866 | 307.938 | 307.166 |
-| Cajazeiras | 139.151 | 155.652 | 159.029 | 181.417 | 159.689 | 173.951 | 175.220 |
+| Centro Histórico | 72.262 | 75.435 | 71.678 | 72.294 | 52.741 | 53.178 | 52.187 |
+| Itapagipe | 160.374 | 169.041 | 162.416 | 170.911 | 131.239 | 135.008 | 133.388 |
+| São Caetano/Valéria | 227.858 | 254.280 | 259.426 | 273.318 | 215.362 | 223.205 | 221.089 |
+| Liberdade | 183.647 | 189.344 | 178.640 | 183.510 | 137.381 | 139.899 | 137.744 |
+| Brotas | 190.971 | 206.146 | 203.297 | 219.315 | 177.202 | 185.580 | 184.429 |
+| Barra/Rio Vermelho | 330.697 | 350.154 | 338.299 | 368.102 | 298.671 | 313.420 | 311.683 |
+| Boca do Rio | 104.447 | 120.524 | 126.950 | 144.068 | 124.113 | 133.793 | 134.258 |
+| Itapuã | 199.307 | 233.688 | 250.230 | 302.018 | 300.070 | 339.632 | 346.342 |
+| Cabula/Beiru | 335.138 | 375.384 | 384.060 | 409.709 | 327.120 | 341.917 | 339.775 |
+| Pau da Lima | 194.950 | 216.957 | 220.498 | 243.832 | 203.224 | 216.085 | 215.839 |
+| Subúrbio Ferroviário | 304.305 | 326.873 | 321.133 | 352.680 | 290.866 | 308.329 | 307.705 |
+| Cajazeiras | 139.151 | 155.731 | 159.029 | 181.330 | 159.689 | 174.158 | 175.506 |
 | **Salvador** | **2.443.107** | **2.673.557** | **2.675.656** | **2.921.087** | **2.417.678** | **2.564.204** | **2.559.945** |
 
-2000, 2010 e 2022 têm total censitário; os demais anos têm total TCU/IBGE. Em 2000, o total de cada DS é o da tabela DS 2000 (v4). A queda de 2009 para 2010 e o salto de 2006 para 2007 vêm de quebras nos totais TCU, não de variação real (use `FREQ_CENSO` para tendência).
+2000, 2010 e 2022 têm total censitário; os demais anos têm total TCU/IBGE. Em 2000, o total de cada DS é o da tabela DS 2000; em 2010, a soma dos setores nos limites atuais (v5). A queda de 2009 para 2010 e o salto de 2006 para 2007 vêm de quebras nos totais TCU, não de variação real (use `FREQ_CENSO` para tendência).
 
 ## 6.2 Nova base × base antiga do TabNet (2025)
 
 | DS | Antiga (razão fixa / Lagrange) | Nova | Diferença |
 |:--|--:|--:|--:|
-| Centro Histórico | 68.455 | 53.026 | −22,5% |
-| Itapagipe | 154.698 | 134.799 | −12,9% |
-| São Caetano/Valéria | 245.233 | 223.558 | −8,8% |
-| Liberdade | 170.907 | 139.706 | −18,3% |
-| Brotas | 193.641 | 185.373 | −4,3% |
-| Barra/Rio Vermelho | 322.822 | 313.383 | −2,9% |
-| Boca do Rio | 120.324 | 133.907 | +11,3% |
-| **Itapuã** | 238.348 | 340.056 | **+42,7%** |
-| Cabula/Beiru | 367.520 | 341.983 | −6,9% |
-| Pau da Lima | 208.322 | 216.524 | +3,9% |
-| Subúrbio Ferroviário | 306.816 | 307.938 | +0,4% |
-| Cajazeiras | 151.474 | 173.951 | +14,8% |
+| Centro Histórico | 68.455 | 53.178 | −22,3% |
+| Itapagipe | 154.698 | 135.008 | −12,7% |
+| São Caetano/Valéria | 245.233 | 223.205 | −9,0% |
+| Liberdade | 170.907 | 139.899 | −18,1% |
+| Brotas | 193.641 | 185.580 | −4,2% |
+| Barra/Rio Vermelho | 322.822 | 313.420 | −2,9% |
+| Boca do Rio | 120.324 | 133.793 | +11,2% |
+| **Itapuã** | 238.348 | 339.632 | **+42,5%** |
+| Cabula/Beiru | 367.520 | 341.917 | −7,0% |
+| Pau da Lima | 208.322 | 216.085 | +3,7% |
+| Subúrbio Ferroviário | 306.816 | 308.329 | +0,5% |
+| Cajazeiras | 151.474 | 174.158 | +15,0% |
 
 **Impacto nos indicadores:** as taxas do Centro Histórico e da Liberdade vão **subir**, porque o denominador antigo estava inflado. As de Itapuã, Cajazeiras e Boca do Rio vão **cair**: Itapuã tinha 100 mil habitantes a menos no denominador.
 
@@ -50,59 +50,59 @@ Arquivos em `resultados/`:
 
 | DS | Branca | Preta | Amarela | Parda | Indígena | **Negra** |
 |:--|--:|--:|--:|--:|--:|--:|
-| Centro Histórico | 24,2 | 28,1 | 0,2 | 47,0 | 0,4 | 75,2 |
-| Itapagipe | 12,7 | 34,0 | 0,1 | 53,1 | 0,2 | 87,0 |
-| São Caetano/Valéria | 9,4 | 38,2 | 0,1 | 52,2 | 0,1 | 90,4 |
+| Centro Histórico | 24,2 | 28,2 | 0,2 | 47,1 | 0,4 | 75,2 |
+| Itapagipe | 12,7 | 34,0 | 0,1 | 53,1 | 0,2 | 87,1 |
+| São Caetano/Valéria | 9,4 | 38,2 | 0,0 | 52,2 | 0,1 | 90,4 |
 | Liberdade | 10,2 | 39,5 | 0,0 | 50,1 | 0,2 | 89,6 |
-| Brotas | 24,0 | 30,6 | 0,1 | 45,0 | 0,2 | 75,6 |
-| Barra/Rio Vermelho | 33,3 | 25,9 | 0,2 | 40,4 | 0,2 | 66,3 |
+| Brotas | 24,0 | 30,6 | 0,1 | 45,0 | 0,2 | 75,7 |
+| Barra/Rio Vermelho | 33,3 | 25,9 | 0,2 | 40,5 | 0,2 | 66,3 |
 | Boca do Rio | 28,5 | 22,4 | 0,2 | 48,6 | 0,3 | 71,0 |
 | Itapuã | 18,6 | 31,6 | 0,1 | 49,5 | 0,2 | 81,1 |
-| Cabula/Beiru | 12,1 | 37,1 | 0,3 | 50,0 | 0,4 | 87,1 |
+| Cabula/Beiru | 12,2 | 37,2 | 0,3 | 50,0 | 0,4 | 87,1 |
 | Pau da Lima | 11,7 | 37,2 | 0,1 | 50,8 | 0,2 | 88,0 |
 | Subúrbio Ferroviário | 8,6 | 39,4 | 0,1 | 51,8 | 0,1 | 91,2 |
 | Cajazeiras | 9,6 | 39,0 | 0,1 | 51,2 | 0,2 | 90,1 |
 | **Salvador** | **16,6** | **34,1** | **0,1** | **49,0** | **0,2** | **83,1** |
 
-### Raça/cor em 2010 (universo, SIDRA 3175) e 2000 (amostra, SIDRA 136), %
+### Raça/cor em 2010 (universo, setores censitários) e 2000 (amostra, SIDRA 136), %
 
 **2010**
 
 | DS | Branca | Preta | Amarela | Parda | Indígena | **Negra** |
 |:--|--:|--:|--:|--:|--:|--:|
-| Centro Histórico | 28,6 | 20,9 | 1,1 | 49,0 | 0,4 | 69,9 |
-| Itapagipe | 14,9 | 27,0 | 0,8 | 57,1 | 0,2 | 84,1 |
-| São Caetano/Valéria | 11,8 | 31,4 | 1,5 | 55,0 | 0,3 | 86,4 |
-| Liberdade | 13,4 | 32,2 | 1,2 | 52,9 | 0,3 | 85,1 |
-| Brotas | 22,4 | 26,8 | 1,1 | 49,3 | 0,3 | 76,2 |
-| Barra/Rio Vermelho | 36,0 | 21,1 | 1,1 | 41,6 | 0,3 | 62,7 |
-| Boca do Rio | 28,8 | 20,9 | 1,2 | 48,8 | 0,3 | 69,7 |
-| Itapuã | 21,4 | 25,9 | 1,5 | 51,0 | 0,2 | 76,9 |
-| Cabula/Beiru | 15,6 | 29,3 | 1,5 | 53,4 | 0,2 | 82,7 |
-| Pau da Lima | 14,9 | 30,0 | 1,5 | 53,4 | 0,3 | 83,4 |
-| Subúrbio Ferroviário | 11,1 | 31,2 | 1,7 | 55,6 | 0,3 | 86,9 |
-| Cajazeiras | 12,9 | 31,5 | 1,4 | 53,9 | 0,3 | 85,4 |
+| Centro Histórico | 29,5 | 20,2 | 1,1 | 48,8 | 0,4 | 68,9 |
+| Itapagipe | 15,7 | 26,1 | 0,8 | 57,2 | 0,2 | 83,3 |
+| São Caetano/Valéria | 12,1 | 31,1 | 1,4 | 55,1 | 0,3 | 86,2 |
+| Liberdade | 13,7 | 32,1 | 1,3 | 52,6 | 0,3 | 84,7 |
+| Brotas | 23,8 | 25,5 | 1,1 | 49,2 | 0,3 | 74,8 |
+| Barra/Rio Vermelho | 35,5 | 21,6 | 1,0 | 41,5 | 0,3 | 63,2 |
+| Boca do Rio | 29,3 | 20,7 | 1,2 | 48,4 | 0,3 | 69,2 |
+| Itapuã | 20,6 | 26,4 | 1,3 | 51,4 | 0,3 | 77,7 |
+| Cabula/Beiru | 14,6 | 30,2 | 1,5 | 53,5 | 0,3 | 83,7 |
+| Pau da Lima | 14,7 | 30,3 | 1,6 | 53,1 | 0,3 | 83,5 |
+| Subúrbio Ferroviário | 11,4 | 31,0 | 1,8 | 55,6 | 0,2 | 86,6 |
+| Cajazeiras | 13,1 | 31,0 | 1,5 | 54,2 | 0,3 | 85,1 |
 | **Salvador** | **18,9** | **27,8** | **1,3** | **51,7** | **0,3** | **79,5** |
 
 **2000**
 
 | DS | Branca | Preta | Amarela | Parda | Indígena | **Negra** |
 |:--|--:|--:|--:|--:|--:|--:|
-| Centro Histórico | 33,4 | 15,1 | 0,3 | 50,4 | 0,9 | 65,4 |
-| Itapagipe | 18,5 | 20,0 | 0,2 | 60,9 | 0,5 | 80,8 |
-| São Caetano/Valéria | 15,2 | 23,5 | 0,3 | 60,1 | 0,9 | 83,6 |
-| Liberdade | 17,0 | 24,2 | 0,3 | 57,6 | 0,9 | 81,8 |
-| Brotas | 27,4 | 19,7 | 0,2 | 51,9 | 0,9 | 71,5 |
-| Barra/Rio Vermelho | 41,5 | 15,1 | 0,2 | 42,4 | 0,8 | 57,5 |
-| Boca do Rio | 34,2 | 14,8 | 0,2 | 49,8 | 0,9 | 64,7 |
-| Itapuã | 26,0 | 18,9 | 0,3 | 54,1 | 0,7 | 73,0 |
-| Cabula/Beiru | 19,7 | 21,7 | 0,3 | 57,5 | 0,7 | 79,2 |
-| Pau da Lima | 18,9 | 22,2 | 0,3 | 57,7 | 0,8 | 80,0 |
-| Subúrbio Ferroviário | 14,5 | 23,5 | 0,4 | 60,9 | 0,7 | 84,4 |
-| Cajazeiras | 16,6 | 23,5 | 0,3 | 58,7 | 0,8 | 82,3 |
+| Centro Histórico | 34,2 | 14,4 | 0,3 | 50,0 | 1,1 | 64,4 |
+| Itapagipe | 19,4 | 19,2 | 0,2 | 60,6 | 0,6 | 79,9 |
+| São Caetano/Valéria | 15,7 | 23,2 | 0,3 | 60,0 | 0,8 | 83,2 |
+| Liberdade | 17,5 | 24,1 | 0,3 | 57,2 | 0,8 | 81,3 |
+| Brotas | 28,7 | 18,6 | 0,2 | 51,6 | 0,8 | 70,2 |
+| Barra/Rio Vermelho | 40,9 | 15,6 | 0,2 | 42,5 | 0,8 | 58,1 |
+| Boca do Rio | 34,6 | 14,8 | 0,3 | 49,5 | 0,8 | 64,3 |
+| Itapuã | 25,1 | 19,4 | 0,3 | 54,5 | 0,7 | 73,9 |
+| Cabula/Beiru | 18,4 | 22,5 | 0,3 | 58,0 | 0,8 | 80,5 |
+| Pau da Lima | 18,7 | 22,6 | 0,4 | 57,5 | 0,8 | 80,1 |
+| Subúrbio Ferroviário | 14,8 | 23,3 | 0,4 | 60,8 | 0,7 | 84,1 |
+| Cajazeiras | 16,9 | 23,1 | 0,3 | 58,9 | 0,7 | 82,0 |
 | **Salvador** | **23,2** | **20,5** | **0,3** | **55,2** | **0,8** | **75,7** |
 
-Em Salvador, a população negra passou de 75,7% (2000) para 79,5% (2010) e 83,1% (2022). A autodeclaração preta subiu de 20,5% para 27,8% e 34,1%. A distribuição por DS em 2000 usa a interação DS × raça de 2010, ajustada ao total de raça de 2000.
+Em Salvador, a população negra passou de 75,7% (2000) para 79,5% (2010) e 83,1% (2022). A autodeclaração preta subiu de 20,5% para 27,8% e 34,1%. Desde a v5, a raça de 2010 por DS vem do universo, setor a setor. A distribuição por DS em 2000 usa a interação bairro × raça de 2010, ajustada ao total de raça de 2000.
 
 ## 6.4 Estrutura etária, Salvador (%)
 
@@ -118,18 +118,18 @@ Os três anos são idênticos aos censos. Razão de sexo: 89,0 (2000), 87,5 (201
 
 | Bairro | População |
 |:--|--:|
-| Itapuã | 60.966 |
-| Pituba (sem Aquarius) | 53.057 |
-| Pernambués | 52.570 |
-| Paripe | 52.461 |
-| Brotas | 51.300 |
-| São Cristóvão | 47.417 |
-| Fazenda Grande do Retiro | 41.050 |
-| São Caetano | 40.313 |
-| Boca do Rio | 39.258 |
-| Beiru/Tancredo Neves | 38.338 |
+| Itapuã | 60.968 |
+| Pituba | 53.055 |
+| Pernambués | 52.564 |
+| Paripe | 52.469 |
+| Brotas | 51.296 |
+| São Cristóvão | 47.408 |
+| Fazenda Grande do Retiro | 41.056 |
+| São Caetano | 40.303 |
+| Boca do Rio | 39.262 |
+| Beiru/Tancredo Neves | 38.329 |
 
-Aquarius (171): 4.835 habitantes em 2022. Aeroporto (2): sem população residente, presente nas bases com FREQ = 0. 23 bairros têm território em mais de um DS.
+Aquarius (171): 3.248 habitantes em 2010 (área atual do bairro) e 4.839 em 2022. Aeroporto (2): sem população residente, presente nas bases com FREQ = 0. 23 bairros têm território em mais de um DS.
 
 ## 6.6 Conferências automáticas (aba CHECAGENS)
 
@@ -137,11 +137,11 @@ Aquarius (171): 4.835 habitantes em 2022. Aeroporto (2): sem população residen
 |---|---|
 | Total 2000, 2010 e 2022 = Censo | OK |
 | Total 2014 = TCU (2.902.927); total 2025 = IBGE Cidades (2.564.204) | OK |
-| DS 2010 = tabela SESAB (por DS, sexo e faixa), tolerância 2 pessoas | OK |
+| Bairros 2010 = soma dos setores censitários; DS 2010 × tabela SESAB (limites da época): até 0,8% | OK |
 | 2000 e 2022: sexo × faixa = Censo; 2000: DS = tabela DS 2000 | OK |
 | Soma dos bairros 2022 = IBGE (2.417.678) | OK |
 | Soma POP_BAIRRO por DS = POP_DS (todos os anos) | OK |
 | Valores negativos | nenhum |
 
 
-A lista completa de conferências da v4 (raça, idades simples, 171 bairros, consistência entre tabelas) está em [Diálogo entre bases](13-Dialogo-entre-bases#136-validação-da-versão-4-resultadosvalidacao_v4csv).
+A lista completa de conferências da v5 (raça, idades simples, 171 bairros, consistência entre tabelas) está em [Diálogo entre bases](13-Dialogo-entre-bases#136-validação-da-versão-4-resultadosvalidacao_v4csv).

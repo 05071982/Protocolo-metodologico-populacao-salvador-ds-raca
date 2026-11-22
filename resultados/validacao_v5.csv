@@ -9,10 +9,11 @@ bairro×idade×raça: total de cada ano = POP_DS,OK,
 2000: idades simples 0–19 por sexo = Censo 2000,OK,
 2010: sexo × faixa × raça = universo SIDRA 3175,OK,
 2010: idade simples 0–100+ por sexo = SIDRA 3175,OK,
-2010: DS × sexo × faixa = tabela SESAB por DS (±1 pessoa),OK,"máx 1, células ajustadas 60"
+"2010: população de cada bairro × DS, por sexo = soma dos setores censitários (limites atuais)",OK,
+2010: DS (limites atuais) × tabela SESAB (limites da época) — informativo,OK,máx |dif| 0.82%
 2022: sexo × faixa etária = Censo 2022,OK,
 2022: idades simples 0–19 por sexo = Censo 2022,OK,
-2022: população dos bairros = IBGE (arredondamento),OK,máx ±20
+2022: população dos bairros = IBGE (arredondamento),OK,máx ±0
 Detalhada (idade) agregada = POP_BAIRRO em todas as células,OK,
 Detalhada agregada = DS × sexo × idade em todas as células,OK,
 Sem valores negativos,OK,
