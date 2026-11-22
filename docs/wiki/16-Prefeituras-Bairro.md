@@ -32,7 +32,7 @@ As frações de área estão em `dados/entrada/chave_bairro_prefeitura_bairro.cs
 - **Dicionário de PBs:** `dados/dicionarios/prefeituras_bairro.csv`.
 - **Arquivos por ano (idade detalhada):** colunas `COD_PB` e `NOME_PB`.
 - **Série por PB:** `resultados/populacao_salvador_prefeitura_bairro_2000_2026.csv.gz` e aba POP_PB da planilha, no formato `ANO | COD_PB | FXET | SEXO | RACA | FREQ`.
-- **Tabela oficial** (`ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ`): **não muda**, para não quebrar o TabNet. Para obter a PB, basta ligar `COD_BAIRRO` ao dicionário.
+- **Tabela oficial do TabNet** (`ANO | DS | COD_PB | COD_BAIRRO | FXET | SEXO | RACA | FREQ`) e tabela detalhada por idade: coluna `COD_PB` logo após o DS. Atenção: no TabNet, a nova coluna desloca as posições, então o `.def` precisa ser atualizado.
 
 **Validação:** todo bairro tem uma PB (de 1 a 10), e a soma das 10 PBs é igual ao total de cada ano.
 

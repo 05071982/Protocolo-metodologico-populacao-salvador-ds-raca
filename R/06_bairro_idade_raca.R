@@ -1,5 +1,5 @@
 # =====================================================================
-# 06_bairro_idade_raca.R — ANO | DS | COD_BAIRRO | IDADE | FXET | SEXO | RACA | FREQ
+# 06_bairro_idade_raca.R — ANO | DS | COD_PB | COD_BAIRRO | IDADE | FXET | SEXO | RACA | FREQ
 # Rode DEPOIS de 04 e 05. Cada célula bairro×DS×faixa×sexo×raça (saída do 04)
 # é repartida entre as idades da faixa na proporção da tabela DS×sexo×idade
 # (saída do 05). Arredondamento controlado com DUAS margens:
@@ -52,6 +52,9 @@ for (g in names(kb)) {
 res <- do.call(rbind, saida)
 stopifnot(all(res$FREQ >= 0))
 res <- res[res$FREQ > 0, ]
+dic <- read.csv(file.path(raiz, "dados/dicionarios/bairros.csv"))
+res$COD_PB <- dic$COD_PB[match(res$COD_BAIRRO, dic$COD_BAIRRO)]
+res <- res[, c("ANO", "DS", "COD_PB", "COD_BAIRRO", "IDADE", "FXET", "SEXO", "RACA", "FREQ")]
 arq <- file.path(raiz, "resultados", sprintf("populacao_salvador_bairro_ds_idade_raca_%d_%d.csv", min(res$ANO), max(res$ANO)))
 write.csv(res, arq, row.names = FALSE, fileEncoding = "UTF-8")
 cat("Arquivo gerado:", arq, " | linhas:", nrow(res), "\n")

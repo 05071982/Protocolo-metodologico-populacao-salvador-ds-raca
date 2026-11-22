@@ -13,16 +13,17 @@ for _,z in zero.iterrows():
     a,s,f,r=np.meshgrid(range(2000,2027),[1,2],range(1,19),range(1,6),indexing='ij')
     g.append(pd.DataFrame({'ANO':a.ravel(),'DS':z.DS_PRINCIPAL,'COD_BAIRRO':z.COD_BAIRRO,'FXET':f.ravel(),'SEXO':s.ravel(),'RACA':r.ravel(),'FREQ':0}))
 PBz=pd.concat([PB]+g,ignore_index=True).sort_values(['ANO','DS','COD_BAIRRO','SEXO','FXET','RACA']).reset_index(drop=True)
+PBz['COD_PB']=PBz.COD_BAIRRO.map(BPB); assert PBz.COD_PB.notna().all()
 PBz.to_pickle(V+'pop_full_z.pkl')
 assert sorted(PBz.COD_BAIRRO.unique())==list(range(1,173))
 # ---- repositório: CSV comprimidos
-PBz[['ANO','DS','COD_BAIRRO','FXET','SEXO','RACA','FREQ']].to_csv(REPO+'resultados/populacao_salvador_bairro_ds_2000_2026.csv.gz',index=False,compression='gzip')
+PBz[['ANO','DS','COD_PB','COD_BAIRRO','FXET','SEXO','RACA','FREQ']].to_csv(REPO+'resultados/populacao_salvador_bairro_ds_2000_2026.csv.gz',index=False,compression='gzip')
 PP=PBz.assign(COD_PB=PBz.COD_BAIRRO.map(BPB)).groupby(['ANO','COD_PB','FXET','SEXO','RACA']).FREQ.sum().reset_index(); PP.to_pickle(V+'pop_pb.pkl')
 PP.to_csv(REPO+'resultados/populacao_salvador_prefeitura_bairro_2000_2026.csv.gz',index=False,compression='gzip')
 PI[['ANO','DS','SEXO','IDADE','FXET','FREQ']].to_csv(REPO+'resultados/populacao_salvador_ds_sexo_idade_2000_2026.csv.gz',index=False,compression='gzip')
 Rz=pd.concat([R,pd.DataFrame([{'ANO':a,'DS':z.DS_PRINCIPAL,'COD_BAIRRO':z.COD_BAIRRO,'IDADE':0,'FXET':1,'SEXO':1,'RACA':1,'FREQ':0} for a in range(2000,2027) for _,z in zero.iterrows()])],ignore_index=True)
 Rz=Rz.sort_values(['ANO','DS','COD_BAIRRO','IDADE','SEXO','RACA']).reset_index(drop=True)
-Rz.to_csv(REPO+'resultados/populacao_salvador_bairro_ds_idade_raca_2000_2026.csv.gz',index=False,compression='gzip')
+Rz['COD_PB']=Rz.COD_BAIRRO.map(BPB); Rz[['ANO','DS','COD_PB','COD_BAIRRO','IDADE','FXET','SEXO','RACA','FREQ']].to_csv(REPO+'resultados/populacao_salvador_bairro_ds_idade_raca_2000_2026.csv.gz',index=False,compression='gzip')
 shutil.copy(V+'validacao_v5_1.csv',REPO+'resultados/validacao_v5_1.csv'); shutil.copy(V+'reconciliacao_sesab.csv',REPO+'resultados/reconciliacao_sesab_2000_2025.csv')
 # ---- arquivos por ano (idade detalhada, com nomes)
 Rz['NOME_DS']=Rz.DS.map(DSN); Rz['NOME_BAIRRO']=Rz.COD_BAIRRO.map(BN); Rz['COD_PB']=Rz.COD_BAIRRO.map(BPB); Rz['NOME_PB']=Rz.COD_PB.map(PBN)
@@ -41,7 +42,7 @@ lei=['Dicionário de códigos — população de Salvador por DS, bairro, idade,
  'Código 171 (Aquarius): criado pela Lei 9.778/2024, desmembrado da Pituba; aparece em toda a série com o limite atual.',
  'Código 172 (Boa Vista do Lobato): criado pela Lei 9.919/2025 (18/12/2025), definido por logradouros. Sem polígono oficial, foi delimitado pelos endereços do CNEFE 2022 nos logradouros da lei: cada setor censitário contribui com a fração de seus domicílios nessas ruas (2010 e 2022). Desmembrado do Lobato (96), Alto do Cabrito (5) e Boa Vista de São Caetano (20); aparece em toda a série com o limite atual. As colunas LEI_CRIACAO e BAIRRO_ORIGEM do dicionário permitem reagregar aos bairros do IBGE 2022.',
  'Prefeitura-Bairro (COD_PB 1–10, configuração de 10 PBs da Prefeitura): cada bairro pertence a uma única PB (bairro inteiro na PB que contém sua maior área; nenhum bairro tem mais de 3% da área em outra PB). A Boa Vista do Lobato (172) segue o Lobato (PB V). Somar por COD_PB dá a população de cada PB.',
- 'Os arquivos trazem apenas linhas com FREQ > 0, exceto a linha do Aeroporto. Somando por ANO × DS × COD_BAIRRO × FXET × SEXO × RACA obtém-se exatamente a base principal (ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ).',
+ 'Os arquivos trazem apenas linhas com FREQ > 0, exceto a linha do Aeroporto. Somando por ANO × DS × COD_BAIRRO × FXET × SEXO × RACA obtém-se exatamente a base principal (ANO | DS | COD_PB | COD_BAIRRO | FXET | SEXO | RACA | FREQ).',
  'Totais anuais: Censo (2000, 2010, 2022); TCU/IBGE nos demais anos (2023 = RIPSA; 2025 e 2026 = IBGE Cidades).',
  'Versão 5.1 (bairro 172) sobre a versão 5 — 2010 e 2022 construídos setor a setor (setores censitários nos limites atuais de bairro e DS) e calibrados ao IBGE: 2000 (sexo × faixa e idades 0–19 = Censo 2000; raça = SIDRA 136; totais por DS = tabela DS 2000), 2010 (bairros = soma dos setores; sexo × idade × raça = universo SIDRA 3175) e 2022 (bairros = IBGE; sexo × faixa e idades 0–19 = Censo 2022). Cada bairro tem tendência própria entre os censos.',
  'VALIDACAO_v5_1.csv: todas as conferências. RECONCILIACAO_SESAB_2000_2025.csv: comparação ano a ano com o TabNet SESAB (análise; a SESAB não foi usada como total fora dos anos de censo).',

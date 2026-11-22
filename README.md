@@ -9,13 +9,13 @@ Base populacional oficial da **Sala de Situação em Saúde de Salvador (SDSS/SM
 ## Tabela principal
 
 ```
-ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ
+ANO | DS | COD_PB | COD_BAIRRO | FXET | SEXO | RACA | FREQ
 ```
 
 - `resultados/populacao_salvador_bairro_ds_2000_2026.csv.gz` — 952.560 linhas (27 anos × 195 unidades bairro×DS × 2 × 18 × 5, mais o bairro 2 – Aeroporto com FREQ = 0)
 - `resultados/POP_SSA_DS_BAIRRO_RACA_2000_2026_v5_1.xlsx` — planilha com metodologia, dicionário, checagens, POP_DS, POP_BAIRRO, reconciliação com a SESAB, validação e SETORES
 - `resultados/populacao_salvador_ds_sexo_idade_2000_2026.csv.gz` e `POP_SSA_DS_SEXO_IDADE_SIMPLES_2000_2026_v5_1.xlsx` — DS × sexo × idade simples (0–100+), 65.448 linhas, totais por faixa idênticos à base principal
-- `resultados/populacao_salvador_bairro_ds_idade_raca_2000_2026.csv.gz` — `ANO | DS | COD_BAIRRO | IDADE | FXET | SEXO | RACA | FREQ` (3.131.625 linhas com FREQ > 0), coerente com as duas tabelas acima
+- `resultados/populacao_salvador_bairro_ds_idade_raca_2000_2026.csv.gz` — `ANO | DS | COD_PB | COD_BAIRRO | IDADE | FXET | SEXO | RACA | FREQ` (3.131.625 linhas com FREQ > 0), coerente com as duas tabelas acima
 - `resultados/populacao_bairro_idade_raca_por_ano.zip` — a mesma tabela, um CSV por ano (abre no Excel), com nomes e dicionário
 - `resultados/populacao_salvador_prefeitura_bairro_2000_2026.csv.gz` — série por Prefeitura-Bairro (10 PBs)
 - `resultados/validacao_v5_1.csv` e `reconciliacao_sesab_2000_2025.csv`

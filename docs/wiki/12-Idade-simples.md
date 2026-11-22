@@ -1,6 +1,6 @@
 # 12. População por idade simples (DS × sexo × idade 0 a 100+)
 
-Tabela complementar para o **TabNet Salvador** (idade detalhada), **compatível** com a base principal: em todos os anos, somando as idades de cada faixa obtém-se exatamente o valor de FXET da base `ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ`.
+Tabela complementar para o **TabNet Salvador** (idade detalhada), **compatível** com a base principal: em todos os anos, somando as idades de cada faixa obtém-se exatamente o valor de FXET da base `ANO | DS | COD_PB | COD_BAIRRO | FXET | SEXO | RACA | FREQ`.
 
 ```
 ANO | DS | SEXO | IDADE | FXET | FREQ        (IDADE 100 = 100 anos e mais)
@@ -73,7 +73,7 @@ Conferências automáticas:
 ## 12.4 Tabela completa com bairro e raça
 
 ```
-ANO | DS | COD_BAIRRO | IDADE | FXET | SEXO | RACA | FREQ
+ANO | DS | COD_PB | COD_BAIRRO | IDADE | FXET | SEXO | RACA | FREQ
 ```
 
 Cada célula da base principal (bairro × DS × faixa × sexo × raça) é repartida entre as idades da faixa na proporção da tabela DS × sexo × idade (seção 12.2). Supõe-se que, dentro de uma faixa de 5 anos, a distribuição por idade do bairro e da raça é a do seu DS e sexo.

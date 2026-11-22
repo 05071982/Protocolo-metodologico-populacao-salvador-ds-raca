@@ -28,7 +28,7 @@ ws=wb.create_sheet('LEIAME'); ws.column_dimensions['A'].width=120
 L=[('T','População de Salvador por Distrito Sanitário, bairro, sexo, faixa etária e raça/cor — 2000 a 2026 (versão 5.1)'),
 ('','Elaboração: Sala de Situação em Saúde de Salvador (SDSS/SMS). Totais municipais: Censos 2000, 2010 e 2022 e estimativas TCU/IBGE nos demais anos (2023: RIPSA; 2025–2026: IBGE Cidades). Distribuição interna (DS, bairro): setores censitários de 2010 e 2022 nos limites atuais. Documentação: wiki do repositório · DOI 10.5281/zenodo.24096844.'),
 ('',''),('B','Abas'),
-('','POP_BAIRRO — tabela completa (ANO, DS, COD_BAIRRO, FXET, SEXO, RACA, FREQ), 172 bairros (inclui Aquarius, cód. 171, Boa Vista do Lobato, cód. 172, e Aeroporto, cód. 2, com FREQ = 0). Cada linha é a parte de um bairro dentro de um DS. Somando por DS obtém-se exatamente POP_DS. Use no TabNet e no BI.'),
+('','POP_BAIRRO — tabela completa (ANO, DS, COD_PB, COD_BAIRRO, FXET, SEXO, RACA, FREQ; COD_PB = Prefeitura-Bairro 1–10), 172 bairros (inclui Aquarius, cód. 171, Boa Vista do Lobato, cód. 172, e Aeroporto, cód. 2, com FREQ = 0). Cada linha é a parte de um bairro dentro de um DS. Somando por DS obtém-se exatamente POP_DS. Use no TabNet e no BI.'),
 ('','POP_DS — mesma série agregada por DS no formato do pop14 (ANO, FXET, DS, SEXO, RACA, FREQ, FREQ_CENSO). FREQ = totais oficiais; FREQ_CENSO = série alternativa com totais apenas censitários (tendência).'),
 ('','POP_PB — mesma série agregada por Prefeitura-Bairro (10 PBs): ANO, COD_PB, FXET, SEXO, RACA, FREQ. Cada bairro pertence a uma única PB (ver DICIONARIO e coluna COD_PB do dicionário de bairros).'),
 ('','RECONCILIACAO_SESAB — comparação ano a ano com o TabNet SESAB (total e estrutura sexo × faixa). VALIDACAO — conferências da versão 5.1.'),
@@ -110,12 +110,12 @@ ws=wb.create_sheet('CHECAGENS'); ws.column_dimensions['A'].width=70; ws.column_d
 H_(ws,['Conferência','Esperado','Obtido','OK?'])
 nb=len(pb)+1
 chk=[('Total 2010 = Censo 2010 (SESAB)',2675656,'=TOTAIS!N12'),('Total 2022 = Censo 2022',2417678,'=TOTAIS!N24'),('Total 2000 = Censo 2000',2443107,'=TOTAIS!N2'),('Total 2014 = TCU',2902927,'=TOTAIS!N16'),('Total 2025 = IBGE Cidades',2564204,'=TOTAIS!N27'),
-('POP_BAIRRO 2022 = soma bairros IBGE',2417678,f'=SUMIFS(POP_BAIRRO!$G$2:$G${nb},POP_BAIRRO!$A$2:$A${nb},2022)'),
-('POP_BAIRRO 2026 = POP_DS 2026','=TOTAIS!N28',f'=SUMIFS(POP_BAIRRO!$G$2:$G${nb},POP_BAIRRO!$A$2:$A${nb},2026)'),
-('Boa Vista do Lobato 2022 (cód. 172) = 6.219',6219,f'=SUMIFS(POP_BAIRRO!$G$2:$G${nb},POP_BAIRRO!$A$2:$A${nb},2022,POP_BAIRRO!$C$2:$C${nb},172)'),
+('POP_BAIRRO 2022 = soma bairros IBGE',2417678,f'=SUMIFS(POP_BAIRRO!$H$2:$H${nb},POP_BAIRRO!$A$2:$A${nb},2022)'),
+('POP_BAIRRO 2026 = POP_DS 2026','=TOTAIS!N28',f'=SUMIFS(POP_BAIRRO!$H$2:$H${nb},POP_BAIRRO!$A$2:$A${nb},2026)'),
+('Boa Vista do Lobato 2022 (cód. 172) = 6.219',6219,f'=SUMIFS(POP_BAIRRO!$H$2:$H${nb},POP_BAIRRO!$A$2:$A${nb},2022,POP_BAIRRO!$D$2:$D${nb},172)'),
 ('POP_PB 2022 = Censo 2022',2417678,f'=SUMIFS(POP_PB!$F:$F,POP_PB!$A:$A,2022)'),
-('Aquarius 2022 (cód. 171) > 0',True,f'=SUMIFS(POP_BAIRRO!$G$2:$G${nb},POP_BAIRRO!$A$2:$A${nb},2022,POP_BAIRRO!$C$2:$C${nb},171)>0'),
-('POP_BAIRRO DS Itapuã 2024 = POP_DS','=TOTAIS!I26',f'=SUMIFS(POP_BAIRRO!$G$2:$G${nb},POP_BAIRRO!$A$2:$A${nb},2024,POP_BAIRRO!$B$2:$B${nb},8)'),
+('Aquarius 2022 (cód. 171) > 0',True,f'=SUMIFS(POP_BAIRRO!$H$2:$H${nb},POP_BAIRRO!$A$2:$A${nb},2022,POP_BAIRRO!$D$2:$D${nb},171)>0'),
+('POP_BAIRRO DS Itapuã 2024 = POP_DS','=TOTAIS!I26',f'=SUMIFS(POP_BAIRRO!$H$2:$H${nb},POP_BAIRRO!$A$2:$A${nb},2024,POP_BAIRRO!$B$2:$B${nb},8)'),
 ('DS Barra/RV 2010 = soma dos setores (limites atuais)',338299,'=TOTAIS!G12'),
 ('2000: Masculino = Censo 2000',1150252,'=TOTAIS!O2'),('2022: Feminino = Censo 2022',1315298,'=TOTAIS!P24')]
 r=2
@@ -135,8 +135,8 @@ ws=wb.create_sheet('POP_PB'); _pp=pd.read_pickle(D+'v51/pop_pb.pkl')
 H_(ws,['ANO','COD_PB','FXET','SEXO','RACA','FREQ'])
 for t in _pp[['ANO','COD_PB','FXET','SEXO','RACA','FREQ']].itertuples(index=False): ws.append(list(map(int,t)))
 ws=wb.create_sheet('POP_BAIRRO')
-H_(ws,['ANO','DS','COD_BAIRRO','FXET','SEXO','RACA','FREQ'])
-for t in pb[['ANO','DS','COD_BAIRRO','FXET','SEXO','RACA','FREQ']].itertuples(index=False): ws.append(list(map(int,t)))
+H_(ws,['ANO','DS','COD_PB','COD_BAIRRO','FXET','SEXO','RACA','FREQ'])
+for t in pb[['ANO','DS','COD_PB','COD_BAIRRO','FXET','SEXO','RACA','FREQ']].itertuples(index=False): ws.append(list(map(int,t)))
 ws=wb.create_sheet('RECONCILIACAO_SESAB'); rc=pd.read_csv(D+'v51/reconciliacao_sesab.csv'); H_(ws,list(rc.columns)+['NOTA'])
 NT={2000:'Censo',2010:'Censo',2022:'Censo',2007:'SESAB usa projeção UNFPA/IBGE; base usa TCU',2023:'SESAB repete Censo 2022; base usa RIPSA',2001:'Arquivo TCU',2002:'Arquivo TCU'}
 for r_ in rc.itertuples(index=False): row(ws,list(r_)+[NT.get(r_[0],'Fora dos censos a SESAB quase repete a estrutura do censo anterior' if r_[4]>3 else '')])

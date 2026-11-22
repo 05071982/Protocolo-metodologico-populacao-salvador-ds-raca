@@ -24,7 +24,7 @@ Além disso, não existia base por **bairro** nem por **raça/cor**, essenciais 
 Uma tabela única, usada no TabNet Salvador e no Painel Sociodemográfico:
 
 ```
-ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ
+ANO | DS | COD_PB | COD_BAIRRO | FXET | SEXO | RACA | FREQ
 27 anos × 195 unidades bairro×DS × 2 sexos × 18 faixas × 5 raças = 947.700 linhas
 ```
 

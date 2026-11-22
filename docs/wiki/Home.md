@@ -25,7 +25,7 @@ Esta base é o **denominador populacional** do **TabNet Salvador**, do **Painel 
 A tabela oficial tem o layout:
 
 ```
-ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ
+ANO | DS | COD_PB | COD_BAIRRO | FXET | SEXO | RACA | FREQ
 ```
 
 ## Em uma frase

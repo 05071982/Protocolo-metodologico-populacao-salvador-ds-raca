@@ -1,6 +1,6 @@
 # =====================================================================
 # 04_atualizar_populacao.R  (versão 5)
-# Gera a base populacional de Salvador (ANO, DS, COD_BAIRRO, FXET, SEXO,
+# Gera a base populacional de Salvador (ANO, DS, COD_PB, COD_BAIRRO, FXET, SEXO,
 # RACA, FREQ) para todos os anos de dados/entrada/totais_municipais.csv.
 #
 # USO ANUAL (ex.: saiu o total de 2027) — só isto:
@@ -85,6 +85,9 @@ if (nrow(sem) > 0) {
 }
 pop <- pop[order(pop$ANO, pop$DS, pop$COD_BAIRRO, pop$SEXO, pop$FXET, pop$RACA), ]
 stopifnot(setequal(unique(pop$COD_BAIRRO), dic$COD_BAIRRO), all(pop$FREQ >= 0))
+pop$COD_PB <- dic$COD_PB[match(pop$COD_BAIRRO, dic$COD_BAIRRO)]   # Prefeitura-Bairro (cada bairro em uma única PB)
+stopifnot(!anyNA(pop$COD_PB))
+pop <- pop[, c("ANO", "DS", "COD_PB", "COD_BAIRRO", "FXET", "SEXO", "RACA", "FREQ")]
 chk <- merge(aggregate(FREQ ~ ANO, pop, sum), totais[, c("ANO", "TOTAL")])
 stopifnot(all(chk$FREQ == round(chk$TOTAL)))
 print(chk)

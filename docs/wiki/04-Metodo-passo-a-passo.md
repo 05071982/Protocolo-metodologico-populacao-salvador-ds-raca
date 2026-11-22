@@ -14,7 +14,7 @@ O método tem duas partes independentes:
                                                     │
  Totais TCU/Censo ──► SÉRIE (04_atualizar_populacao.R): razão censitária com razões variáveis ──► arredondamento
                                                     │
-                                       ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ
+                                       ANO | DS | COD_PB | COD_BAIRRO | FXET | SEXO | RACA | FREQ
 ```
 
 ---
