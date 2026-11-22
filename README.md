@@ -23,7 +23,7 @@ ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ
 
 - **Totais municipais:** Censo (2000, 2010, 2022); TCU/IBGE nos demais anos (2023: RIPSA; 2025–2026: IBGE Cidades).
 - **Calibração censitária:** 2000, 2010 e 2022 fecham exatamente com o IBGE em sexo × idade, raça (SIDRA 136 e 3175), DS (2000) e bairros (2022).
-- **Distribuição interna:** setores censitários 2010 e 2022; Razão Censitária com razões variáveis (2001–2009 entre 2000 e 2010; depois entre 2010 e 2022), IPF/raking e arredondamento controlado.
+- **Distribuição interna:** setores censitários 2022 e tabulações por DS de 2010; Razão Censitária com razões variáveis (2001–2009 entre 2000 e 2010; depois entre 2010 e 2022), IPF/raking e arredondamento controlado.
 - **Diálogo com a SESAB:** iguais nos anos de censo; diferenças nos demais anos publicadas ano a ano.
 - 12 Distritos Sanitários · 171 bairros (inclui Aquarius, Lei 9.778/2024) · 18 faixas etárias e idade simples · 5 categorias de raça/cor.
 

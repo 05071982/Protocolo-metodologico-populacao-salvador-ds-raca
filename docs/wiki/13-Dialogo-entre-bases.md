@@ -21,7 +21,7 @@ O alinhamento é feito por **ajuste proporcional iterativo** (IPF/raking; Deming
 | | Idades simples 0–19 (2000 e 2022) e 0–100+ (2010) | 2000, 2010, 2022 |
 | 3. Raça/cor do município | Censo 2000, amostra (SIDRA 136); universo 2010 por sexo e idade (SIDRA 3175); universo 2022 (setores) | 2000, 2010, 2022 |
 | 4. Total por DS | Tabela DS 2000 (mesmos limites atuais); SESAB/DIS 2010; setores 2022 | 2000, 2010, 2022 |
-| 5. Bairro e cruzamentos internos | Setores censitários 2010 e 2022 | todos |
+| 5. Bairro e cruzamentos internos | Setores censitários 2022; tabulações por DS de 2010 (SESAB e banco 2010) | todos |
 | SESAB fora dos censos | **comparação publicada**, não ajuste | 2001–2009, 2011–2021, 2023–2025 |
 
 "Sem declaração" de raça (2000: 16.749 pessoas; 2010: 402 no universo) foi redistribuída proporcionalmente entre as cinco categorias, dentro de cada sexo e idade em 2010 e no total em 2000.
