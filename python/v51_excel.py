@@ -25,7 +25,7 @@ def row(ws,vals,font=N,fill=None,fmt=None):
 def H_(ws,vals): row(ws,vals,H,HF)
 # ---------- LEIAME
 ws=wb.create_sheet('LEIAME'); ws.column_dimensions['A'].width=120
-L=[('T','População de Salvador por Distrito Sanitário, bairro, sexo, faixa etária e raça/cor — 2000 a 2026 (versão 5.1)'),
+L=[('T','População de Salvador por Distrito Sanitário, Prefeitura-Bairro, bairro, sexo, faixa etária e raça/cor — 2000 a 2026 (versão 5.1)'),
 ('','Elaboração: Sala de Situação em Saúde de Salvador (SDSS/SMS). Totais municipais: Censos 2000, 2010 e 2022 e estimativas TCU/IBGE nos demais anos (2023: RIPSA; 2025–2026: IBGE Cidades). Distribuição interna (DS, bairro): setores censitários de 2010 e 2022 nos limites atuais. Documentação: wiki do repositório · DOI 10.5281/zenodo.24096844.'),
 ('',''),('B','Abas'),
 ('','POP_BAIRRO — tabela completa (ANO, DS, COD_PB, COD_BAIRRO, FXET, SEXO, RACA, FREQ; COD_PB = Prefeitura-Bairro 1–10), 172 bairros (inclui Aquarius, cód. 171, Boa Vista do Lobato, cód. 172, e Aeroporto, cód. 2, com FREQ = 0). Cada linha é a parte de um bairro dentro de um DS. Somando por DS obtém-se exatamente POP_DS. Use no TabNet e no BI.'),

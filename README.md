@@ -1,4 +1,4 @@
-# Protocolo metodológico — População de Salvador por DS, bairro, sexo, idade e raça/cor (2000–2026)
+# Protocolo metodológico — População de Salvador por DS, Prefeitura-Bairro, bairro, sexo, idade e raça/cor (2000–2026)
 
 [![DOI](https://zenodo.org/badge/1452138178.svg)](https://doi.org/10.5281/zenodo.24096844)
 
@@ -53,7 +53,7 @@ resultados/   base final, planilhas v5.1, zip por ano, validação, reconciliaç
 
 ## Como citar
 
-Leal JTFM, Santos RSC. Protocolo metodológico para estimativa populacional de Salvador por distrito sanitário, bairro, sexo, idade e raça/cor, 2000–2026 [Internet]. Salvador: Secretaria Municipal da Saúde de Salvador; 2026. doi:10.5281/zenodo.24096844
+Leal JTFM, Santos RSC. Protocolo metodológico para estimativa populacional de Salvador por distrito sanitário, prefeitura-bairro, bairro, sexo, idade e raça/cor, 2000–2026 [Internet]. Salvador: Secretaria Municipal da Saúde de Salvador; 2026. doi:10.5281/zenodo.24096844
 
 ## Licença
 

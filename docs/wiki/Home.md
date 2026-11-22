@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/1452138178.svg)](https://doi.org/10.5281/zenodo.24096844)
 
-**Base populacional de Salvador por Distrito Sanitário (DS), bairro, sexo, faixa etária e raça/cor — 2000 a 2026**
+**Base populacional de Salvador por Distrito Sanitário (DS), Prefeitura-Bairro (PB), bairro, sexo, faixa etária, idade simples e raça/cor — 2000 a 2026**
 
 Sala de Situação em Saúde de Salvador (SDSS) · Secretaria Municipal da Saúde de Salvador (SMS)
 
@@ -30,7 +30,7 @@ ANO | DS | COD_PB | COD_BAIRRO | FXET | SEXO | RACA | FREQ
 
 ## Em uma frase
 
-Os **totais municipais** vêm do Censo nos anos censitários (2000, 2010, 2022) e das estimativas oficiais **TCU/IBGE** nos demais anos. A **distribuição interna** (DS × bairro × sexo × idade × raça) vem dos setores censitários de 2010 e 2022, nos limites atuais de bairro e DS, pelo **Método da Razão Censitária com razões variáveis**, uma evolução do método usado até 2023 no TabNet Salvador. Desde a **versão 4**, os três anos censitários (2000, 2010, 2022) fecham exatamente com o IBGE em sexo, idade, raça e DS, e 2001–2009 são interpolados entre os Censos 2000 e 2010 (ver [Diálogo entre bases](13-Dialogo-entre-bases)).
+Os **totais municipais** vêm do Censo nos anos censitários (2000, 2010, 2022) e das estimativas oficiais **TCU/IBGE** nos demais anos. A **distribuição interna** (DS × PB × bairro × sexo × idade × raça) vem dos setores censitários de 2010 e 2022, nos limites atuais de bairro, DS e PB, pelo **Método da Razão Censitária com razões variáveis**, uma evolução do método usado até 2023 no TabNet Salvador. Desde a **versão 4**, os três anos censitários (2000, 2010, 2022) fecham exatamente com o IBGE em sexo, idade, raça e DS, e 2001–2009 são interpolados entre os Censos 2000 e 2010 (ver [Diálogo entre bases](13-Dialogo-entre-bases)).
 
 ## Navegação
 
@@ -58,6 +58,6 @@ Documento-síntese: [Protocolo Metodológico para estimativa populacional de Sal
 
 ## Como citar
 
-> Leal JTFM, Santos RSC. Protocolo metodológico para estimativa populacional de Salvador por distrito sanitário, bairro, sexo, idade e raça/cor, 2000–2026. Salvador: Secretaria Municipal da Saúde de Salvador; 2026. doi:10.5281/zenodo.24096844
+> Leal JTFM, Santos RSC. Protocolo metodológico para estimativa populacional de Salvador por distrito sanitário, prefeitura-bairro, bairro, sexo, idade e raça/cor, 2000–2026. Salvador: Secretaria Municipal da Saúde de Salvador; 2026. doi:10.5281/zenodo.24096844
 
 DOI: https://doi.org/10.5281/zenodo.24096844 (sempre aponta para a versão mais recente).

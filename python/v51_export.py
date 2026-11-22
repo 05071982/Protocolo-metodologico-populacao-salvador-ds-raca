@@ -36,7 +36,7 @@ pd.read_csv(V+'validacao_v5_1.csv').to_csv(OUT+'por_ano/VALIDACAO_v5_1.csv',sep=
 pd.read_csv(V+'reconciliacao_sesab.csv').to_csv(OUT+'por_ano/RECONCILIACAO_SESAB_2000_2025.csv',sep=';',index=False,encoding='utf-8-sig')
 FXN=['Menor de 1 ano','1 a 4 anos','5 a 9 anos','10 a 14 anos','15 a 19 anos','20 a 24 anos','25 a 29 anos','30 a 34 anos','35 a 39 anos','40 a 44 anos','45 a 49 anos','50 a 54 anos','55 a 59 anos','60 a 64 anos','65 a 69 anos','70 a 74 anos','75 a 79 anos','80 anos e mais']
 FX=np.array([1]+[2]*4+[3+(a-5)//5 for a in range(5,80)]+[18]*21)
-lei=['Dicionário de códigos — população de Salvador por DS, bairro, idade, sexo e raça/cor, 2000–2026 (versão 5.1)',
+lei=['Dicionário de códigos — população de Salvador por DS, Prefeitura-Bairro, bairro, idade, sexo e raça/cor, 2000–2026 (versão 5.1)',
  'Arquivos pop_bairro_idade_raca_AAAA.csv: colunas ANO; DS; NOME_DS; COD_BAIRRO; NOME_BAIRRO; COD_PB; NOME_PB; IDADE; FXET; SEXO; RACA; FREQ (separador ";", UTF-8). Um arquivo por ano porque a série completa passa do limite de linhas do Excel.',
  'Bairros: 172 oficiais. O código 2 (Aeroporto) não tem população residente; aparece com UMA linha por ano com FREQ = 0 (DS 8 Itapuã, IDADE 0, SEXO 1, RACA 1), apenas para constar. Bairros que cruzam limites de DS aparecem em mais de um DS (ver DS_TODOS).',
  'Código 171 (Aquarius): criado pela Lei 9.778/2024, desmembrado da Pituba; aparece em toda a série com o limite atual.',

@@ -4,7 +4,7 @@
 
 A Análise de Situação de Saúde (ASIS) depende de taxas: mortalidade, incidência, cobertura vacinal, cobertura de pré-natal. Toda taxa tem um **denominador populacional**. Se ele estiver errado, o indicador também estará, e um DS pode parecer pior (ou melhor) do que realmente é.
 
-O IBGE publica população por município. A SMS planeja e executa ações em uma escala menor: **12 Distritos Sanitários** e **172 bairros**. O IBGE não publica estimativas anuais nessas escalas, e as fronteiras dos DS não coincidem com as dos bairros nem com as divisões do IBGE. Por isso a SMS precisa produzir as próprias estimativas.
+O IBGE publica população por município. A SMS planeja e executa ações em uma escala menor: **12 Distritos Sanitários** e **172 bairros**; a gestão municipal também se organiza em **10 Prefeituras-Bairro**. O IBGE não publica estimativas anuais nessas escalas, e as fronteiras dos DS não coincidem com as dos bairros nem com as divisões do IBGE. Por isso a SMS precisa produzir as próprias estimativas.
 
 ## 1.2 Como era feito até 2023
 
@@ -30,7 +30,7 @@ A premissa central era que **a distribuição da população entre os DS permane
 
 ## 1.4 Objetivos do protocolo
 
-**Geral:** produzir uma base populacional anual de Salvador por DS, bairro, sexo, faixa etária e raça/cor, com método reprodutível, documentado e atualizável.
+**Geral:** produzir uma base populacional anual de Salvador por DS, Prefeitura-Bairro, bairro, sexo, faixa etária, idade simples e raça/cor, com método reprodutível, documentado e atualizável.
 
 **Específicos:**
 

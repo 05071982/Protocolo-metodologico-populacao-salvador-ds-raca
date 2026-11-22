@@ -146,3 +146,20 @@ Aquarius (171): 3.248 habitantes em 2010 (área atual do bairro) e 4.839 em 2022
 
 
 A lista completa de conferências da v5 (raça, idades simples, 172 bairros, consistência entre tabelas) está em [Diálogo entre bases](13-Dialogo-entre-bases#136-validação-da-versão-4-resultadosvalidacao_v4csv).
+
+## Prefeituras-Bairro (2022)
+
+| PB | População | % negra | % 60+ |
+|---|---|---|---|
+| I – Centro / Brotas | 239.424 | 75,7 | 20,7 |
+| II – Subúrbio / Ilhas | 261.006 | 91,0 | 14,0 |
+| III – Cajazeiras | 192.680 | 89,9 | 13,9 |
+| IV – Itapuã / Ipitanga | 388.097 | 80,1 | 14,8 |
+| V – Cidade Baixa | 149.149 | 87,8 | 18,5 |
+| VI – Barra / Pituba | 323.924 | 64,8 | 23,5 |
+| VII – Liberdade / São Caetano | 296.545 | 90,2 | 16,7 |
+| VIII – Cabula / Tancredo Neves | 317.923 | 87,2 | 14,2 |
+| IX – Pau da Lima | 173.172 | 87,5 | 12,3 |
+| X – Valéria | 75.758 | 89,7 | 11,9 |
+
+Detalhes e série 2000–2026 na [página 16](16-Prefeituras-Bairro).

@@ -1,5 +1,5 @@
 {
-  "title": "Protocolo metodológico para estimativa populacional de Salvador por distrito sanitário, bairro, sexo, idade e raça/cor, 2000–2026",
+  "title": "Protocolo metodológico para estimativa populacional de Salvador por distrito sanitário, prefeitura-bairro, bairro, sexo, idade e raça/cor, 2000–2026",
   "upload_type": "dataset",
   "description": "Base populacional anual de Salvador (BA), 2000–2026, por Distrito Sanitário (12), Prefeitura-Bairro (10), bairro (172, incluindo Aquarius e Boa Vista do Lobato), sexo, 18 faixas etárias, idade simples (0–100+) e raça/cor (5), nos limites territoriais atuais, com códigos R para atualização anual. Totais municipais do Censo (2000, 2010, 2022) e das estimativas TCU/IBGE; estruturas de 2010 e 2022 construídas a partir dos setores censitários e calibradas às margens do IBGE por ajuste proporcional iterativo (IPF) com arredondamento controlado; série anual pela razão censitária com razões variáveis. Versão 5.1: setores censitários de 2010; bairro 172 (Boa Vista do Lobato, Lei 9.919/2025) delimitado pelo CNEFE 2022; Prefeitura-Bairro no arquivo do TabNet. Documentação completa na wiki do repositório.",
   "creators": [

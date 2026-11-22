@@ -4,7 +4,7 @@
 
 **Equipe:** Jessidenes Teixeira de Freitas Mendes Leal · Rafaella Santiago Coutinho Santos
 **Instituição:** Sala de Situação em Saúde de Salvador (SDSS), Secretaria Municipal da Saúde de Salvador
-**Versão:** v5 (22/11/2026) · **Cobertura:** 2000–2026, atualizável
+**Versão:** v5.1 (22/11/2026) · **Recortes:** 12 DS, 10 Prefeituras-Bairro, 172 bairros · **Cobertura:** 2000–2026, atualizável
 
 ---
 
@@ -76,6 +76,7 @@ Todo ano, quando o IBGE publicar o novo total: acrescente uma linha em `dados/en
 - **População negra:** 83,1% em Salvador, variando de 66,3% (Barra/Rio Vermelho) a 91,2% (Subúrbio Ferroviário).
 - **Aquarius (bairro 171):** 4.839 habitantes (3.248 em 2010, na área atual).
 - **Boa Vista do Lobato (bairro 172, Lei 9.919/2025):** 6.219 habitantes em 2022 (6.747 em 2010, na área atual), delimitado pelos logradouros da lei no CNEFE 2022.
+- **Prefeituras-Bairro:** 10 PBs; cada bairro pertence inteiro a uma PB (coluna `COD_PB` no arquivo do TabNet e série por PB). Ver [página 16](16-Prefeituras-Bairro).
 - **Alinhamento com o IBGE:** 2000, 2010 e 2022 fecham exatamente com os censos em sexo × idade, raça e DS; diferenças com a SESAB fora dos censos estão publicadas ([página 13](13-Dialogo-entre-bases)).
 
 Tabelas completas em [Resultados](06-Resultados).

@@ -30,7 +30,7 @@ setwd("C:/caminho/Protocolo-metodologico-populacao-salvador-ds-raca")
 source("R/04_atualizar_populacao.R")   # base principal (bairro × DS × faixa × sexo × raça)
 source("R/05_idade_simples.R")         # DS × sexo × idade simples
 source("R/06_bairro_idade_raca.R")     # bairro × DS × idade × sexo × raça
-source("R/07_exportar_por_ano.R")      # zip: um CSV por ano + dicionário
+source("R/07_exportar_por_ano.R")      # zip: um CSV por ano + dicionário; série por Prefeitura-Bairro
 ```
 
 Os scripts 04 a 06 usam só o R base. O 07 usa o pacote `zip` (recomendado: `install.packages(c("zip", "openxlsx"))`). Sem `zip` ele tenta o `utils::zip`, que no Windows depende do Rtools; sem `openxlsx` o dicionário sai só em CSV.
