@@ -4,7 +4,7 @@
 
 A Análise de Situação de Saúde (ASIS) depende de taxas: mortalidade, incidência, cobertura vacinal, cobertura de pré-natal. Toda taxa tem um **denominador populacional**. Se ele estiver errado, o indicador também estará, e um DS pode parecer pior (ou melhor) do que realmente é.
 
-O IBGE publica população por município. A SMS planeja e executa ações em uma escala menor: **12 Distritos Sanitários** e **171 bairros**. O IBGE não publica estimativas anuais nessas escalas, e as fronteiras dos DS não coincidem com as dos bairros nem com as divisões do IBGE. Por isso a SMS precisa produzir as próprias estimativas.
+O IBGE publica população por município. A SMS planeja e executa ações em uma escala menor: **12 Distritos Sanitários** e **172 bairros**. O IBGE não publica estimativas anuais nessas escalas, e as fronteiras dos DS não coincidem com as dos bairros nem com as divisões do IBGE. Por isso a SMS precisa produzir as próprias estimativas.
 
 ## 1.2 Como era feito até 2023
 
@@ -26,7 +26,7 @@ A premissa central era que **a distribuição da população entre os DS permane
 - O **Censo 2022** encontrou **2.417.678** habitantes em Salvador, menos que em 2010 (2.675.656). As estimativas TCU anteriores (~2,9 milhões) estavam superestimadas.
 - O Ministério da Saúde questionou a cobertura do Censo (Nota Técnica nº 41/2024-CGIAE/DAENT/SVSA/MS).
 - O IBGE publicou os **agregados por setor censitário** de 2022, com idade, sexo e cor/raça. Isso permitiu, pela primeira vez, montar a estrutura por DS e por bairro com dados de 2022.
-- Salvador passou a ter **171 bairros** oficiais com a criação do **Aquarius** (Lei 9.778/2024), desmembrado da Pituba.
+- Salvador passou a ter **171 bairros** oficiais com a criação do **Aquarius** (Lei 9.778/2024), desmembrado da Pituba, e **172** com a criação da **Boa Vista do Lobato** (Lei 9.919/2025). Ver [Bairros criados por lei](15-Bairros-criados-por-lei).
 
 ## 1.4 Objetivos do protocolo
 

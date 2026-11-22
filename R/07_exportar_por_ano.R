@@ -15,7 +15,7 @@ ult <- function(p) sort(list.files(file.path(raiz, "resultados"), pattern = p, f
 res <- read.csv(ult("^populacao_salvador_bairro_ds_idade_raca_\\d{4}_\\d{4}\\.csv$"))
 dd  <- function(a) read.csv(file.path(raiz, "dados/dicionarios", a), check.names = FALSE)
 bai <- dd("bairros.csv"); dsn <- dd("ds.csv"); fx <- dd("fxet.csv"); sx <- dd("sexo.csv"); rc <- dd("raca.csv")
-stopifnot(nrow(bai) == 171, setequal(bai$COD_BAIRRO, 1:171))
+stopifnot(nrow(bai) == 172, setequal(bai$COD_BAIRRO, 1:172))
 
 sem <- bai[!bai$COD_BAIRRO %in% res$COD_BAIRRO, ]
 if (nrow(sem) > 0) {
@@ -34,7 +34,7 @@ totais <- read.csv(file.path(raiz, "dados/entrada/totais_municipais.csv"))
 for (a in sort(unique(res$ANO))) {
   d <- res[res$ANO == a, cols]
   d <- d[order(d$DS, d$COD_BAIRRO, d$IDADE, d$SEXO, d$RACA), ]
-  stopifnot(sum(d$FREQ) == round(totais$TOTAL[totais$ANO == a]), setequal(d$COD_BAIRRO, 1:171))
+  stopifnot(sum(d$FREQ) == round(totais$TOTAL[totais$ANO == a]), setequal(d$COD_BAIRRO, 1:172))
   write.table(d, file.path(tmp, sprintf("pop_bairro_idade_raca_%d.csv", a)), sep = ";",
               row.names = FALSE, quote = FALSE, fileEncoding = "UTF-8")
 }

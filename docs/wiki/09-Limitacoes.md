@@ -18,3 +18,4 @@
 - Incorporar indicadores administrativos de dinâmica intramunicipal: nascidos vivos (SINASC) por bairro, óbitos (SIM), cadastros da Atenção Primária, ligações de água e energia. Isso permitiria um modelo de **razão-correlação** (Swanson & Tayman, 2012) para corrigir a tendência depois de 2022.
 - Substituir 2010 pelo Censo 2030 quando sair, mantendo 2022 como âncora.
 - Estimar intervalos de incerteza por bairro (*bootstrap* sobre setores).
+13. **Boa Vista do Lobato.** Sem polígono oficial, o bairro 172 foi delimitado pelos endereços do CNEFE 2022 nos logradouros da Lei 9.919/2025 (33 de 34 encontrados). A fração de cada setor é a dos domicílios, aplicada também à estrutura por idade e raça do setor. Revisar quando o polígono for publicado ([página 15](15-Bairros-criados-por-lei)).

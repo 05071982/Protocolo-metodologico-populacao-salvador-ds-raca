@@ -8,7 +8,7 @@ authors:
   - family-names: "Santos"
     given-names: "Rafaella Santiago Coutinho"
     affiliation: "Sala de Situação em Saúde de Salvador, Secretaria Municipal da Saúde de Salvador"
-version: "5.0.0"
+version: "5.1.0"
 date-released: "2026-11-22"
 doi: "10.5281/zenodo.24096844"
 license: CC-BY-4.0

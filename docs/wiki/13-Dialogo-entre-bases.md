@@ -29,14 +29,14 @@ O alinhamento é feito por **ajuste proporcional iterativo** (IPF/raking; Deming
 
 ## 13.3 Calibração de cada censo
 
-**2010 (v5).** Ponto de partida: os 3.546 setores do universo agregados nas 194 unidades bairro × DS (ver [página 14](14-Versao-5-setores-2010)). Margens:
+**2010 (v5).** Ponto de partida: os 3.546 setores do universo agregados nas 195 unidades bairro × DS (ver [página 14](14-Versao-5-setores-2010)). Margens:
 
 1. população de cada unidade por sexo = soma dos setores;
 2. sexo × faixa × raça do município = universo SIDRA 3175.
 
 Inteiros por arredondamento controlado com as duas margens exatas. Na v4, 2010 partia da tabela SESAB por DS (limites da época) e de um banco com 78% de cobertura.
 
-**2022.** Ponto de partida: as 194 unidades bairro × DS da v3, vindas dos setores. Margens:
+**2022.** Ponto de partida: as unidades bairro × DS da v3 (194; a 195ª, Boa Vista do Lobato, é desmembrada depois da calibração), vindas dos setores. Margens:
 
 1. total de cada unidade = total oficial IBGE do bairro;
 2. unidade × raça = setores (raça do Censo 2022);
@@ -75,18 +75,19 @@ A dissimilaridade é o percentual da população que teria de mudar de célula s
 
 Fora dos censos, **forçar a base a seguir a SESAB pioraria a qualidade**. A estrutura etária da SESAB fica quase parada entre censos e se afasta até 10% em 2019, e mesmo assim a base reencontra o Censo 2022 quando ele chega. Por isso a SESAB é usada como comparação, não como total. Quem precisar dos números da SESAB tem a tabela de reconciliação ano a ano.
 
-## 13.6 Validação (`resultados/validacao_v5.csv`)
+## 13.6 Validação (`resultados/validacao_v5_1.csv`)
 
 | Conferência | Resultado |
 |---|---|
 | Total de cada ano = total oficial | OK |
 | 2000: DS = tabela DS 2000; sexo × faixa = Censo 2000; raça = SIDRA 136; idades 0–19 = Censo 2000 | OK |
 | 2010: sexo × faixa × raça e idade simples 0–100+ = SIDRA 3175; bairros × DS por sexo = soma dos setores | OK |
-| 2022: sexo × faixa e idades 0–19 = Censo 2022; bairros = IBGE | OK |
+| 2022: sexo × faixa e idades 0–19 = Censo 2022; bairros = IBGE (origens do 172 somadas à parte transferida) | OK |
+| 2022: Boa Vista do Lobato (172) = parte transferida (5.519 + 501 + 199 = 6.219) | OK |
 | Tabela detalhada (idade) = POP_BAIRRO = DS × idade, em todas as células | OK |
-| 171 bairros no dicionário e nas bases (2 – Aeroporto com FREQ = 0) | OK |
+| 172 bairros no dicionário e nas bases (2 – Aeroporto com FREQ = 0) | OK |
 | Valores negativos | nenhum |
-| R (04 e 05) reproduz a referência Python, inclusive com um ano 2027 de teste | 0 células diferentes (v5) |
+| R (04 e 05) reproduz a referência Python, inclusive com um ano 2027 de teste | 0 células diferentes (v5 e v5.1) |
 
 ## 13.7 Referências desta página
 

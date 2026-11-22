@@ -30,7 +30,7 @@ $$
 DS(i) = \arg\max_{d}\; \text{área}(\text{setor}_i \cap DS_d)
 $$
 
-O **Aquarius** (171) recebe os setores da Pituba com mais de 50% da área no seu polígono oficial (7 setores).
+O **Aquarius** (171) recebe os setores da Pituba com mais de 50% da área no seu polígono oficial (7 setores). A **Boa Vista do Lobato** (172) recebe, de cada setor do Lobato, Alto do Cabrito e Boa Vista de São Caetano, a fração dos domicílios do CNEFE 2022 que está nos logradouros da Lei 9.919/2025 ([página 15](15-Bairros-criados-por-lei)).
 
 ## 4.2 Imputação do sigilo ("X")
 
@@ -44,7 +44,7 @@ Os blocos, nesta ordem, são: sexo; sexo × idade; raça; sexo × raça; (0–9,
 
 ## 4.3 Unidades bairro × DS e calibração
 
-Os setores são somados em **194 unidades** (bairro × DS). Em cada bairro $b$, todas as variáveis são multiplicadas por
+Os setores são somados em **195 unidades** (bairro × DS). Em cada bairro $b$, todas as variáveis são multiplicadas por
 
 $$
 f_b = \frac{P_b^{\text{IBGE 2022}}}{\sum_{i \in b} \text{moradores}_i}

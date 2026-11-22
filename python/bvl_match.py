@@ -1,0 +1,16 @@
+import pandas as pd, unicodedata, re
+d=pd.read_csv('/home/claude/data/bvl/cnefe_lobato_logradouros.csv',dtype=str)
+for c in ['N_END','N_DOM']: d[c]=d[c].astype(int)
+d[['LAT','LON']]=d[['LAT','LON']].astype(float)
+def norm(s):
+    s=unicodedata.normalize('NFKD',str(s)).encode('ascii','ignore').decode().upper()
+    s=s.replace('ª','A')
+    s=re.sub(r'\b(\d)\s*A\b',r'\1',s)
+    s=re.sub(r'\bPRIMEIRA\b','1',s); s=re.sub(r'\bSEGUNDA\b','2',s); s=re.sub(r'\bTERCEIRA\b','3',s)
+    s=re.sub(r'\b(DA|DE|DO|DOS|DAS|RUA)\b',' ',s)
+    s=re.sub(r'[^A-Z0-9 ]',' ',s); return ' '.join(s.split())
+lei="""1ª Travessa Itaquaraci|1ª Travessa João Rodrigues Mendes|1ª Travessa Paulo Geovane|1ª Travessa Ramalho Santos|2ª Travessa Itaquaraci|Avenida Afrânio Peixoto|Avenida Pedro Veríssimo|Rua Ana Piedade|Rua Aristóteles Boaventura|Rua Boa Fé|Rua Boa Ventura|Rua Francisco José|Rua Itaquaraci|Rua Marciano Porcino|Rua Nilcélia Pontes|Rua Nova Direta|Rua Nova do Meio|Rua Paulo Geovane|Rua Santo Antônio|Rua São Barnabé|Rua São Cornélio|Rua São Jorge da Boa Vista|Rua São Luís|Travessa Ana Piedade|Travessa Boa Fé|Travessa João Rodrigues Mendes|Travessa Luciano Barreto|Travessa Oswaldo Martins de Castro|Travessa Paulo Geovane|Travessa Sansué|Travessa Santo Antônio|Travessa São José da Boa Vista|Travessa São Sebastião|Travessa Tranquilino Mendes""".split('|')
+d['FULL']=(d.TIPO.fillna('')+' '+d.TITULO.fillna('')+' '+d.NOME.fillna('')).map(norm)
+d['NOMEN']=(d.TITULO.fillna('')+' '+d.NOME.fillna('')).map(norm)
+d['TIPON']=d.TIPO.fillna('').map(norm)
+import pickle; pickle.dump((d,lei),open('/home/claude/data/bvl/d.pkl','wb'))

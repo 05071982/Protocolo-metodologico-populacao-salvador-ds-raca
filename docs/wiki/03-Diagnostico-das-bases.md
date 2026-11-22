@@ -33,7 +33,7 @@ Em `Bairros_2022.csv` e `pop_bairros2022.xlsx`, **apenas população e domicíli
 ## 3.4 Bairros × DS
 
 Bairros não se encaixam em DS: **23 bairros** têm setores em mais de um DS. Atribuir um bairro inteiro ao DS do seu centróide gera erros grandes. Com centróides, o Centro Histórico teria 84 mil habitantes em 2022, contra 53 mil pelos setores.
-**Decisão:** a unidade de cálculo é a interseção **bairro × DS** (194 unidades).
+**Decisão:** a unidade de cálculo é a interseção **bairro × DS** (195 unidades).
 
 ## 3.5 Limitações dos agregados do Censo 2022
 
@@ -60,3 +60,8 @@ Os saltos são **metodológicos**, não demográficos. Por isso o arquivo traz t
 
 Criado em jan/2024 (Lei 9.778/2024) a partir da Pituba. O IBGE não tem setor "Aquarius", porque em 2022 a área era Pituba.
 **Decisão:** cruzar os setores da Pituba com o polígono oficial (`02_aquarius.R`). Os **7 setores** com mais de 50% da área no Aquarius formam o bairro 171.
+
+
+## 3.8 Bairro Boa Vista do Lobato
+
+Criado pela Lei 9.919/2025 (18/12/2025), com o perímetro definido por **34 logradouros** e sem polígono oficial. **Decisão:** delimitar pelos endereços do CNEFE 2022 nos logradouros da lei e repartir cada setor pela fração de domicílios nessas ruas (detalhes na [página 15](15-Bairros-criados-por-lei)).

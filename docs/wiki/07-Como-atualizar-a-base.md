@@ -40,7 +40,7 @@ Os scripts 04 a 06 usam só o R base. O 07 usa o pacote `zip` (recomendado: `ins
 - a soma de algum ano diferir do total informado;
 - surgir algum valor negativo;
 - o total informado para 2000, 2010 ou 2022 diferir do censo;
-- faltar algum dos 171 bairros do dicionário.
+- faltar algum dos 172 bairros do dicionário.
 
 **5. Pegue os resultados em `resultados/`:**
 
@@ -69,7 +69,7 @@ Só quando mudar a estrutura:
 - uma mudança nos **limites dos DS**;
 - uma correção dos agregados do IBGE.
 
-Nesses casos: rode `01_chave_setor_bairro_ds.R` e `01b_chave_setor2010.R` (e `02_aquarius.R` ou um equivalente para o novo bairro), depois `03_estrutura_base.R`, refaça a calibração censitária (implementação de referência em `python/v5_*.py`; ver [página 13](13-Dialogo-entre-bases)) e por fim os scripts 04 a 07.
+Nesses casos: rode `01_chave_setor_bairro_ds.R` e `01b_chave_setor2010.R` (e `02_aquarius.R` quando houver polígono oficial, ou `02b_boa_vista_lobato_cnefe.R` quando a lei listar logradouros), depois `03_estrutura_base.R`, refaça a calibração censitária (implementação de referência em `python/v5_*.py`; ver [página 13](13-Dialogo-entre-bases)) e por fim os scripts 04 a 07.
 
 ## 7.4 Se o total de algum ano for revisado
 

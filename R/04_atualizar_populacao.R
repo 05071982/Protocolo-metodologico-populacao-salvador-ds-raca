@@ -9,7 +9,7 @@
 #   2. Rode, nesta ordem: 04_atualizar_populacao.R, 05_idade_simples.R,
 #      06_bairro_idade_raca.R e 07_exportar_por_ano.R.
 #
-# Estruturas prontas em dados/estrutura/ (194 unidades bairro × DS, limites atuais):
+# Estruturas prontas em dados/estrutura/ (195 unidades bairro × DS, limites atuais; 172 bairros):
 #   2000 (margens do Censo 2000), 2010 (setores censitários 2010) e 2022 (setores 2022),
 #   todas calibradas ao IBGE (ver wiki, páginas 4 e 13).
 # Método (Razão Censitária com razões variáveis):
@@ -29,7 +29,7 @@ totais <- totais[order(totais$ANO), ]
 stopifnot(!anyDuplicated(totais$ANO), all(totais$TOTAL > 0), min(totais$ANO) >= 2000)
 le <- function(a) { d <- read.csv(file.path(raiz, "dados/estrutura", a)); d[order(d$UNIDADE, d$SEXO, d$FXET, d$RACA), ] }
 e00 <- le("estrutura_2000_unidade.csv"); e10 <- le("estrutura_2010_unidade.csv"); e22 <- le("estrutura_2022_unidade.csv")
-stopifnot(nrow(e10) == 194 * 180, nrow(e00) == nrow(e10), nrow(e22) == nrow(e10))
+stopifnot(nrow(e10) == 195 * 180, nrow(e00) == nrow(e10), nrow(e22) == nrow(e10))
 cel <- e10[, c("UNIDADE", "DS", "COD_BAIRRO", "SEXO", "FXET", "RACA")]
 C00 <- e00$POP; C10 <- e10$POP; C22 <- e22$POP
 censo <- list("2000" = C00, "2010" = C10, "2022" = C22)

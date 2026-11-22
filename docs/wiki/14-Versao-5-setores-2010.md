@@ -62,13 +62,13 @@ Para cada unidade:
 
 ## 14.7 Validação da versão 5
 
-Todas as 20 conferências de `resultados/validacao_v5.csv` passaram:
+Todas as conferências passaram (20 na v5; 21 na v5.1, em `resultados/validacao_v5_1.csv`):
 
 - totais oficiais em todos os anos;
 - margens do IBGE em 2000, 2010 e 2022;
 - bairros de 2010 iguais à soma dos setores e de 2022 iguais ao IBGE;
 - tabelas por bairro, por idade simples e por DS iguais em todas as células;
-- 171 bairros presentes;
+- 171 bairros presentes (172 a partir da v5.1);
 - nenhum valor negativo.
 
 A réplica do R reproduziu as 942.840 células da base e as 65.448 da idade simples, também com um ano 2027 de teste.

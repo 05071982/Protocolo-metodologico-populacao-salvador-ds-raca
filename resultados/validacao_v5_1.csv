@@ -9,13 +9,14 @@ bairro×idade×raça: total de cada ano = POP_DS,OK,
 2000: idades simples 0–19 por sexo = Censo 2000,OK,
 2010: sexo × faixa × raça = universo SIDRA 3175,OK,
 2010: idade simples 0–100+ por sexo = SIDRA 3175,OK,
-"2010: população de cada bairro × DS, por sexo = soma dos setores censitários (limites atuais)",OK,
+"2010: população de cada bairro × DS, por sexo = soma dos setores censitários (limites atuais)",OK,"Lobato, Alto do Cabrito, Boa Vista de São Caetano e Boa Vista do Lobato (DS 11): soma do grupo = setores; repartição pelos domicílios do CNEFE"
 2010: DS (limites atuais) × tabela SESAB (limites da época) — informativo,OK,máx |dif| 0.82%
 2022: sexo × faixa etária = Censo 2022,OK,
 2022: idades simples 0–19 por sexo = Censo 2022,OK,
-2022: população dos bairros = IBGE (arredondamento),OK,máx ±0
+2022: população dos bairros = IBGE (arredondamento),OK,"máx ±0; para Lobato, Alto do Cabrito e Boa Vista de São Caetano soma-se a parte transferida para o cód. 172"
+2022: Boa Vista do Lobato (172) = parte transferida dos bairros de origem,OK,6219 = 5519 (96) + 501 (5) + 199 (20)
 Detalhada (idade) agregada = POP_BAIRRO em todas as células,OK,
 Detalhada agregada = DS × sexo × idade em todas as células,OK,
 Sem valores negativos,OK,
-Dicionário com 171 bairros (1–171),OK,
-Bairros com população na base,OK,170 com população; sem população: [2]
+Dicionário com 172 bairros (1–172),OK,
+Bairros com população na base,OK,171 com população; sem população: [2]

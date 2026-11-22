@@ -16,3 +16,4 @@
 12. [Idade simples](12-Idade-simples)
 13. [Diálogo entre bases (IBGE, SESAB, Município)](13-Dialogo-entre-bases)
 14. [Versão 5: setores 2010](14-Versao-5-setores-2010)
+15. [Bairros criados por lei](15-Bairros-criados-por-lei)

@@ -16,7 +16,7 @@ Esta base é o **denominador populacional** do **TabNet Salvador**, do **Painel 
 |---|---|
 | Ano | 2000 a 2026 (atualizável a cada nova estimativa) |
 | Distrito Sanitário | 12 DS |
-| Bairro | 171 bairros oficiais (Lei 9.278/2017 e alterações, incluindo o Aquarius, Lei 9.778/2024) |
+| Bairro | 172 bairros oficiais (Lei 9.278/2017 e alterações, incluindo o Aquarius, Lei 9.778/2024, e a Boa Vista do Lobato, Lei 9.919/2025) |
 | Sexo | Masculino, Feminino |
 | Faixa etária | 18 faixas (as mesmas do antigo `pop14`) |
 | Raça/cor | Branca, Preta, Amarela, Parda, Indígena (códigos IBGE/SIM/SINASC) |

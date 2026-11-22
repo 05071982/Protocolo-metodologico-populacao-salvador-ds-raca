@@ -25,7 +25,7 @@ Uma tabela única, usada no TabNet Salvador e no Painel Sociodemográfico:
 
 ```
 ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ
-27 anos × 194 unidades bairro×DS × 2 sexos × 18 faixas × 5 raças = 942.840 linhas
+27 anos × 195 unidades bairro×DS × 2 sexos × 18 faixas × 5 raças = 947.700 linhas
 ```
 
 **Novidade da versão 5:** 2010 passa a ser construído setor a setor (3.546 setores do Censo 2010) nos limites atuais, e cada bairro segue a própria tendência entre os censos ([página 14](14-Versao-5-setores-2010)).
@@ -75,6 +75,7 @@ Todo ano, quando o IBGE publicar o novo total: acrescente uma linha em `dados/en
 - **Menos populoso:** Centro Histórico (53 mil).
 - **População negra:** 83,1% em Salvador, variando de 66,3% (Barra/Rio Vermelho) a 91,2% (Subúrbio Ferroviário).
 - **Aquarius (bairro 171):** 4.839 habitantes (3.248 em 2010, na área atual).
+- **Boa Vista do Lobato (bairro 172, Lei 9.919/2025):** 6.219 habitantes em 2022 (6.747 em 2010, na área atual), delimitado pelos logradouros da lei no CNEFE 2022.
 - **Alinhamento com o IBGE:** 2000, 2010 e 2022 fecham exatamente com os censos em sexo × idade, raça e DS; diferenças com a SESAB fora dos censos estão publicadas ([página 13](13-Dialogo-entre-bases)).
 
 Tabelas completas em [Resultados](06-Resultados).

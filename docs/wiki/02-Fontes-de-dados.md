@@ -24,7 +24,8 @@ Todos os insumos estão na pasta **População por DS** do Drive da SDSS. Os que
 | Insumo | Origem | Uso |
 |---|---|---|
 | `DISTRITO_SANITARIO.shp` (2023) | SMS | Limites dos 12 DS |
-| `delimitacao_de_bairros_oficial.shp` | Prefeitura de Salvador | 171 bairros, incluindo o Aquarius |
+| `delimitacao_de_bairros_oficial.shp` | Prefeitura de Salvador | 171 bairros, incluindo o Aquarius (ainda sem a Boa Vista do Lobato) |
+| CNEFE 2022 (`2927408_SALVADOR.csv`) | IBGE | Endereços com setor censitário, logradouro e coordenadas; usado para delimitar a Boa Vista do Lobato (172) |
 
 ## 2.3 Totais municipais
 
@@ -65,6 +66,6 @@ Os totais estão em `dados/entrada/totais_municipais.csv`.
 
 **SEXO:** 1 Masculino · 2 Feminino
 **RACA:** 1 Branca · 2 Preta · 3 Amarela · 4 Parda · 5 Indígena ("Negra" = 2 + 4)
-**COD_BAIRRO:** ordem alfabética do Livro código (1 = Acupe … 170 = Águas Claras) e **171 = Aquarius**. A lista completa está em `dados/dicionarios/bairros.csv`.
+**COD_BAIRRO:** ordem alfabética do Livro código (1 = Acupe … 170 = Águas Claras) e **171 = Aquarius** e **172 = Boa Vista do Lobato**. As colunas `LEI_CRIACAO` e `BAIRRO_ORIGEM` identificam os bairros criados depois do Censo 2022 e de onde foram desmembrados. A lista completa está em `dados/dicionarios/bairros.csv`.
 
-> O bairro **2 – Aeroporto** consta no dicionário, mas não tem população residente no Censo 2022 e por isso não aparece nas tabelas de população: elas trazem **170 bairros com moradores** dos 171 oficiais.
+> O bairro **2 – Aeroporto** consta no dicionário, mas não tem população residente no Censo 2022 e por isso não aparece nas tabelas de população: elas trazem **171 bairros com moradores** dos 171 oficiais.

@@ -7,7 +7,7 @@ ANO | DS | SEXO | IDADE | FXET | FREQ        (IDADE 100 = 100 anos e mais)
 27 anos × 12 DS × 2 sexos × 101 idades = 65.448 linhas
 ```
 
-Arquivos: `resultados/POP_SSA_DS_SEXO_IDADE_SIMPLES_2000_2026_v5.xlsx` e `resultados/populacao_salvador_ds_sexo_idade_2000_2026.csv.gz`.
+Arquivos: `resultados/POP_SSA_DS_SEXO_IDADE_SIMPLES_2000_2026_v5_1.xlsx` e `resultados/populacao_salvador_ds_sexo_idade_2000_2026.csv.gz`.
 
 ## 12.1 O problema
 
@@ -82,7 +82,7 @@ O arredondamento é controlado em **duas margens** ao mesmo tempo, por alocaçã
 - somando as idades, obtém-se exatamente a base principal (bairro, raça, faixa);
 - somando bairros e raças, obtém-se exatamente a tabela DS × sexo × idade.
 
-São 5.290.380 combinações em 2000–2026, das quais **3.116.941 têm FREQ > 0** (v5). O arquivo traz essas linhas e mais uma linha por ano para o bairro 2 (Aeroporto), com FREQ = 0. Isso passa do limite do Excel (1.048.576 linhas). A entrega é em CSV (`resultados/populacao_salvador_bairro_ds_idade_raca_2000_2026.csv.gz`) e em `resultados/populacao_bairro_idade_raca_por_ano.zip`, com um arquivo por ano, que abre no Excel, mais o dicionário. Scripts: `R/06_bairro_idade_raca.R` e `R/07_exportar_por_ano.R`.
+São 5.317.650 combinações em 2000–2026, das quais **3.131.625 têm FREQ > 0** (v5.1). O arquivo traz essas linhas e mais uma linha por ano para o bairro 2 (Aeroporto), com FREQ = 0. Isso passa do limite do Excel (1.048.576 linhas). A entrega é em CSV (`resultados/populacao_salvador_bairro_ds_idade_raca_2000_2026.csv.gz`) e em `resultados/populacao_bairro_idade_raca_por_ano.zip`, com um arquivo por ano, que abre no Excel, mais o dicionário. Scripts: `R/06_bairro_idade_raca.R` e `R/07_exportar_por_ano.R`.
 
 Planilha de idade simples:
 - aba `TAB_IDADE_2010_2022`: 6 tabelas (2010 e 2022 × masculino, feminino e total), com DS na linha e idade 0–100+ na coluna;

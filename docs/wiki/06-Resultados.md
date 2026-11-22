@@ -2,10 +2,10 @@
 
 Arquivos em `resultados/`:
 
-- `POP_SSA_DS_BAIRRO_RACA_2000_2026_v5.xlsx`, com as abas LEIAME, METODOLOGIA, LIMITACOES, DICIONARIO, TOTAIS, CHECAGENS, POP_DS, **POP_BAIRRO**, RECONCILIACAO_SESAB, VALIDACAO e SETORES;
-- `populacao_salvador_bairro_ds_2000_2026.csv.gz`, a tabela oficial `ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ` (947.700 linhas: 942.840 das 194 unidades bairro × DS mais 4.860 linhas zeradas do bairro 2 – Aeroporto, para que os 171 bairros estejam presentes);
+- `POP_SSA_DS_BAIRRO_RACA_2000_2026_v5_1.xlsx`, com as abas LEIAME, METODOLOGIA, LIMITACOES, DICIONARIO, TOTAIS, CHECAGENS, POP_DS, **POP_BAIRRO**, RECONCILIACAO_SESAB, VALIDACAO, SETORES e BOA_VISTA_LOBATO;
+- `populacao_salvador_bairro_ds_2000_2026.csv.gz`, a tabela oficial `ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ` (952.560 linhas: 947.700 das 195 unidades bairro × DS mais 4.860 linhas zeradas do bairro 2 – Aeroporto, para que os 172 bairros estejam presentes);
 - `populacao_bairro_idade_raca_por_ano.zip`, com um CSV por ano (idade detalhada, com nomes de DS e bairro), o dicionário (`DICIONARIO.xlsx` e `dicionario_bairros.csv`), `VALIDACAO_v4.csv` e `RECONCILIACAO_SESAB_2000_2025.csv`;
-- `validacao_v5.csv` e `reconciliacao_sesab_2000_2025.csv`.
+- `validacao_v5_1.csv` e `reconciliacao_sesab_2000_2025.csv`.
 
 ## 6.1 População por DS
 
@@ -129,7 +129,7 @@ Os três anos são idênticos aos censos. Razão de sexo: 89,0 (2000), 87,5 (201
 | Boca do Rio | 39.262 |
 | Beiru/Tancredo Neves | 38.329 |
 
-Aquarius (171): 3.248 habitantes em 2010 (área atual do bairro) e 4.839 em 2022. Aeroporto (2): sem população residente, presente nas bases com FREQ = 0. 23 bairros têm território em mais de um DS.
+Aquarius (171): 3.248 habitantes em 2010 (área atual do bairro) e 4.839 em 2022. Boa Vista do Lobato (172): 6.280 em 2000, 6.747 em 2010, 6.219 em 2022 e 6.613 em 2026 (DS Subúrbio; 93,2% negra em 2022). Aeroporto (2): sem população residente, presente nas bases com FREQ = 0. 23 bairros têm território em mais de um DS.
 
 ## 6.6 Conferências automáticas (aba CHECAGENS)
 
@@ -144,4 +144,4 @@ Aquarius (171): 3.248 habitantes em 2010 (área atual do bairro) e 4.839 em 2022
 | Valores negativos | nenhum |
 
 
-A lista completa de conferências da v5 (raça, idades simples, 171 bairros, consistência entre tabelas) está em [Diálogo entre bases](13-Dialogo-entre-bases#136-validação-da-versão-4-resultadosvalidacao_v4csv).
+A lista completa de conferências da v5 (raça, idades simples, 172 bairros, consistência entre tabelas) está em [Diálogo entre bases](13-Dialogo-entre-bases#136-validação-da-versão-4-resultadosvalidacao_v4csv).

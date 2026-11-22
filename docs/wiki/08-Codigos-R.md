@@ -7,7 +7,8 @@ Todos os scripts estão em [`R/`](https://github.com/05071982/Protocolo-metodolo
 | `funcoes.R` | carregado pelos demais | — | `arred_maior_resto()`, `ipf_2d()`, `composicao_ano()` |
 | `01_chave_setor_bairro_ds.R` | nova malha, novo DS ou novo bairro | `BA_setores_CD2022.shp`, `DISTRITO_SANITARIO.shp` | `chave_setor_bairro_DS_2022.csv` |
 | `01b_chave_setor2010.R` | nova malha de 2010 ou novos limites (v5) | malha de setores 2010 de Salvador, `DISTRITO_SANITARIO.shp`, `delimitacao_de_bairros_oficial.shp` | `chave_setor2010_bairro_ds.csv` (todas as interseções com fração de área) |
-| `02_aquarius.R` | criação de bairro desmembrado | setores + `delimitacao_de_bairros_oficial.shp` | `setores_pituba_aquarius.csv` |
+| `02_aquarius.R` | criação de bairro desmembrado com polígono oficial | setores + `delimitacao_de_bairros_oficial.shp` | `setores_pituba_aquarius.csv` |
+| `02b_boa_vista_lobato_cnefe.R` | bairro criado por lista de logradouros, sem polígono (v5.1) | CNEFE 2022 de Salvador, malha 2010, bairros e DS | `cnefe_lobato_logradouros.csv` (endereços por setor 2022, setor 2010, DS e logradouro); a seleção das ruas da lei e as frações por setor estão em `dados/entrada/boa_vista_lobato_fracao_setores.csv` |
 | `03_estrutura_base.R` | mudança na estrutura censitária | `pop_*.csv` 2022 + `dados/entrada/` | estruturas-semente 2010 e 2022 (v3) |
 | *estruturas e calibração (v5)* | mudança na estrutura censitária | setores 2010 e 2022 + margens IBGE em `dados/entrada/` | `dados/estrutura/estrutura_{2000,2010,2022}_unidade.csv`, idade simples (referência: `python/v5_*.py`) |
 | **`04_atualizar_populacao.R`** | **todo ano** | `dados/estrutura/estrutura_*_unidade.csv` + `totais_municipais.csv` | `resultados/*.csv` |
@@ -79,5 +80,6 @@ Os scripts em `python/` geraram as versões publicadas. Ordem de execução:
 
 - **Sementes (v3):** `geo.py` → `bds.py` → `p1_sesab2010.py` → `s22.py` → `p2_s22.py` → `v3_model.py` → `v3_series.py` → `v3_series_censo.py`
 - **v4:** `v4_inputs.py` (lê e confere SIDRA 136/3175, SESAB e DS 2000) → `v4_model.py` (calibração censitária) → `v4_series.py` → `v4_idade.py` → `v4_bairro_idade.py` → `v4_validar.py` → `v4_export.py` → `v4_repo_estrutura.py` → `v4_excel.py`, `v4_idade_tabs.py`
+- **v5.1:** `bvl_match.py` e `bvl_sel.py` (logradouros da lei no CNEFE, frações por setor) → `v51_bvl_split.py` (cria a unidade 172) → `v51_model.py` e seguintes (mesma lógica da v5 com 195 unidades).
 - **v5:** `v5_setores2010.py` (lê setores 2010 e chave) → `v5_harmoniza_chave.py` → `v5_estrutura2010.py` → `v5_model.py` (calibração e série por unidade) → `v5_idade.py` → `v5_bairro_idade.py` → `v5_validar.py` → `v5_backtest.py` → `v5_export.py` → `v5_repo_estrutura.py` → `v5_excel.py`, `v5_idade_tabs.py`; conferência do R: `v5_espelho_R.py`
 - **Conferência do R:** `v4_espelho_R.py`

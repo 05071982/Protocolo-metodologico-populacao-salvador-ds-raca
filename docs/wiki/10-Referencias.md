@@ -29,8 +29,10 @@
 18. Bahia. Secretaria da Saúde. Superintendência de Vigilância e Proteção da Saúde. Estimativa da população por faixa etária e sexo nos Distritos Sanitários de Salvador, 2010. Salvador: SESAB/SUVISA/DIS; 2016.
 19. Salvador. Lei nº 9.278, de 2017. Dispõe sobre a delimitação e denominação dos bairros do Município de Salvador. Diário Oficial do Município; 2017.
 20. Salvador. Lei nº 9.778, de 2024. Cria o bairro Aquarius. Diário Oficial do Município, 26 jan 2024.
+21. Salvador. Lei nº 9.919, de 18 de dezembro de 2025. Dispõe sobre a criação do bairro Boa Vista do Lobato no Município de Salvador. Diário Oficial do Município, dez 2025.
+22. Instituto Brasileiro de Geografia e Estatística. Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE): Censo Demográfico 2022. Rio de Janeiro: IBGE; 2024.
 
 ## Software
 
-21. R Core Team. R: a language and environment for statistical computing. Vienna: R Foundation for Statistical Computing; 2024.
-22. Pebesma E. Simple features for R: standardized support for spatial vector data. R J. 2018;10(1):439-46.
+23. R Core Team. R: a language and environment for statistical computing. Vienna: R Foundation for Statistical Computing; 2024.
+24. Pebesma E. Simple features for R: standardized support for spatial vector data. R J. 2018;10(1):439-46.

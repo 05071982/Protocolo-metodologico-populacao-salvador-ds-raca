@@ -12,7 +12,7 @@ São três candidatos para estimar a população dos DS fora dos anos censitári
 | Capta migração entre DS? | parcialmente (instável) | **não** | sim |
 | Capta envelhecimento? | parcialmente | **não** | sim |
 | Capta mudança de raça/cor? | — | **não** | sim |
-| Funciona com 2.160 células e 194 unidades? | **não** (oscila) | sim | sim |
+| Funciona com 2.160 células e 195 unidades? | **não** (oscila) | sim | sim |
 
 ## 5.1 Teste fora da amostra: prever 2022 usando só dados até 2010
 
