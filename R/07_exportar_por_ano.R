@@ -4,7 +4,8 @@
 # Por quê: com a idade detalhada a série passa de 1.048.576 linhas (limite do Excel);
 # cada ano tem ~115 mil linhas e abre no Excel.
 # Saída: resultados/populacao_bairro_idade_raca_por_ano.zip com
-#   pop_bairro_idade_raca_AAAA.csv (ANO;DS;NOME_DS;COD_BAIRRO;NOME_BAIRRO;IDADE;FXET;SEXO;RACA;FREQ)
+#   pop_bairro_idade_raca_AAAA.csv (ANO;DS;NOME_DS;COD_BAIRRO;NOME_BAIRRO;COD_PB;NOME_PB;IDADE;FXET;SEXO;RACA;FREQ)
+#   populacao_salvador_prefeitura_bairro_<ini>_<fim>.csv.gz (ANO,COD_PB,FXET,SEXO,RACA,FREQ) em resultados/
 #   dicionario_bairros.csv, dicionario_ds.csv, dicionario_fxet.csv, dicionario_sexo.csv, dicionario_raca.csv
 #   (e DICIONARIO.xlsx, se o pacote openxlsx estiver instalado)
 # Bairros sem população residente (ex.: 2 – Aeroporto) entram com 1 linha por ano e FREQ = 0.
@@ -14,7 +15,7 @@ raiz <- getwd()
 ult <- function(p) sort(list.files(file.path(raiz, "resultados"), pattern = p, full.names = TRUE), decreasing = TRUE)[1]
 res <- read.csv(ult("^populacao_salvador_bairro_ds_idade_raca_\\d{4}_\\d{4}\\.csv$"))
 dd  <- function(a) read.csv(file.path(raiz, "dados/dicionarios", a), check.names = FALSE)
-bai <- dd("bairros.csv"); dsn <- dd("ds.csv"); fx <- dd("fxet.csv"); sx <- dd("sexo.csv"); rc <- dd("raca.csv")
+bai <- dd("bairros.csv"); pbd <- dd("prefeituras_bairro.csv"); dsn <- dd("ds.csv"); fx <- dd("fxet.csv"); sx <- dd("sexo.csv"); rc <- dd("raca.csv")
 stopifnot(nrow(bai) == 172, setequal(bai$COD_BAIRRO, 1:172))
 
 sem <- bai[!bai$COD_BAIRRO %in% res$COD_BAIRRO, ]
@@ -26,8 +27,14 @@ if (nrow(sem) > 0) {
 }
 res$NOME_DS <- dsn$NOME_DS[match(res$DS, dsn$DS)]
 res$NOME_BAIRRO <- bai$BAIRRO[match(res$COD_BAIRRO, bai$COD_BAIRRO)]
-stopifnot(!anyNA(res$NOME_DS), !anyNA(res$NOME_BAIRRO))
-cols <- c("ANO", "DS", "NOME_DS", "COD_BAIRRO", "NOME_BAIRRO", "IDADE", "FXET", "SEXO", "RACA", "FREQ")
+res$COD_PB <- bai$COD_PB[match(res$COD_BAIRRO, bai$COD_BAIRRO)]
+res$NOME_PB <- pbd$NOME_PB[match(res$COD_PB, pbd$COD_PB)]
+stopifnot(!anyNA(res$NOME_DS), !anyNA(res$NOME_BAIRRO), !anyNA(res$COD_PB))
+# série por Prefeitura-Bairro (cada bairro pertence a uma única PB)
+pp <- aggregate(FREQ ~ ANO + COD_PB + FXET + SEXO + RACA, data = res, FUN = sum)
+write.csv(pp[order(pp$ANO, pp$COD_PB, pp$FXET, pp$SEXO, pp$RACA), ],
+          gzfile(file.path(raiz, "resultados", sprintf("populacao_salvador_prefeitura_bairro_%d_%d.csv.gz", min(res$ANO), max(res$ANO)))), row.names = FALSE)
+cols <- c("ANO", "DS", "NOME_DS", "COD_BAIRRO", "NOME_BAIRRO", "COD_PB", "NOME_PB", "IDADE", "FXET", "SEXO", "RACA", "FREQ")
 
 tmp <- file.path(tempdir(), "pop_por_ano"); unlink(tmp, recursive = TRUE); dir.create(tmp)
 totais <- read.csv(file.path(raiz, "dados/entrada/totais_municipais.csv"))
@@ -39,11 +46,11 @@ for (a in sort(unique(res$ANO))) {
               row.names = FALSE, quote = FALSE, fileEncoding = "UTF-8")
 }
 write.table(bai, file.path(tmp, "dicionario_bairros.csv"), sep = ";", row.names = FALSE, fileEncoding = "UTF-8", na = "")
-for (nm in c("ds", "fxet", "sexo", "raca"))
+for (nm in c("ds", "fxet", "sexo", "raca", "prefeituras_bairro"))
   write.table(dd(paste0(nm, ".csv")), file.path(tmp, paste0("dicionario_", nm, ".csv")), sep = ";", row.names = FALSE, quote = FALSE, fileEncoding = "UTF-8")
 if (requireNamespace("openxlsx", quietly = TRUE)) {
   idade <- data.frame(IDADE = 0:100, FXET = c(1, rep(2, 4), 3 + (5:79 - 5) %/% 5, rep(18, 21)))
-  openxlsx::write.xlsx(list(BAIRRO = bai, DS = dsn, FXET = fx, IDADE = idade, SEXO = sx, RACA = rc),
+  openxlsx::write.xlsx(list(BAIRRO = bai, PREFEITURA_BAIRRO = pbd, DS = dsn, FXET = fx, IDADE = idade, SEXO = sx, RACA = rc),
                        file.path(tmp, "DICIONARIO.xlsx"))
 }
 arq <- file.path(raiz, "resultados", "populacao_bairro_idade_raca_por_ano.zip")

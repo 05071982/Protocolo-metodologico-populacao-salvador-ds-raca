@@ -25,6 +25,7 @@ Todos os insumos estão na pasta **População por DS** do Drive da SDSS. Os que
 |---|---|---|
 | `DISTRITO_SANITARIO.shp` (2023) | SMS | Limites dos 12 DS |
 | `delimitacao_de_bairros_oficial.shp` | Prefeitura de Salvador | 171 bairros, incluindo o Aquarius (ainda sem a Boa Vista do Lobato) |
+| `Prefeituras_Bairro.shp` | Prefeitura de Salvador (2018) | 10 Prefeituras-Bairro; chave bairro → PB |
 | CNEFE 2022 (`2927408_SALVADOR.csv`) | IBGE | Endereços com setor censitário, logradouro e coordenadas; usado para delimitar a Boa Vista do Lobato (172) |
 
 ## 2.3 Totais municipais

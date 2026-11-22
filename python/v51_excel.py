@@ -30,9 +30,11 @@ L=[('T','População de Salvador por Distrito Sanitário, bairro, sexo, faixa et
 ('',''),('B','Abas'),
 ('','POP_BAIRRO — tabela completa (ANO, DS, COD_BAIRRO, FXET, SEXO, RACA, FREQ), 172 bairros (inclui Aquarius, cód. 171, Boa Vista do Lobato, cód. 172, e Aeroporto, cód. 2, com FREQ = 0). Cada linha é a parte de um bairro dentro de um DS. Somando por DS obtém-se exatamente POP_DS. Use no TabNet e no BI.'),
 ('','POP_DS — mesma série agregada por DS no formato do pop14 (ANO, FXET, DS, SEXO, RACA, FREQ, FREQ_CENSO). FREQ = totais oficiais; FREQ_CENSO = série alternativa com totais apenas censitários (tendência).'),
+('','POP_PB — mesma série agregada por Prefeitura-Bairro (10 PBs): ANO, COD_PB, FXET, SEXO, RACA, FREQ. Cada bairro pertence a uma única PB (ver DICIONARIO e coluna COD_PB do dicionário de bairros).'),
 ('','RECONCILIACAO_SESAB — comparação ano a ano com o TabNet SESAB (total e estrutura sexo × faixa). VALIDACAO — conferências da versão 5.1.'),
 ('','SETORES, TOTAIS, CHECAGENS, DICIONARIO, METODOLOGIA e LIMITACOES.'),
 ('',''),('B','O que mudou na versão 5.1'),
+('','• Prefeitura-Bairro (10 PBs) incluída: aba POP_PB e PB de cada bairro no dicionário.'),
 ('','• Novo bairro 172, Boa Vista do Lobato (Lei 9.919/2025), delimitado pelos endereços do CNEFE 2022 nos logradouros da lei e desmembrado do Lobato, Alto do Cabrito e Boa Vista de São Caetano (DS 11). Aparece em toda a série nos limites atuais.'),
 ('',''),('B','O que mudou na versão 5'),
 ('','• 2010 passa a ser construído setor a setor (3.546 setores do Censo 2010, agregados por setor do IBGE), nos limites atuais de bairro e DS, com raça/cor do universo em todos os setores (antes: tabela por DS e banco parcial).'),
@@ -83,6 +85,12 @@ for i in range(len(yrs)):
     r=[[1,'Masculino'],[2,'Feminino']][i] if i<2 else [None,None]
     r+=[None]+([i+1,RC[i]] if i<5 else [None,None])+[None,str(yrs[i]),Q[yrs[i]]]
     row(ws,r)
+row(ws,[]); H_(ws,['COD_PB','Prefeitura-Bairro','','COD_BAIRRO','Bairro','','COD_PB',''])
+_pbd=pd.read_csv('/home/claude/protocolo-metodologico-populacao-salvador-ds-raca/dados/dicionarios/prefeituras_bairro.csv'); _bd=pd.read_csv('/home/claude/protocolo-metodologico-populacao-salvador-ds-raca/dados/dicionarios/bairros.csv')
+for i in range(len(_bd)):
+    r=[int(_pbd.COD_PB[i]),_pbd.NOME_PB[i]] if i<10 else [None,None]
+    r+=[None,int(_bd.COD_BAIRRO[i]),_bd.BAIRRO[i],None,int(_bd.COD_PB[i])]
+    row(ws,r)
 # ---------- TOTAIS (fórmulas)
 ws=wb.create_sheet('TOTAIS'); ws.column_dimensions['A'].width=10
 for c in 'BCDEFGHIJKLMNOPQRS': ws.column_dimensions[c].width=13
@@ -105,6 +113,7 @@ chk=[('Total 2010 = Censo 2010 (SESAB)',2675656,'=TOTAIS!N12'),('Total 2022 = Ce
 ('POP_BAIRRO 2022 = soma bairros IBGE',2417678,f'=SUMIFS(POP_BAIRRO!$G$2:$G${nb},POP_BAIRRO!$A$2:$A${nb},2022)'),
 ('POP_BAIRRO 2026 = POP_DS 2026','=TOTAIS!N28',f'=SUMIFS(POP_BAIRRO!$G$2:$G${nb},POP_BAIRRO!$A$2:$A${nb},2026)'),
 ('Boa Vista do Lobato 2022 (cód. 172) = 6.219',6219,f'=SUMIFS(POP_BAIRRO!$G$2:$G${nb},POP_BAIRRO!$A$2:$A${nb},2022,POP_BAIRRO!$C$2:$C${nb},172)'),
+('POP_PB 2022 = Censo 2022',2417678,f'=SUMIFS(POP_PB!$F:$F,POP_PB!$A:$A,2022)'),
 ('Aquarius 2022 (cód. 171) > 0',True,f'=SUMIFS(POP_BAIRRO!$G$2:$G${nb},POP_BAIRRO!$A$2:$A${nb},2022,POP_BAIRRO!$C$2:$C${nb},171)>0'),
 ('POP_BAIRRO DS Itapuã 2024 = POP_DS','=TOTAIS!I26',f'=SUMIFS(POP_BAIRRO!$G$2:$G${nb},POP_BAIRRO!$A$2:$A${nb},2024,POP_BAIRRO!$B$2:$B${nb},8)'),
 ('DS Barra/RV 2010 = soma dos setores (limites atuais)',338299,'=TOTAIS!G12'),
@@ -122,6 +131,9 @@ for k in range(5):
 ws=wb.create_sheet('POP_DS')
 H_(ws,['ANO','FXET','DS','SEXO','RACA','FREQ','FREQ_CENSO'])
 for t in pop[['ANO','FXET','DS','SEXO','RACA','FREQ','FREQ_CENSO']].itertuples(index=False): ws.append(list(map(int,t)))
+ws=wb.create_sheet('POP_PB'); _pp=pd.read_pickle(D+'v51/pop_pb.pkl')
+H_(ws,['ANO','COD_PB','FXET','SEXO','RACA','FREQ'])
+for t in _pp[['ANO','COD_PB','FXET','SEXO','RACA','FREQ']].itertuples(index=False): ws.append(list(map(int,t)))
 ws=wb.create_sheet('POP_BAIRRO')
 H_(ws,['ANO','DS','COD_BAIRRO','FXET','SEXO','RACA','FREQ'])
 for t in pb[['ANO','DS','COD_BAIRRO','FXET','SEXO','RACA','FREQ']].itertuples(index=False): ws.append(list(map(int,t)))

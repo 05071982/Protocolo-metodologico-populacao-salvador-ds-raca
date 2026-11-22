@@ -5,6 +5,7 @@ Arquivos em `resultados/`:
 - `POP_SSA_DS_BAIRRO_RACA_2000_2026_v5_1.xlsx`, com as abas LEIAME, METODOLOGIA, LIMITACOES, DICIONARIO, TOTAIS, CHECAGENS, POP_DS, **POP_BAIRRO**, RECONCILIACAO_SESAB, VALIDACAO, SETORES e BOA_VISTA_LOBATO;
 - `populacao_salvador_bairro_ds_2000_2026.csv.gz`, a tabela oficial `ANO | DS | COD_BAIRRO | FXET | SEXO | RACA | FREQ` (952.560 linhas: 947.700 das 195 unidades bairro × DS mais 4.860 linhas zeradas do bairro 2 – Aeroporto, para que os 172 bairros estejam presentes);
 - `populacao_bairro_idade_raca_por_ano.zip`, com um CSV por ano (idade detalhada, com nomes de DS e bairro), o dicionário (`DICIONARIO.xlsx` e `dicionario_bairros.csv`), `VALIDACAO_v4.csv` e `RECONCILIACAO_SESAB_2000_2025.csv`;
+- `populacao_salvador_prefeitura_bairro_2000_2026.csv.gz` (série por Prefeitura-Bairro; ver [página 16](16-Prefeituras-Bairro));
 - `validacao_v5_1.csv` e `reconciliacao_sesab_2000_2025.csv`.
 
 ## 6.1 População por DS

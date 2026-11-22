@@ -20,3 +20,5 @@ Detalhada agregada = DS × sexo × idade em todas as células,OK,
 Sem valores negativos,OK,
 Dicionário com 172 bairros (1–172),OK,
 Bairros com população na base,OK,171 com população; sem população: [2]
+Prefeitura-Bairro: todo bairro do dicionário tem uma PB (1–10),OK,10 PBs; bairro inteiro na PB de maior área
+Prefeitura-Bairro: soma das 10 PBs = total de cada ano,OK,

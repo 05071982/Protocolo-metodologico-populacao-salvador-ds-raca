@@ -46,6 +46,8 @@ ok('Detalhada agregada = DS × sexo × idade em todas as células',(c2.FREQ_x==c
 ok('Sem valores negativos',(PB.FREQ>=0).all() and (PI.FREQ>=0).all() and (R.FREQ>=0).all())
 bd=pd.read_csv(REPO+'dados/dicionarios/bairros.csv'); ok('Dicionário com 172 bairros (1–172)',sorted(bd.COD_BAIRRO)==list(range(1,173)))
 cods=set(PB.COD_BAIRRO.unique()); ok('Bairros com população na base',len(cods)==171 and 2 not in cods,f'{len(cods)} com população; sem população: {sorted(set(range(1,173))-cods)}')
+pbmap=dict(zip(bd.COD_BAIRRO,bd.COD_PB)); ok('Prefeitura-Bairro: todo bairro do dicionário tem uma PB (1–10)',bd.COD_PB.between(1,10).all() and bd.COD_PB.nunique()==10,'10 PBs; bairro inteiro na PB de maior área')
+gpb=PB.assign(PB_=PB.COD_BAIRRO.map(pbmap)).groupby('ANO').FREQ.sum(); ok('Prefeitura-Bairro: soma das 10 PBs = total de cada ano',(gpb.values==g.values).all())
 for r_ in res: print('%-70s %-7s %s'%r_)
 pd.DataFrame(res,columns=['CONFERENCIA','RESULTADO','OBS']).to_csv(V+'validacao_v5_1.csv',index=False)
 # reconciliação com SESAB (análise)
